@@ -13,4 +13,3 @@ const App = () =>
     <AppWrapperNonSync />
   );
 
-registerRootComponent(App);
