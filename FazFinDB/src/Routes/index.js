@@ -155,6 +155,7 @@ function Routes() {
       <Drawer.Screen
         name="Leite"
         component={Leite}
+        initialParams={{ idfaz: "" }}
         options={{
           title: "Leite",
           drawerIcon: ({ focused, size, color }) => (

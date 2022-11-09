@@ -48,6 +48,7 @@ function StackRoutes() {
       <Stack.Screen
         name="Leite"
         component={Leite}
+        initialParams={{ idfaz: "" }}
         options={{
           headerShown: false,
         }}
