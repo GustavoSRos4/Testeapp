@@ -157,7 +157,7 @@ export default function Hometeste({ navigation, route }) {
 
   const renderItem = ({ item }) => {
     var idfazenda = item._id;
-    const contaleite = () =>
+    const contaleite =
       item.contaleite?.map((i) => {
         return (
           <View>
