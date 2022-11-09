@@ -6,7 +6,7 @@ export const Fazendas = {
         name: "string",
         owner: "string",
         createdAt: "date",
-        contaleite: "Leite{}",
+        contaleite: "Leite[]",
     },
 };
 

@@ -159,7 +159,7 @@ export default function Hometeste({ navigation, route }) {
 
     const renderItem = ({ item }) => {
         var idfazenda = item._id
-        const contaleite = item.contaleite?.map((i) => {
+        const contaleite = ()=> item.contaleite?.map((i) => {
             return (
                 <View>
                     <Text>Contas:</Text>
@@ -210,6 +210,9 @@ export default function Hometeste({ navigation, route }) {
                 renderItem={renderItem}
                 keyExtractor={item => item._id}
             />
+            <TouchableOpacity
+                    onPress={() => navigation.navigate("Leite")}
+                ><Text>Teste</Text></TouchableOpacity>
         </View>
     );
 }
