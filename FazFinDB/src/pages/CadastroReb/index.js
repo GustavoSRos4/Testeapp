@@ -11,20 +11,25 @@ import {
   StyleSheet,
   Alert,
 } from "react-native";
+import uuid from "react-native-uuid";
+import writeReb from "../../Realm/writeReb";
 import { scale, verticalScale } from "react-native-size-matters";
 import { useNavigation } from "@react-navigation/native";
-function CadastroReb() {
-  const CadSucess = () => {
-    Alert.alert("Cadastro com sucesso!");
-  };
-  const [nomereb, setNomereb] = useState("");
+function CadastroReb({ Fazid}) {
+  const [nomeReb, setNomeReb] = useState("");
   const [QtdAni, setQtdAni] = useState("");
-  function cadReb() {
-    const data = {
-      nomereb,
-      QtdAni,
-    };
-    console.log(data);
+  console.log(Fazid);
+  //Escrever no Banco
+  async function handleAddReb() {
+    await writeReb({
+      rebanhos: [
+        {
+          _id: uuid.v4(),
+          nomeReb,
+          createdAt: new Date(),
+        },
+      ],
+    });
   }
   const navigation = useNavigation();
   const imgbg1 = "../../../assets/bg6.jpg";
@@ -44,8 +49,8 @@ function CadastroReb() {
           <Text style={styles.texto}>Nome do Rebanho</Text>
           <TextInput
             style={styles.campoTexto}
-            onChangeText={setNomereb}
-            value={nomereb}
+            onChangeText={setNomeReb}
+            value={nomeReb}
             placeholder="Ex: Vaca solteira"
           ></TextInput>
           <Text style={styles.texto}>Quantidade de animais</Text>
@@ -56,7 +61,7 @@ function CadastroReb() {
             placeholder="Quantos animais no rebanho?"
           ></TextInput>
         </View>
-        <TouchableOpacity style={styles.botaopress} onPress={CadSucess}>
+        <TouchableOpacity style={styles.botaopress} onPress={handleAddReb}>
           <Text style={styles.tituloBotao}>{"Cadastrar"}</Text>
         </TouchableOpacity>
         <TouchableOpacity

@@ -1,12 +1,12 @@
 import { getRealm } from "./realm";
 import { Alert } from "react-native";
 
-async function getAllLeite() {
+async function getAllFarm() {
   const realm = await getRealm();
   try {
-    return realm.objects("LeiteSchema").sorted("createdAt");
+    return realm.objects("Farm").sorted("createdAt");
   } catch (e) {
     Alert.alert("Error", e.message);
   }
 }
-export default getAllLeite;
+export default getAllFarm;

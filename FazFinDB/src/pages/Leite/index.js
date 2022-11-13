@@ -9,13 +9,14 @@ import {
   TextInput,
   Alert,
   FlatList,
+  List,
 } from "react-native";
 import uuid from "react-native-uuid";
 import Header from "../../components/Header";
 import { getRealm } from "../../Realm/realm";
 import writeLeite from "../../Realm/writeLeite";
 import getAllLeite from "../../Realm/getAllLeite";
-
+import deleteLeite from "../../Realm/deleteLeite";  
 function Leite() {
   let data = Realm.Results;
   //Escrever no Banco
@@ -30,12 +31,20 @@ function Leite() {
       createdAt: new Date(),
     });
   }
+  //delete
+  async function handleDelete(){
+    await deleteLeite()
+  }
 
   //Buscar no banco
   async function getLeite() {
     const data = await getAllLeite();
     console.log(data);
+    setListaFazenda(data);
   }
+  useEffect(() => {
+    getLeite();
+  }, [ListaFazenda]);
   //Update no banco
   const updateLeite = async () => {
     const precoL = Number(precoLV);
@@ -47,9 +56,9 @@ function Leite() {
       prodL,
       description,
       createdAt: new Date(),
-    }
+    };
     realm.write(() => {
-      realm.create("LeiteSchema",data, Realm.UpdateMode.Modified)
+      realm.create("LeiteSchema", data, Realm.UpdateMode.Modified);
     });
   };
   //Background
@@ -58,11 +67,16 @@ function Leite() {
   const [description, setDescription] = useState("");
   const [precoLV, setPrecoLV] = useState("");
   const [prodLV, setProdLV] = useState("");
+  const [ListaFazenda, setListaFazenda] = useState([]);
   //-----------------------------
+  const renderItem = ({ item }) => {
+    return <Text style={styles.lista2}>{item.description}</Text>;
+  };
   return (
     <SafeAreaView style={styles.container}>
       <Header title={"Olá Carlos"} />
-      <ScrollView>
+      
+      <ScrollView style={styles.container3}>
         {/*Preco do leite*/}
         <View style={styles.containerinfos}>
           <Text style={styles.tituloinfo}>Preço atual do Leite:</Text>
@@ -97,18 +111,28 @@ function Leite() {
             value={description}
             onChangeText={setDescription}
           />
-          <Text></Text>
         </View>
+
+        <TouchableOpacity style={styles.botaovoltar} onPress={handleAddLeite}>
+          <Text style={styles.textovoltar}>Cadastrar</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.botaovoltar2} onPress={getLeite}>
+          <Text style={styles.textovoltar}>Buscar BD</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.botaovoltar3} onPress={updateLeite}>
+          <Text style={styles.textovoltar}>Update</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.botaovoltar3} onPress={handleDelete}>
+          <Text style={styles.textovoltar}>Delete</Text>
+        </TouchableOpacity>
       </ScrollView>
-      <TouchableOpacity style={styles.botaovoltar} onPress={handleAddLeite}>
-        <Text style={styles.textovoltar}>Cadastrar</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.botaovoltar2} onPress={getLeite}>
-        <Text style={styles.textovoltar}>Buscar BD</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.botaovoltar3} onPress={updateLeite}>
-        <Text style={styles.textovoltar}>Update</Text>
-      </TouchableOpacity>
+      <View style={styles.container2}>
+        <FlatList
+          data={ListaFazenda}
+          renderItem={renderItem}
+          keyExtractor={(item) => item._id}
+        />
+      </View>
     </SafeAreaView>
   );
 }
@@ -132,8 +156,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 18,
-    position: "absolute",
-    top: 500,
+    marginVertical: 5,
+    position: "relative",
     alignSelf: "center",
   },
   botaovoltar2: {
@@ -143,8 +167,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 18,
-    position: "absolute",
-    top: 550,
+    marginVertical: 5,
+    position: "relative",
     alignSelf: "center",
   },
   botaovoltar3: {
@@ -154,8 +178,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 18,
-    position: "absolute",
-    top: 600,
+    marginVertical: 5,
+    position: "relative",
     alignSelf: "center",
   },
   textovoltar: {
@@ -195,6 +219,29 @@ const styles = StyleSheet.create({
   selecionaranimal: {
     color: "white",
     fontSize: 20,
+  },
+  container2: {
+    flex: 1,
+    height: 100,
+    backgroundColor: "white",
+  },
+  lista2: {
+    backgroundColor: "rgba(15, 109, 0, 0.9)",
+    width: 300,
+    height: 40,
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 18,
+    alignSelf: "center",
+    marginVertical: 5,
+    color: "white",
+    textAlign: "center",
+    fontSize: 20,
+    fontWeight: "bold",
+  },
+  container3: {
+    height: 300,
+   
   },
 });
 

@@ -8,6 +8,11 @@
     ],
     "android": {
       "package": "com.gustavosros4.FazFinDB"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "4546f443-e252-4015-ac51-5f61f0f2047d"
+      }
     }
   }
 }

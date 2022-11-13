@@ -1,6 +1,5 @@
-import React from "react";
-import { fazendas } from "../../components/Select/data";
-import Select from "../../components/Select";
+import React, { useState, useEffect } from "react";
+import SelectFaz from "../../components/SelectFaz";
 import { scale, verticalScale } from "react-native-size-matters";
 import {
   View,
@@ -11,8 +10,19 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from "react-native";
+import getAllFarm from "../../Realm/getAllFarm";
 function Home({ navigation }) {
+  const [listaFaz, setListaFaz] = useState([]);
   const imgbg1 = "../../../assets/background7.jpg";
+  useEffect(() => {
+    (async () => {
+      const data = await getAllFarm();
+      setListaFaz(data);
+      data.addListener((values) => {
+        setListaFaz([...values]);
+      });
+    })();
+  }, []);
   return (
     <SafeAreaView style={styles.container}>
       <ImageBackground
@@ -27,13 +37,12 @@ function Home({ navigation }) {
         <Text style={styles.title}>Bem-vindo(a)</Text>
         <View style={styles.select}>
           <Text style={styles.texto}>Sua fazenda:</Text>
-
-          <Select
+          <SelectFaz
             touchableText="Selecione sua fazenda"
             title="Fazendas"
-            objKey="code"
-            objValue="name"
-            data={fazendas}
+            objKey="_id"
+            objValue="nomefaz"
+            data={listaFaz}
           />
         </View>
         <TouchableOpacity

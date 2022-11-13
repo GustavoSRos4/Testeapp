@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {verticalScale,scale} from "react-native-size-matters";
+import { verticalScale, scale } from "react-native-size-matters";
 import {
   Text,
   SafeAreaView,
@@ -12,21 +12,22 @@ import {
   Alert,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import uuid from "react-native-uuid";
+import writeFarm from "../../Realm/writeFarm";
 function CadastroFaz() {
   const [nomefaz, setNomefaz] = useState("");
   const [proprietario, setProprietario] = useState("");
   const [tipoprod, setTipoprod] = useState("");
-  function cadFaz() {
-    const data = {
+  //Escrever no Banco
+  async function handleAddFarm() {
+    await writeFarm({
+      _id: uuid.v4(),
       nomefaz,
       proprietario,
       tipoprod,
-    };
-    console.log(data);
+      createdAt: new Date(),
+    });
   }
-  const CadSucess = () => {
-    Alert.alert("Cadastro com sucesso!");
-  };
   const navigation = useNavigation();
   const imgbg1 = "../../../assets/backgroundCad.jpg";
   return (
@@ -63,7 +64,7 @@ function CadastroFaz() {
             placeholder="Ex: Pecuaria Leiteira"
           ></TextInput>
         </View>
-        <TouchableOpacity style={styles.botaopress} onPress={CadSucess}>
+        <TouchableOpacity style={styles.botaopress} onPress={handleAddFarm}>
           <Text style={styles.tituloBotao}>{"Cadastrar"}</Text>
         </TouchableOpacity>
         <TouchableOpacity

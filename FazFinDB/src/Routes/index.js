@@ -5,7 +5,8 @@ import {
   Ionicons,
   MaterialCommunityIcons,
   MaterialIcons,
-  Entypo,Fontisto
+  Entypo,
+  Fontisto,
 } from "@expo/vector-icons";
 import CadastroFaz from "../pages/CadastroFaz";
 import StackRoutes from "../Routes/stackRoutes";
@@ -18,8 +19,8 @@ import Leite from "../pages/Leite";
 import GeralReb from "../pages/GeralReb";
 import FinanceiroFaz from "../pages/FinanceiroFaz";
 import Alimentacao from "../pages/Alimentacao";
-import Cadastrolista from '../pages/Cadastro-listas';
-import Hometeste from '../pages/Hometeste';
+import Cadastrolista from "../pages/Cadastro-listas";
+import Hometeste from "../pages/Hometeste";
 const Drawer = createDrawerNavigator();
 function Routes() {
   return (
@@ -155,7 +156,6 @@ function Routes() {
       <Drawer.Screen
         name="Leite"
         component={Leite}
-        initialParams={{ idfaz: "" }}
         options={{
           title: "Leite",
           drawerIcon: ({ focused, size, color }) => (
@@ -195,10 +195,9 @@ function Routes() {
           ),
         }}
       />
-       <Drawer.Screen
+      <Drawer.Screen
         name="Hometeste"
         component={Hometeste}
-        initialParams={{'idfaz':''}}
         options={{
           title: "Hometeste",
           drawerIcon: ({ focused, size, color }) => (
@@ -210,10 +209,9 @@ function Routes() {
           ),
         }}
       />
-       <Drawer.Screen
+      <Drawer.Screen
         name="Cadastrolista"
         component={Cadastrolista}
-        initialParams={{'idfaz':''}}
         options={{
           title: "Cadastrolista",
           drawerIcon: ({ focused, size, color }) => (
@@ -224,7 +222,7 @@ function Routes() {
             />
           ),
         }}
-      />  
+      />
     </Drawer.Navigator>
   );
 }

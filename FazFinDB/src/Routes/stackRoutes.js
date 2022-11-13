@@ -11,8 +11,8 @@ import PagelancaContas from "../pages/PagelancaContas";
 import PageListavacas from "../pages/PageListavacas";
 import FinanceiroFaz from "../pages/FinanceiroFaz";
 import Alimentacao from "../pages/Alimentacao";
-import Cadastrolista from '../pages/Cadastro-listas';
-import Hometeste from '../pages/Hometeste';
+import Cadastrolista from "../pages/Cadastro-listas";
+import Hometeste from "../pages/Hometeste";
 const Stack = createNativeStackNavigator();
 function StackRoutes() {
   return (
@@ -48,7 +48,6 @@ function StackRoutes() {
       <Stack.Screen
         name="Leite"
         component={Leite}
-        initialParams={{ idfaz: "" }}
         options={{
           headerShown: false,
         }}
@@ -99,12 +98,10 @@ function StackRoutes() {
       <Stack.Screen
         name="HomeScreen"
         component={Hometeste}
-        initialParams={{ idfaz: "" }}
       />
       <Stack.Screen
         name="Cadastro"
         component={Cadastrolista}
-        initialParams={{ idfaz: "" }}
       />
     </Stack.Navigator>
   );

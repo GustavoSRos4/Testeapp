@@ -72,7 +72,7 @@ const Option = (item, value, selected, objKey, onPress) => {
   return { OptionComponent };
 };
 
-const Select = ({
+const SelectFaz = ({
   touchableComponent = Touchable,
   optionComponent = Option,
   touchableText = "Select",
@@ -105,7 +105,12 @@ const Select = ({
     } else {
       setSelected(item);
       setVisible(false);
+      if (typeof item._id !== "undefined") {
+        var Fazid = item._id;
+        console.log(Fazid);
+      }
     }
+    console.log(Fazid);
   }
   return (
     <>
@@ -187,4 +192,4 @@ const styles = StyleSheet.create({
     fontSize: verticalScale(20),
   },
 });
-export default Select;
+export default SelectFaz;

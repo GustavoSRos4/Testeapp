@@ -1,6 +1,6 @@
 import { createRealmContext } from "@realm/react";
-import { LeiteSchema } from "../../src/Realm/Schemas/Leite";
+import { LeiteSchema,Fazendas } from "../../src/Realm/Schemas/Schema";
 export const { useRealm, useQuery, RealmProvider } = createRealmContext({
-  schema: [LeiteSchema],
+  schema: [LeiteSchema,Fazendas],
   deleteRealmIfMigrationNeeded: true,
 });
