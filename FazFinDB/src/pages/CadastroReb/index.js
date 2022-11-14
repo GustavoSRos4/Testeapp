@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Header from "../../components/Header";
+import { AuthContext } from "../../contexts/auth";
 import {
   Text,
   SafeAreaView,
@@ -15,22 +16,33 @@ import uuid from "react-native-uuid";
 import writeReb from "../../Realm/writeReb";
 import { scale, verticalScale } from "react-native-size-matters";
 import { useNavigation } from "@react-navigation/native";
-function CadastroReb({ Fazid}) {
+function CadastroReb({}) {
   const [nomeReb, setNomeReb] = useState("");
   const [QtdAni, setQtdAni] = useState("");
-  console.log(Fazid);
   //Escrever no Banco
   async function handleAddReb() {
     await writeReb({
+      _id: fazID.Fazid,
       rebanhos: [
         {
           _id: uuid.v4(),
           nomeReb,
           createdAt: new Date(),
+          vacas: [
+            {
+              _id: uuid.v4(),
+              nomeVaca: "Teste",
+              nascimentoVaca: 2022,
+              brincoVaca: 15,
+              descVaca: "Teste",
+              createdAt: new Date(),
+            },
+          ],
         },
       ],
     });
   }
+  const { fazID } = useContext(AuthContext);
   const navigation = useNavigation();
   const imgbg1 = "../../../assets/bg6.jpg";
   return (

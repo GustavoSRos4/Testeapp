@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useContext} from "react";
 import {
   TouchableOpacity,
   Text,
@@ -11,7 +11,7 @@ import {
 import { scale, verticalScale } from "react-native-size-matters";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { FlatList } from "react-native-gesture-handler";
-const { height, width } = Dimensions.get("window");
+import { AuthContext } from "../../contexts/auth";
 const Touchable = (
   text = "Selecione sua fazenda",
   onPress,
@@ -105,8 +105,13 @@ const Select = ({
     } else {
       setSelected(item);
       setVisible(false);
+      if (typeof item._id !== "undefined") {
+        var Rebid = item._id;
+        RebanhoID(Rebid);
+      }
     }
   }
+  const {RebanhoID} = useContext(AuthContext);
   return (
     <>
       <TouchableComponent />

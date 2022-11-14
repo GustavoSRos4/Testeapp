@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   Text,
   View,
@@ -7,11 +7,22 @@ import {
   StyleSheet,
   SafeAreaView,
 } from "react-native";
+import getAllReb from "../../Realm/getAllReb";
 import { scale, verticalScale } from "react-native-size-matters";
 import Header from "../../components/Header";
-import { rebanhos } from "../../components/Select/data";
 import Select from "../../components/Select";
 function GeralFaz({ navigation }) {
+  const [listaReb, setListaReb] = useState([]);
+  useEffect(() => {
+    (async () => {
+      const data = await getAllReb();
+      setListaReb(data);
+      console.log(data);
+      data.addListener((values) => {
+        setListaReb([...values]);
+      });
+    })();
+  }, []);
   const imgbg1 = "../../../assets/bg4.jpg";
   return (
     <SafeAreaView style={styles.container}>
@@ -20,7 +31,7 @@ function GeralFaz({ navigation }) {
         source={require(imgbg1)}
         imageStyle={{ opacity: 0.6 }}
       >
-        <Header title="Olá, Carlos" />
+        <Header />
         <TouchableOpacity
           style={styles.bannerButton}
           onPress={() => navigation.navigate("FinanceiroFaz")}
@@ -54,9 +65,9 @@ function GeralFaz({ navigation }) {
           <Select
             touchableText="Selecione seu rebanho"
             title="Rebanhos"
-            objKey="code"
-            objValue="name"
-            data={rebanhos}
+            objKey="_id"
+            objValue="nomeReb"
+            data={listaReb}
           />
         </View>
         <TouchableOpacity
@@ -87,7 +98,7 @@ const styles = StyleSheet.create({
   },
   bannerButton: {
     borderRadius: 30,
-    height:verticalScale(150),
+    height: verticalScale(150),
     width: scale(300),
     alignSelf: "center",
     backgroundColor: "rgba(15,109,0,0.9)",

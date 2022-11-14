@@ -17,7 +17,13 @@ export const RebanhoSchema = {
     _id: "string",
     nomeReb: "string",
     createdAt: "date",
+    vacas: "VacasSchema[]",
   },
+  assignee: {
+    type: 'linkingObjects',
+    objectType: 'Farm',
+    property: 'rebanhos'
+}
 };
 export const LeiteSchema = {
   name: "LeiteSchema",
@@ -29,6 +35,11 @@ export const LeiteSchema = {
     description: "string",
     createdAt: "date",
   },
+  assignee: {
+    type: 'linkingObjects',
+    objectType: 'VacasSchema',
+    property: 'receitas'
+}
 };
 export const VacasSchema = {
   name: "VacasSchema",
@@ -39,7 +50,15 @@ export const VacasSchema = {
     nascimentoVaca: "float",
     brincoVaca: "float",
     descVaca: "string",
+    createdAt: "date",
+    receitas: "LeiteSchema[]",
+    gastos: "GastosSchema[]",
   },
+  assignee: {
+    type: 'linkingObjects',
+    objectType: 'RebanhoSchema',
+    property: 'vacas'
+}
 };
 export const GastosSchema = {
   name: "GastosSchema",
@@ -59,4 +78,9 @@ export const GastosSchema = {
     valorAli: "float",
     consumoAli: "float",
   },
+  assignee: {
+    type: 'linkingObjects',
+    objectType: 'GastosSchema',
+    property: 'gastos'
+}
 };

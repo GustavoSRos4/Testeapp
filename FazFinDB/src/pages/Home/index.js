@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { AuthContext } from "../../contexts/auth";
 import SelectFaz from "../../components/SelectFaz";
 import { scale, verticalScale } from "react-native-size-matters";
 import {
@@ -18,6 +19,7 @@ function Home({ navigation }) {
     (async () => {
       const data = await getAllFarm();
       setListaFaz(data);
+      console.log(data)
       data.addListener((values) => {
         setListaFaz([...values]);
       });
