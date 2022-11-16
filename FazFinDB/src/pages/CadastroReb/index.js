@@ -18,36 +18,30 @@ import { scale, verticalScale } from "react-native-size-matters";
 import { useNavigation } from "@react-navigation/native";
 import writeVaca from "../../Realm/writeVaca";
 
-function CadastroReb({ }) {
+function CadastroReb({}) {
   const [nomeReb, setNomeReb] = useState("");
   const [QtdAni, setQtdAni] = useState(0);
   const { fazID } = useContext(AuthContext);
 
   //Escrever no Banco
 
-  async function genVacas() {
-    console.log(QtdAni)
-    const proximasvacas = []
+  function genVacas() {
+    const proximasvacas = [];
     for (let i = 0; i <= QtdAni; i++) {
       if (QtdAni == i) {
-        console.log("FINALIZADO")
-        console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
       } else {
-        proximasvacas.push(
-          {
-            _id: uuid.v4(),
-            nomeVaca: "vaca" + i,
-            nascimentoVaca: 0,
-            brincoVaca: i,
-            descVaca: "Descricao vazia",
-            createdAt: new Date(),
-          },
-        )
+        proximasvacas.push({
+          _id: uuid.v4(),
+          nomeVaca: "vaca" + i,
+          nascimentoVaca: 0,
+          brincoVaca: i,
+          genero: 1,
+          descVaca: "Descricao vazia",
+          createdAt: new Date(),
+        });
       }
     }
-    console.log("Proximas", proximasvacas, "TAMANHO", proximasvacas.length);
-    console.log("----------------------------------------------------------------")
-    await writeVaca(proximasvacas);
+    return proximasvacas;
   }
 
   async function handleAddReb() {
@@ -58,22 +52,11 @@ function CadastroReb({ }) {
           _id: uuid.v4(),
           nomeReb,
           createdAt: new Date(),
-          vacas: [
-            {
-              _id: uuid.v4(),
-              nomeVaca: "Teste",
-              nascimentoVaca: 2022,
-              brincoVaca: 15,
-              descVaca: "Teste",
-              createdAt: new Date(),
-            },
-          ],
+          vacas: genVacas(QtdAni),
         },
       ],
     });
-    genVacas(QtdAni);
   }
-
 
   const navigation = useNavigation();
   const imgbg1 = "../../../assets/bg6.jpg";
@@ -105,7 +88,12 @@ function CadastroReb({ }) {
             placeholder="Quantos animais no rebanho?"
           ></TextInput>
         </View>
-        <TouchableOpacity style={styles.botaopress} onPress={() => { handleAddReb() }}>
+        <TouchableOpacity
+          style={styles.botaopress}
+          onPress={() => {
+            handleAddReb();
+          }}
+        >
           <Text style={styles.tituloBotao}>{"Cadastrar"}</Text>
         </TouchableOpacity>
         <TouchableOpacity

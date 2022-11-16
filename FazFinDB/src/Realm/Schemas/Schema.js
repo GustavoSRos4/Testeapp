@@ -7,12 +7,11 @@ export const Fazenda = {
     proprietario: "string",
     tipoprod: "string",
     createdAt: "date",
-    rebanhos: { type: "list", objectType: "RebanhoSchema" },
+    rebanhos: "RebanhoSchema[]",
   },
 };
 export const RebanhoSchema = {
   name: "RebanhoSchema",
-  embedded: true,
   properties: {
     _id: "string",
     nomeReb: "string",
@@ -52,6 +51,7 @@ export const VacasSchema = {
     brincoVaca: "float",
     descVaca: "string",
     createdAt: "date",
+    genero: "string",
     receitas: "LeiteSchema[]",
     gastos: "GastosSchema[]",
     assignee: {
