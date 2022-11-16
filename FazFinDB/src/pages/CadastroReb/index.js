@@ -38,6 +38,11 @@ function CadastroReb({}) {
               createdAt: new Date(),
             },
           ],
+          assignee: {
+            type: "linkingObjects",
+            objectType: "VacasSchema",
+            property: "receitas",
+          },
         },
       ],
     });

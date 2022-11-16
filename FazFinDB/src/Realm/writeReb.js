@@ -5,7 +5,7 @@ const writeReb = async (data) => {
   const realm = await getRealm();
   try {
     realm.write(() => {
-        createdReb = realm.create("Farm", data, "modified");
+      createdReb = realm.create("Farm", data,"modified");
     });
     Alert.alert("Dados cadastrados com sucesso!");
     return createdReb;

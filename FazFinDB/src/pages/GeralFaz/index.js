@@ -16,8 +16,8 @@ function GeralFaz({ navigation }) {
   useEffect(() => {
     (async () => {
       const data = await getAllReb();
-      setListaReb(data);
-      console.log(data);
+      setListaReb(data.rebanhos);
+      console.log(listaReb);
       data.addListener((values) => {
         setListaReb([...values]);
       });
