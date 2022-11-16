@@ -51,7 +51,7 @@ export const VacasSchema = {
     brincoVaca: "float",
     descVaca: "string",
     createdAt: "date",
-    genero: "string",
+    genero: "float",
     receitas: "LeiteSchema[]",
     gastos: "GastosSchema[]",
     assignee: {
