@@ -3,22 +3,11 @@
     "name": "FazFin",
     "slug": "FazFin",
     "version": "1.1.0",
-    "orientation": "portrait",
-    "icon": "./assets/FazFin.png",
-    "userInterfaceStyle": "light",
-    "splash": {
-      "image": "./assets/FazFin.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
     "assetBundlePatterns": [
       "**/*"
     ],
     "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/FazFin.png",
-        "backgroundColor": "#FFFFFF"
-      }
+      "package": "com.henrique_om.FazFin"
     },
     "extra": {
       "eas": {
