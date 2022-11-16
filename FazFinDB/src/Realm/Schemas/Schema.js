@@ -32,6 +32,7 @@ export const LeiteSchema = {
     _id: "string",
     precoL: "float",
     prodL: "float",
+    genero: "int",
     description: "string",
     createdAt: "date",
     assignee: {
