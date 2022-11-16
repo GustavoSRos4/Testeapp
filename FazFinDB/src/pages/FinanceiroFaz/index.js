@@ -1,4 +1,6 @@
 import * as React from "react";
+import { useEffect, useState, useContext, useCallback } from "react";
+import { useFocusEffect } from "@react-navigation/native";
 import { View, StyleSheet, useWindowDimensions } from "react-native";
 import { TabView, SceneMap, TabBar } from "react-native-tab-view";
 import Relatorio from "./Relatorio";

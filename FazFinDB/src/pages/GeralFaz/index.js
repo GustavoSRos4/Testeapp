@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext, useCallback } from "react";
 import {
   Text,
   View,
@@ -7,22 +7,45 @@ import {
   StyleSheet,
   SafeAreaView,
 } from "react-native";
+import { useFocusEffect } from "@react-navigation/native";
 import getAllReb from "../../Realm/getAllReb";
 import { scale, verticalScale } from "react-native-size-matters";
 import Header from "../../components/Header";
 import Select from "../../components/Select";
+import { AuthContext } from "../../contexts/auth";
+import { DespesasTotais } from "../../components/Calculos DB/DespesasTotais";
+import getAllGastos from "../../Realm/getAllGastos";
 function GeralFaz({ navigation }) {
   const [listaReb, setListaReb] = useState([]);
   useEffect(() => {
     (async () => {
-      const data = await getAllReb();
-      setListaReb(data.rebanhos);
-      console.log(listaReb);
+      const data = await getAllReb(fazID);
+      setListaReb(data);
       data.addListener((values) => {
         setListaReb([...values]);
       });
     })();
   }, []);
+  async function fetchData() {
+    const dataGas = await getAllGastos();
+    ListaAli(dataGas);
+    const precoCF = DespesasTotais(dataGas);
+    PrecoCF(precoCF);
+  }
+  useFocusEffect(
+    useCallback(() => {
+      fetchData();
+    }, [])
+  );
+  const { precoCF, PrecoCF, ListaAli,fazID } = useContext(AuthContext);
+  function getDespesas() {
+    if (typeof precoCF !== "undefined") {
+      return Number(precoCF);
+    } else {
+      return 0;
+    }
+  }
+  const despesas = getDespesas();
   const imgbg1 = "../../../assets/bg4.jpg";
   return (
     <SafeAreaView style={styles.container}>
@@ -45,7 +68,7 @@ function GeralFaz({ navigation }) {
           </Text>
           <Text style={styles.textoBannerT}>
             <Text style={styles.textoBanner}>{"Gasto Mensal: "}</Text>
-            <Text style={styles.textoBannerDes}>{"R$ 3500,00"}</Text>
+            <Text style={styles.textoBannerDes}>R${despesas}</Text>
           </Text>
           <Text style={styles.textoBannerT}>
             <Text style={styles.textoBanner}>{"Total Mensal: "}</Text>

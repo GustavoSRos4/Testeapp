@@ -110,7 +110,6 @@ const SelectFaz = ({
         FazendaID(Fazid);
         var FazProp = item.proprietario;
         FazendaProp(FazProp);
-        console.log(Fazid)
       }
     }
   }

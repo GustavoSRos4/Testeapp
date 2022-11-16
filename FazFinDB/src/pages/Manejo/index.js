@@ -9,29 +9,26 @@ import {
 } from "react-native";
 import Header from "../../components/Header";
 import { scale, verticalScale } from "react-native-size-matters";
-import Modal from '../modalVacina/index'
-const { height, width } = Dimensions.get("window");
+import Modal from "../modalVacina/index";
 function Manejo({ navigation }) {
   const imgbg1 = "../../../assets/bg10.jpg";
   return (
     <SafeAreaView style={styles.container}>
-      
-        <ImageBackground
-          style={styles.imgbg}
-          source={require(imgbg1)}
-          imageStyle={{ opacity: 0.6 }}
+      <ImageBackground
+        style={styles.imgbg}
+        source={require(imgbg1)}
+        imageStyle={{ opacity: 0.6 }}
+      >
+        <Header />
+        <Modal />
+        <Modal />
+        <TouchableOpacity
+          style={styles.botaopress}
+          onPress={() => navigation.navigate("PagelancaContas")}
         >
-          
-          <Header title="Olá, Carlos" />
-          <Modal/> 
-          <Modal/>
-          <TouchableOpacity
-            style={styles.botaopress}
-            onPress={() => navigation.navigate("PagelancaContas")}
-          >
-            <Text style={styles.tituloBotao}>{"Voltar"}</Text>
-          </TouchableOpacity>
-        </ImageBackground>
+          <Text style={styles.tituloBotao}>{"Voltar"}</Text>
+        </TouchableOpacity>
+      </ImageBackground>
     </SafeAreaView>
   );
 }

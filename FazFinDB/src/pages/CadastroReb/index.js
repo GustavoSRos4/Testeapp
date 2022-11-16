@@ -22,7 +22,7 @@ function CadastroReb({}) {
   //Escrever no Banco
   async function handleAddReb() {
     await writeReb({
-      _id: fazID.Fazid,
+      _id: fazID,
       rebanhos: [
         {
           _id: uuid.v4(),
@@ -38,11 +38,6 @@ function CadastroReb({}) {
               createdAt: new Date(),
             },
           ],
-          assignee: {
-            type: "linkingObjects",
-            objectType: "VacasSchema",
-            property: "receitas",
-          },
         },
       ],
     });

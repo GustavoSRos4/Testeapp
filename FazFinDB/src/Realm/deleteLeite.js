@@ -6,7 +6,7 @@ async function deleteLeite() {
   try {
     Alert.alert("Dados deletados com sucesso!");
     return realm.write(() => {
-      realm.deleteAllObjects();
+      realm.deleteAll();
     });
   } catch (e) {
     Alert.alert("Error", e.message);

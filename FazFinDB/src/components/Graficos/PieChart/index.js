@@ -1,14 +1,18 @@
 import { PieChart } from "react-native-chart-kit";
 import { Dimensions } from "react-native";
 import { scale, verticalScale } from "react-native-size-matters";
+import { useContext } from "react";
 const screenWidth = Dimensions.get("window").width;
-function PieChartFaz(dataRelatorio) {
+import { AuthContext } from "../../../contexts/auth";
+function PieChartFaz() {
+  const { precoCF } = useContext(AuthContext);
+  const despesas = Number(precoCF);
   const chartConfig = {
     color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`,
     backgroundGradientFromOpacity: 0,
     backgroundGradientToOpacity: 0,
   };
-const data = [
+  const data = [
     {
       name: "Faturamento",
       valor: 5000,
@@ -18,7 +22,7 @@ const data = [
     },
     {
       name: "Despesas",
-      valor: 2500,
+      valor: despesas,
       color: "rgba(255,0,0,0.85)",
       legendFontColor: "#FFF",
       legendFontSize: 13,

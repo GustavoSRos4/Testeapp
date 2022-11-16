@@ -19,7 +19,6 @@ function Home({ navigation }) {
     (async () => {
       const data = await getAllFarm();
       setListaFaz(data);
-      console.log(data)
       data.addListener((values) => {
         setListaFaz([...values]);
       });

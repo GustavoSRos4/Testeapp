@@ -1,70 +1,87 @@
-import React from "react";
+import React, { useState} from "react";
 import {
   Text,
   TouchableOpacity,
   StyleSheet,
-  Dimensions,
   SafeAreaView,
-   
 } from "react-native";
 import { CampoTexto } from "./styles";
 import Header from "../../components/Header";
 import { scale, verticalScale } from "react-native-size-matters";
-import Select from "../../components/Select";
-import { racao } from "../../components/Select/data";
-const { height, width } = Dimensions.get("window");
-function Alimentacao ({ navigation }) {
-  
+import uuid from "react-native-uuid";
+import writeGastos from "../../Realm/writeGastos";
+function Alimentacao({ navigation }) {
+  const [tipoAlim, setTipoAlim] = useState("");
+  const [qtdAliS, setQtdAliS] = useState("");
+  const [valorAliS, setValorAliS] = useState("");
+  const [consumoAliS, setConsumoAliS] = useState("");
+  async function handleAddGastos() {
+    const qtdAli = Number(qtdAliS)
+    const valorAli = Number(valorAliS)
+    const consumoAli = Number(consumoAliS)
+    await writeGastos({
+      _id: uuid.v4(),
+      createdAt: new Date(),
+      tipoAlim,
+      qtdAli,
+      valorAli,
+      consumoAli,
+    });
+  }
   return (
     <SafeAreaView style={styles.container}>
-      
-      <Header title="Olá, Carlos" />
-          <TouchableOpacity style={styles.botaoPress2}>
-            <Text style={styles.tituloBotao}>
-              Selecione o trato</Text>
-            <Select
-              touchableText="Selecione o trato"
-              title="Trato"
-              data={racao}
-              onSelect={(selectedItem, index) => {
-                console.log(selectedItem, index)
-              }}/>
-          </TouchableOpacity>
-         
-          <TouchableOpacity style={styles.botaoPress3}>
-            <Text style={styles.tituloBotao}>
-            {"Digite a quntidade sacos"}
-            </Text>
-            <CampoTexto placeholder=""></CampoTexto>
-            </TouchableOpacity>
+      <Header />
+      <TouchableOpacity style={styles.botaoPress2}>
+        <Text style={styles.tituloBotao}>Qual o trato?</Text>
+        <CampoTexto
+          placeholder=""
+          onChangeText={setTipoAlim}
+          value={tipoAlim}
+        ></CampoTexto>
+      </TouchableOpacity>
 
-            <TouchableOpacity style={styles.botaoPress4}>
-            <Text style={styles.tituloBotao}>
-            {"Valor por saco"}
-            </Text>
-            <CampoTexto placeholder=""></CampoTexto>
-            </TouchableOpacity>
+      <TouchableOpacity style={styles.botaoPress3}>
+        <Text style={styles.tituloBotao}>{"Qual o peso da saca(KG)?"}</Text>
+        <CampoTexto
+          placeholder=""
+          onChangeText={setQtdAliS}
+          value={qtdAliS}
+        ></CampoTexto>
+      </TouchableOpacity>
 
-            <TouchableOpacity style={styles.botaoPress5}>
-            <Text style={styles.tituloBotao}>
-            {"Consumo total do rebanho"}
-            </Text>
-            <CampoTexto placeholder=""></CampoTexto>
-            </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.botaopress}
-            onPress={() => navigation.navigate("PagelancaContas")}
-          >
-            <Text style={styles.tituloBotao}>{"Voltar"}</Text>
-          </TouchableOpacity>
-        
+      <TouchableOpacity style={styles.botaoPress4}>
+        <Text style={styles.tituloBotao}>{"Valor por saca(R$)?"}</Text>
+        <CampoTexto
+          placeholder=""
+          onChangeText={setValorAliS}
+          value={valorAliS}
+        ></CampoTexto>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={styles.botaoPress5}>
+        <Text style={styles.tituloBotao}>{"Quantidade consumida(KG)?"}</Text>
+        <CampoTexto
+          placeholder=""
+          onChangeText={setConsumoAliS}
+          value={consumoAliS}
+        ></CampoTexto>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.botaopress6} onPress={handleAddGastos}>
+        <Text style={styles.tituloBotao}>{"Cadastrar"}</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.botaopress}
+        onPress={() => navigation.navigate("PagelancaContas")}
+      >
+        <Text style={styles.tituloBotao}>{"Voltar"}</Text>
+      </TouchableOpacity>
     </SafeAreaView>
   );
 }
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor:"#00290C",
+    backgroundColor: "#00290C",
   },
   imgbg: {
     flex: 1,
@@ -131,11 +148,22 @@ const styles = StyleSheet.create({
     top: verticalScale(625),
     position: "absolute",
   },
+  
+  botaopress6: {
+    borderRadius: 20,
+    backgroundColor: "rgba(15, 109, 0, 0.9)",
+    width: scale(300),
+    height: verticalScale(40),
+    alignItems: "center",
+    justifyContent: "center",
+    alignSelf: "center",
+    top: verticalScale(575),
+    position: "absolute",
+  },
   tituloBotao: {
     fontSize: verticalScale(14),
     fontWeight: "bold",
     color: "#fff",
   },
-  
 });
 export default Alimentacao;
