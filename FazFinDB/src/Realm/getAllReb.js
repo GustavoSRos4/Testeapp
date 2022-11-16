@@ -5,8 +5,8 @@ import { useContext } from "react";
 async function getAllReb() {
   const realm = await getRealm();
   try {
-    const fazid = "536dbf9f-2f15-456a-ac82-3437eb0b984a";
-    const data = realm.objects("Farm");
+    const fazid = "ac8fdcaf-4a60-4f1d-88aa-041510d85107";
+    const data = realm.objectForPrimaryKey("Farm", fazid).rebanhos
     console.log(data);
     return data;
   } catch (e) {
