@@ -35,12 +35,12 @@ function Leite() {
   //Buscar no banco
   async function fetchData() {
     const dataLeite = await getAllLeite();
-    setDataLeite(dataLeite);
+    setListaLeite(dataLeite);
     ListaLeite(dataLeite);
     const precoLeite = ReceitasTotais(dataLeite);
     PrecoLeite(precoLeite);
     dataLeite.addListener((values) => {
-      setDataLeite([...values]);
+      setListaLeite([...values]);
     });
   }
   useFocusEffect(
@@ -55,7 +55,7 @@ function Leite() {
   const [description, setDescription] = useState("");
   const [precoLV, setPrecoLV] = useState("");
   const [prodLV, setProdLV] = useState("");
-  const [dataLeite, setDataLeite] = useState([]);
+  const [listaLeite, setListaLeite] = useState([]);
   //-----------------------------
   const renderItem = ({ item }) => {
     return <Text style={styles.lista2}>{item.description}</Text>;
@@ -104,6 +104,11 @@ function Leite() {
           <Text style={styles.textovoltar}>Cadastrar</Text>
         </TouchableOpacity>
       </ScrollView>
+      <FlatList
+                data={listaLeite}
+                renderItem={renderItem}
+                keyExtractor={(item) => item._id}
+              />
     </SafeAreaView>
   );
 }
