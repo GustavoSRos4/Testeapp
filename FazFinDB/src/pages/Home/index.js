@@ -14,6 +14,7 @@ import {
 import getAllFarm from "../../Realm/getAllFarm";
 function Home({ navigation }) {
   const [listaFaz, setListaFaz] = useState([]);
+  const { fazID } = useContext(AuthContext);
   const imgbg1 = "../../../assets/background7.jpg";
   useEffect(() => {
     (async () => {
@@ -24,6 +25,25 @@ function Home({ navigation }) {
       });
     })();
   }, []);
+
+  function CanContinue(fazID) {
+    if (typeof fazID == "undefined" || fazID == "") {
+      const CanContinue = true;
+      return CanContinue;
+    } else {
+      const CanContinue = false;
+      return CanContinue;
+    }
+  }
+  function DisabledStyle(fazID) {
+    if (typeof fazID == "undefined" || fazID == "") {
+      const Style = styles.botaopress3;
+      return Style;
+    } else {
+      const Style = styles.botaopress2;
+      return Style;
+    }
+  }
   return (
     <SafeAreaView style={styles.container}>
       <ImageBackground
@@ -53,7 +73,8 @@ function Home({ navigation }) {
           <Text style={styles.tituloBotao}>{"Cadastrar fazenda"}</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={styles.botaopress2}
+          disabled={CanContinue(fazID)}
+          style={DisabledStyle(fazID)}
           onPress={() => navigation.navigate("GeralFaz")}
         >
           <Text style={styles.tituloBotao}>{"Continuar"}</Text>
@@ -108,6 +129,17 @@ const styles = StyleSheet.create({
   botaopress2: {
     borderRadius: 20,
     backgroundColor: "rgba(15, 109, 0, 0.9)",
+    width: scale(300),
+    height: verticalScale(40),
+    alignItems: "center",
+    justifyContent: "center",
+    alignSelf: "center",
+    top: verticalScale(625),
+    position: "absolute",
+  },
+  botaopress3: {
+    borderRadius: 20,
+    backgroundColor: "rgba(15, 109, 0, 0.4)",
     width: scale(300),
     height: verticalScale(40),
     alignItems: "center",

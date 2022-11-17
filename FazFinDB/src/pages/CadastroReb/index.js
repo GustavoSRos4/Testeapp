@@ -45,17 +45,14 @@ function CadastroReb({}) {
   }
 
   async function handleAddReb() {
-    await writeReb({
-      _id: fazID,
-      rebanhos: [
+    await writeReb(
         {
           _id: uuid.v4(),
           nomeReb,
           createdAt: new Date(),
           vacas: genVacas(QtdAni),
-        },
-      ],
-    });
+        },fazID
+    );navigation.navigate("GeralFaz")
   }
 
   const navigation = useNavigation();

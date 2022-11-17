@@ -27,6 +27,7 @@ function CadastroFaz() {
       tipoprod,
       createdAt: new Date(),
     });
+    navigation.navigate("Home")
   }
   const navigation = useNavigation();
   const imgbg1 = "../../../assets/backgroundCad.jpg";

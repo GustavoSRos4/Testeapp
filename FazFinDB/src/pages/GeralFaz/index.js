@@ -17,6 +17,7 @@ import { DespesasTotais } from "../../components/Calculos DB/DespesasTotais";
 import getAllGastos from "../../Realm/getAllGastos";
 function GeralFaz({ navigation }) {
   const [listaReb, setListaReb] = useState([]);
+  const [dataGastos, setDataGastos] = useState([]);
   useEffect(() => {
     (async () => {
       const data = await getAllReb(fazID);
@@ -26,18 +27,22 @@ function GeralFaz({ navigation }) {
       });
     })();
   }, []);
-  async function fetchData() {
-    const dataGas = await getAllGastos();
+  async function fetchData(rebID) {
+    const dataGas = await getAllGastos(rebID);
+    setDataGastos(dataGas);
     ListaAli(dataGas);
     const precoCF = DespesasTotais(dataGas);
     PrecoCF(precoCF);
+    dataGas.addListener((values) => {
+      setDataGastos([...values]);
+    });
   }
   useFocusEffect(
     useCallback(() => {
-      fetchData();
+      fetchData(rebID);
     }, [])
   );
-  const { precoCF, PrecoCF, ListaAli,fazID } = useContext(AuthContext);
+  const { precoCF, PrecoCF, ListaAli, fazID, rebID } = useContext(AuthContext);
   function getDespesas() {
     if (typeof precoCF !== "undefined") {
       return Number(precoCF);
@@ -46,6 +51,24 @@ function GeralFaz({ navigation }) {
     }
   }
   const despesas = getDespesas();
+  function CanContinue(rebID) {
+    if (typeof rebID == "undefined" || rebID == "") {
+      const CanContinue = true;
+      return CanContinue;
+    } else {
+      const CanContinue = false;
+      return CanContinue;
+    }
+  }
+  function DisabledStyle(rebID) {
+    if (typeof rebID == "undefined" || rebID == "") {
+      const Style = styles.botaopress4;
+      return Style;
+    } else {
+      const Style = styles.botaopress;
+      return Style;
+    }
+  }
   const imgbg1 = "../../../assets/bg4.jpg";
   return (
     <SafeAreaView style={styles.container}>
@@ -79,9 +102,7 @@ function GeralFaz({ navigation }) {
           style={styles.botaoPress3}
           onPress={() => navigation.navigate("CadastroReb")}
         >
-          <Text style={styles.tituloBotao2}>
-            {"Cadastrar ou modificar rebanhos"}
-          </Text>
+          <Text style={styles.tituloBotao2}>{"Cadastrar rebanho"}</Text>
         </TouchableOpacity>
         <View style={styles.viewtext}>
           <Text style={styles.texto}>Selecionar rebanho</Text>
@@ -94,7 +115,8 @@ function GeralFaz({ navigation }) {
           />
         </View>
         <TouchableOpacity
-          style={styles.botaopress}
+          disabled={CanContinue(rebID)}
+          style={DisabledStyle(rebID)}
           onPress={() => navigation.navigate("GeralReb")}
         >
           <Text style={styles.tituloBotao}>{"Continuar"}</Text>
@@ -171,6 +193,17 @@ const styles = StyleSheet.create({
   botaopress: {
     borderRadius: 20,
     backgroundColor: "rgba(15, 109, 0, 0.9)",
+    width: scale(300),
+    height: verticalScale(40),
+    alignItems: "center",
+    justifyContent: "center",
+    alignSelf: "center",
+    top: verticalScale(575),
+    position: "absolute",
+  },
+  botaopress4: {
+    borderRadius: 20,
+    backgroundColor: "rgba(15, 109, 0, 0.4)",
     width: scale(300),
     height: verticalScale(40),
     alignItems: "center",

@@ -7,11 +7,9 @@ function AuthProvider({ children }) {
   function FazendaID(Fazid) {
     setFazID(Fazid);
   }
-  const [rebID, setRebID] = useState({});
+  const [rebID, setRebID] = useState();
   function RebanhoID(Rebid) {
-    setRebID({
-      Rebid: Rebid,
-    });
+    setRebID(Rebid);
   }
   const [fazProp, setFazProp] = useState({});
   function FazendaProp(FazProp) {
@@ -27,6 +25,14 @@ function AuthProvider({ children }) {
   function ListaAli(dataGas) {
     SetListaAli(dataGas);
   }
+  const [listaLeite, SetListaLeite] = useState();
+  function ListaLeite(dataLeite) {
+    SetListaLeite(dataLeite);
+  }
+  const [precoLeite, SetPrecoLeite] = useState();
+  function PrecoLeite(precoLeite) {
+    SetPrecoLeite(precoLeite);
+  }
   return (
     <AuthContext.Provider
       value={{
@@ -40,6 +46,8 @@ function AuthProvider({ children }) {
         precoCF,
         listaAli,
         ListaAli,
+        ListaLeite,
+        listaLeite,
       }}
     >
       {children}

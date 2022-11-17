@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React, { useState,useContext} from "react";
 import {
   Text,
   TouchableOpacity,
@@ -10,11 +10,13 @@ import Header from "../../components/Header";
 import { scale, verticalScale } from "react-native-size-matters";
 import uuid from "react-native-uuid";
 import writeGastos from "../../Realm/writeGastos";
+import { AuthContext } from "../../contexts/auth";
 function Alimentacao({ navigation }) {
   const [tipoAlim, setTipoAlim] = useState("");
   const [qtdAliS, setQtdAliS] = useState("");
   const [valorAliS, setValorAliS] = useState("");
   const [consumoAliS, setConsumoAliS] = useState("");
+  const { rebID } = useContext(AuthContext);
   async function handleAddGastos() {
     const qtdAli = Number(qtdAliS)
     const valorAli = Number(valorAliS)
@@ -26,7 +28,7 @@ function Alimentacao({ navigation }) {
       qtdAli,
       valorAli,
       consumoAli,
-    });
+    },rebID);
   }
   return (
     <SafeAreaView style={styles.container}>

@@ -1,4 +1,4 @@
-import React, { useState,useContext} from "react";
+import React, { useState, useContext } from "react";
 import {
   TouchableOpacity,
   Text,
@@ -102,6 +102,8 @@ const Select = ({
   function toggleSelect(item) {
     if (item?.[objKey] === selected?.[objKey]) {
       setSelected(null);
+      var Rebid = "";
+      RebanhoID(Rebid);
     } else {
       setSelected(item);
       setVisible(false);
@@ -111,7 +113,7 @@ const Select = ({
       }
     }
   }
-  const {RebanhoID} = useContext(AuthContext);
+  const { RebanhoID } = useContext(AuthContext);
   return (
     <>
       <TouchableComponent />

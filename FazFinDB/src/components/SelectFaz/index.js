@@ -102,18 +102,24 @@ const SelectFaz = ({
   function toggleSelect(item) {
     if (item?.[objKey] === selected?.[objKey]) {
       setSelected(null);
+      var Fazid = ""
+      var Rebid = ""
+      FazendaID(Fazid);
+      RebanhoID(Rebid)
     } else {
       setSelected(item);
       setVisible(false);
       if (typeof item._id !== "undefined") {
         var Fazid = item._id;
         FazendaID(Fazid);
+        var Rebid = ""
+        RebanhoID(Rebid)
         var FazProp = item.proprietario;
         FazendaProp(FazProp);
       }
     }
   }
-  const { FazendaID, FazendaProp } = useContext(AuthContext);
+  const { FazendaID, FazendaProp,RebanhoID } = useContext(AuthContext);
   return (
     <>
       <TouchableComponent />

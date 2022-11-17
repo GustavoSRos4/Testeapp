@@ -1,12 +1,10 @@
 import { getRealm } from "./realm";
 import { Alert } from "react-native";
-import { AuthContext } from "../contexts/auth";
-import { useContext } from "react";
-async function getAllGastos() {
+async function getAllGastos(rebID) {
   const realm = await getRealm();
   try {
-    const data = realm.objects("GastosSchema");
-    return data;
+    const data = realm.objects("RebanhoSchema").filtered(`_id= '${rebID}'`);
+    return data[0].gastos;
   } catch (e) {
     Alert.alert("Error", e.message);
   }

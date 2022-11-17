@@ -13,12 +13,10 @@ import {
 } from "react-native";
 import uuid from "react-native-uuid";
 import Header from "../../components/Header";
-import { getRealm } from "../../Realm/realm";
 import writeLeite from "../../Realm/writeLeite";
 import getAllLeite from "../../Realm/getAllLeite";
-import deleteLeite from "../../Realm/deleteLeite";  
+import { ReceitasTotais } from "../../components/Calculos DB/ReceitasTotais"; 
 function Leite() {
-  let data = Realm.Results;
   //Escrever no Banco
   async function handleAddLeite() {
     const precoL = Number(precoLV);
@@ -31,51 +29,33 @@ function Leite() {
       createdAt: new Date(),
     });
   }
-  //delete
-  async function handleDelete(){
-    await deleteLeite()
-  }
-
   //Buscar no banco
-  async function getLeite() {
-    const data = await getAllLeite();
-    console.log(data);
-    setListaFazenda(data);
+  async function fetchData() {
+    const dataLeite = await getAllLeite();
+    ListaLeite(dataLeite);
+    const precoLeite = ReceitasTotais(dataLeite);
+    PrecoLeite(precoLeite);
   }
-  useEffect(() => {
-    getLeite();
-  }, [ListaFazenda]);
-  //Update no banco
-  const updateLeite = async () => {
-    const precoL = Number(precoLV);
-    const prodL = Number(prodLV);
-    const realm = await getRealm();
-    const data = {
-      _id: uuid.v4(),
-      precoL,
-      prodL,
-      description,
-      createdAt: new Date(),
-    };
-    realm.write(() => {
-      realm.create("LeiteSchema", data, Realm.UpdateMode.Modified);
-    });
-  };
+  useFocusEffect(
+    useCallback(() => {
+      fetchData();
+    }, [])
+  );
+  const {ListaLeite, PrecoLeite, rebID } = useContext(AuthContext);
   //Background
   const imgbg1 = "../../../assets/bg10.jpg";
   //States para salvar o input
   const [description, setDescription] = useState("");
   const [precoLV, setPrecoLV] = useState("");
   const [prodLV, setProdLV] = useState("");
-  const [ListaFazenda, setListaFazenda] = useState([]);
+  const [dataLeite, setDataLeite] = useState([]);
   //-----------------------------
   const renderItem = ({ item }) => {
     return <Text style={styles.lista2}>{item.description}</Text>;
   };
   return (
     <SafeAreaView style={styles.container}>
-      <Header title={"Olá Carlos"} />
-      
+      <Header/>
       <ScrollView style={styles.container3}>
         {/*Preco do leite*/}
         <View style={styles.containerinfos}>

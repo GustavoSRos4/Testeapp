@@ -3,12 +3,13 @@ import { useContext } from "react";
 import { AuthContext } from "../contexts/auth";
 import { Alert } from "react-native";
 let createdReb
-const writeReb = async (data) => {
+const writeReb = async (data,fazID) => {
   const realm = await getRealm();
   try {
     realm.write(() => {
-      createdReb = realm.create("Farm", data,"modified");
-      console.log(data.rebanhos);
+     const farm = realm.objects("Farm").filtered(`_id= '${fazID}'`);
+      createdReb = realm.create("RebanhoSchema", data);
+      farm[0].rebanhos.push(createdReb)
     });
     Alert.alert("Dados cadastrados com sucesso!");
     return createdReb;
