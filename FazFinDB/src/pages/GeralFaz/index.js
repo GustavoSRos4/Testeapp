@@ -17,17 +17,15 @@ import { DespesasTotais } from "../../components/Calculos DB/DespesasTotais";
 import getAllGastos from "../../Realm/getAllGastos";
 function GeralFaz({ navigation }) {
   const [listaReb, setListaReb] = useState([]);
-  const [dataGastos, setDataGastos] = useState([]);
-  useEffect(() => {
-    (async () => {
-      const data = await getAllReb(fazID);
-      setListaReb(data);
-      data.addListener((values) => {
-        setListaReb([...values]);
-      });
-    })();
-  }, []);
-  async function fetchData(rebID) {
+  const [dataGasto, setDataGastos] = useState([]);
+  async function fetchDataReb(fazID) {
+    const data = await getAllReb(fazID);
+    setListaReb(data);
+    data.addListener((values) => {
+      setListaReb([...values]);
+    });
+  }
+  async function fetchDataDes(rebID) {
     const dataGas = await getAllGastos(rebID);
     setDataGastos(dataGas);
     ListaAli(dataGas);
@@ -39,7 +37,8 @@ function GeralFaz({ navigation }) {
   }
   useFocusEffect(
     useCallback(() => {
-      fetchData(rebID);
+      fetchDataDes(rebID);
+      fetchDataReb(fazID);
     }, [])
   );
   const { precoCF, PrecoCF, ListaAli, fazID, rebID } = useContext(AuthContext);

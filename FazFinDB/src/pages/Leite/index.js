@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback, useContext } from "react";
 import {
   Text,
   TouchableOpacity,
@@ -15,7 +15,10 @@ import uuid from "react-native-uuid";
 import Header from "../../components/Header";
 import writeLeite from "../../Realm/writeLeite";
 import getAllLeite from "../../Realm/getAllLeite";
-import { ReceitasTotais } from "../../components/Calculos DB/ReceitasTotais"; 
+import { ReceitasTotais } from "../../components/Calculos DB/ReceitasTotais";
+import { useFocusEffect } from "@react-navigation/native";
+import { AuthContext } from "../../contexts/auth";
+
 function Leite() {
   //Escrever no Banco
   async function handleAddLeite() {
@@ -32,16 +35,20 @@ function Leite() {
   //Buscar no banco
   async function fetchData() {
     const dataLeite = await getAllLeite();
+    setDataLeite(dataLeite);
     ListaLeite(dataLeite);
     const precoLeite = ReceitasTotais(dataLeite);
     PrecoLeite(precoLeite);
+    dataLeite.addListener((values) => {
+      setDataLeite([...values]);
+    });
   }
   useFocusEffect(
     useCallback(() => {
       fetchData();
     }, [])
   );
-  const {ListaLeite, PrecoLeite, rebID } = useContext(AuthContext);
+  const { ListaLeite, PrecoLeite, rebID } = useContext(AuthContext);
   //Background
   const imgbg1 = "../../../assets/bg10.jpg";
   //States para salvar o input
@@ -55,7 +62,7 @@ function Leite() {
   };
   return (
     <SafeAreaView style={styles.container}>
-      <Header/>
+      <Header />
       <ScrollView style={styles.container3}>
         {/*Preco do leite*/}
         <View style={styles.containerinfos}>
@@ -96,23 +103,7 @@ function Leite() {
         <TouchableOpacity style={styles.botaovoltar} onPress={handleAddLeite}>
           <Text style={styles.textovoltar}>Cadastrar</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.botaovoltar2} onPress={getLeite}>
-          <Text style={styles.textovoltar}>Buscar BD</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.botaovoltar3} onPress={updateLeite}>
-          <Text style={styles.textovoltar}>Update</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.botaovoltar3} onPress={handleDelete}>
-          <Text style={styles.textovoltar}>Delete</Text>
-        </TouchableOpacity>
       </ScrollView>
-      <View style={styles.container2}>
-        <FlatList
-          data={ListaFazenda}
-          renderItem={renderItem}
-          keyExtractor={(item) => item._id}
-        />
-      </View>
     </SafeAreaView>
   );
 }
@@ -221,7 +212,6 @@ const styles = StyleSheet.create({
   },
   container3: {
     height: 300,
-   
   },
 });
 

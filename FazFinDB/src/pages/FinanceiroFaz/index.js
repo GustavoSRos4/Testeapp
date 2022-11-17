@@ -50,7 +50,7 @@ export default function FinanceiroFaz({ navigation }) {
   );
   return (
     <>
-      <Header title={"Olá, Carlos"} />
+      <Header />
       <TabView
         navigationState={{
           index,

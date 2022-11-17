@@ -48,6 +48,8 @@ function AuthProvider({ children }) {
         ListaAli,
         ListaLeite,
         listaLeite,
+        PrecoLeite,
+        precoLeite
       }}
     >
       {children}
