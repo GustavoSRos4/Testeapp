@@ -6,9 +6,7 @@ const writeGastos = async (data, rebID) => {
   try {
     realm.write(() => {
       const reb = realm.objects("RebanhoSchema").filtered(`_id= '${rebID}'`);
-
       createdGastos = realm.create("GastosSchema", data);
-      console.log(createdGastos);
       reb[0].gastos.push(createdGastos);
     });
     Alert.alert("Dados cadastrados com sucesso!");
