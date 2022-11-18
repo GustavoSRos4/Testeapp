@@ -18,9 +18,6 @@ import Manejo from "../pages/Manejo";
 import Leite from "../pages/Leite";
 import GeralReb from "../pages/GeralReb";
 import FinanceiroFaz from "../pages/FinanceiroFaz";
-import Alimentacao from "../pages/Alimentacao";
-import Cadastrolista from "../pages/Cadastro-listas";
-import Hometeste from "../pages/Hometeste";
 const Drawer = createDrawerNavigator();
 function Routes() {
   return (
@@ -175,48 +172,6 @@ function Routes() {
           drawerIcon: ({ focused, size, color }) => (
             <Fontisto
               name={focused ? "injection-syringe" : "injection-syringe"}
-              size={size}
-              color={color}
-            />
-          ),
-        }}
-      />
-      <Drawer.Screen
-        name="Alimentacao"
-        component={Alimentacao}
-        options={{
-          title: "Alimentacao",
-          drawerIcon: ({ focused, size, color }) => (
-            <Entypo
-              name={focused ? "address" : "address"}
-              size={size}
-              color={color}
-            />
-          ),
-        }}
-      />
-      <Drawer.Screen
-        name="Hometeste"
-        component={Hometeste}
-        options={{
-          title: "Hometeste",
-          drawerIcon: ({ focused, size, color }) => (
-            <Entypo
-              name={focused ? "address" : "address"}
-              size={size}
-              color={color}
-            />
-          ),
-        }}
-      />
-      <Drawer.Screen
-        name="Cadastrolista"
-        component={Cadastrolista}
-        options={{
-          title: "Cadastrolista",
-          drawerIcon: ({ focused, size, color }) => (
-            <Entypo
-              name={focused ? "address" : "address"}
               size={size}
               color={color}
             />

@@ -11,8 +11,6 @@ import PagelancaContas from "../pages/PagelancaContas";
 import PageListavacas from "../pages/PageListavacas";
 import FinanceiroFaz from "../pages/FinanceiroFaz";
 import Alimentacao from "../pages/Alimentacao";
-import Cadastrolista from "../pages/Cadastro-listas";
-import Hometeste from "../pages/Hometeste";
 const Stack = createNativeStackNavigator();
 function StackRoutes() {
   return (
@@ -94,14 +92,6 @@ function StackRoutes() {
         options={{
           headerShown: false,
         }}
-      />
-      <Stack.Screen
-        name="HomeScreen"
-        component={Hometeste}
-      />
-      <Stack.Screen
-        name="Cadastro"
-        component={Cadastrolista}
       />
     </Stack.Navigator>
   );
