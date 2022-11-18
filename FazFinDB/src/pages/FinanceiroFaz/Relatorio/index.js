@@ -15,11 +15,21 @@ import { scale, verticalScale } from "react-native-size-matters";
 import Modal from "react-native-modal";
 import { AuthContext } from "../../../contexts/auth";
 function Relatorio() {
-  const { precoCF,listaAli} = useContext(AuthContext);
+  const precoTotal = precoLeite - precoCF;
+  const { precoCF,listaAli,listaLeite,precoLeite} = useContext(AuthContext);
   const [isModalVisible, setModalVisible] = useState(false);
   function toggleModal() {
     setModalVisible(!isModalVisible);
   }
+  const renderItem2 = ({ item }) => {
+    return (
+      <TouchableOpacity style={styles.listaDet}>
+        <Text style={styles.tituloBotao}>
+        {item.description} - R$ {(item.prodL * item.precoL).toFixed(2)}
+        </Text>
+      </TouchableOpacity>
+    );
+  };
   const renderItem = ({ item }) => {
     return (
       <TouchableOpacity style={styles.listaDet}>
@@ -30,6 +40,40 @@ function Relatorio() {
       </TouchableOpacity>
     );
   };
+  function Color(total) {
+    let color
+    if (total > 0) {
+      color = styles.textoValorPos
+      return color;
+    } else {
+      color = styles.textoValorNeg
+      return color;
+    }
+  }
+  function getDespesas() {
+    if (typeof precoCF !== "undefined") {
+      return Number(precoCF);
+    } else {
+      return 0;
+    }
+  }
+  function getReceitas() {
+    if (typeof precoLeite !== "undefined") {
+      return Number(precoLeite);
+    } else {
+      return 0;
+    }
+  }
+  function getTotal(despesas, receitas) {
+    if (despesas !== "0" || receitas !== "0") {
+      return Number(receitas - despesas);
+    } else {
+      return 0;
+    }
+  }
+  const total = getTotal(getDespesas(), getReceitas());
+  const despesas = getDespesas();
+  const receitas = getReceitas();
   const imgbg1 = "../../../../assets/bg5.jpg";
   const navigation = useNavigation();
   return (
@@ -45,13 +89,13 @@ function Relatorio() {
           }}
         >
           <Text style={styles.texto}>Total de Faturamento:</Text>
-          <Text style={styles.textoValorPos}>R$ 5000,00</Text>
+          <Text style={styles.textoValorPos}>R$ {receitas}</Text>
           <View style={styles.lineStyle} />
           <Text style={styles.texto}>Total de despesas:</Text>
-          <Text style={styles.textoValorNeg}>R${precoCF}</Text>
+          <Text style={styles.textoValorNeg}>R${despesas}</Text>
           <View style={styles.lineStyle} />
           <Text style={styles.texto}>Balanço final:</Text>
-          <Text style={styles.textoValorPos}>R$ 2500,00</Text>
+          <Text style={Color()}>R${total}</Text>
           <View style={styles.lineStyle} />
           <View style={styles.containerChart}>
             <PieChartFaz />
@@ -66,58 +110,12 @@ function Relatorio() {
           >
             <View style={styles.modalContainer}>
               <Text style={styles.tituloModal}>Detalhes de Faturamento:</Text>
-              <ScrollView style={styles.modalScroll}>
-                <TouchableOpacity style={styles.listaDet}>
-                  <Text style={styles.tituloBotao}>
-                    {"Produção Leite 165l 09/10 - R$ 500,00"}
-                  </Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.listaDet2}>
-                  <Text style={styles.tituloBotao}>
-                    {"Produção Leite 165l 19/10 - R$ 555,00"}
-                  </Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.listaDet}>
-                  <Text style={styles.tituloBotao}>
-                    {"Produção Leite 165l 18/10 - R$ 555,00"}
-                  </Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.listaDet2}>
-                  <Text style={styles.tituloBotao}>
-                    {"Produção Leite 165l 17/10 - R$ 555,00"}
-                  </Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.listaDet}>
-                  <Text style={styles.tituloBotao}>
-                    {"Produção Leite 165l 16/10 - R$ 555,00"}
-                  </Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.listaDet2}>
-                  <Text style={styles.tituloBotao}>
-                    {"Produção Leite 165l 15/10 - R$ 555,00"}
-                  </Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.listaDet}>
-                  <Text style={styles.tituloBotao}>
-                    {"Produção Leite 165l 14/10 - R$ 555,00"}
-                  </Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.listaDet2}>
-                  <Text style={styles.tituloBotao}>
-                    {"Produção Leite 165l 13/10 - R$ 555,00"}
-                  </Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.listaDet}>
-                  <Text style={styles.tituloBotao}>
-                    {"Produção Leite 165l 12/10 - R$ 555,00"}
-                  </Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.listaDet2}>
-                  <Text style={styles.tituloBotao}>
-                    {"Produção Leite 165l 11/10 - R$ 555,00"}
-                  </Text>
-                </TouchableOpacity>
-              </ScrollView>
+              <FlatList
+                style={styles.scroll}
+                data={listaLeite}
+                renderItem={renderItem2}
+                keyExtractor={(item) => item._id}
+              />
               <Text style={styles.tituloModal}>Detalhes de Despesas:</Text>
               <FlatList
                 style={styles.scroll}
@@ -228,7 +226,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     alignSelf: "center",
-    top: verticalScale(603),
+    top: verticalScale(583),
     position: "absolute",
   },
   listaDet: {
@@ -252,7 +250,7 @@ const styles = StyleSheet.create({
     marginVertical: verticalScale(5),
   },
   scroll: {
-    height: verticalScale(272.5),
+    height: verticalScale(245),
   },
 });
 export default Relatorio;

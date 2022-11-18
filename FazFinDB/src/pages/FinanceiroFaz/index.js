@@ -7,6 +7,11 @@ import Relatorio from "./Relatorio";
 import Header from "../../components/Header";
 import Despesas from "./Despesas";
 import Faturamento from "./Faturamento";
+import { AuthContext } from "../../contexts/auth";
+import { DespesasTotais } from "../../components/Calculos DB/DespesasTotais";
+import { ReceitasTotais } from "../../components/Calculos DB/ReceitasTotais";
+import getAllGastos from "../../Realm/getAllGastos";
+import getAllLeite from "../../Realm/getAllLeite";
 const FirstRoute = () => <Relatorio />;
 
 const SecondRoute = () => <Despesas />;
@@ -19,6 +24,31 @@ const renderScene = SceneMap({
 });
 
 export default function FinanceiroFaz({ navigation }) {
+  const { PrecoCF, ListaAli, fazID, PrecoLeite, ListaLeite } =
+    useContext(AuthContext);
+  const [dataGasto, setDataGastos] = useState([]);
+  const [dataReceitas, setDataReceitas] = useState([]);
+  async function fetchDataDes(fazID) {
+    const dataGas = await getAllGastos(fazID);
+    setDataGastos(dataGas);
+    ListaAli(dataGas);
+    const precoCF = DespesasTotais(dataGas);
+    PrecoCF(precoCF);
+  }
+  async function fetchDataRec(fazID) {
+    const dataRec = await getAllLeite(fazID);
+    setDataReceitas(dataRec);
+    ListaLeite(dataRec);
+    const precoLeite = ReceitasTotais(dataRec);
+    PrecoLeite(precoLeite);
+  }
+  useFocusEffect(
+    useCallback(() => {
+      fetchDataRec(fazID);
+      fetchDataDes(fazID);
+    }, [])
+  );
+
   const layout = useWindowDimensions();
 
   const [index, setIndex] = React.useState(0);

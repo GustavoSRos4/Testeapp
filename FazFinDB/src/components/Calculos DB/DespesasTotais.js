@@ -6,6 +6,6 @@ export function DespesasTotais(dataGastos) {
       dataGastos[i].consumoAli;
   }
 
-  const precoCF = testes;
+  const precoCF = testes.toFixed(2);
   return precoCF;
 }

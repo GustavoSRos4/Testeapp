@@ -14,33 +14,64 @@ import {
 import uuid from "react-native-uuid";
 import Header from "../../components/Header";
 import writeLeite from "../../Realm/writeLeite";
-import getAllLeite from "../../Realm/getAllLeite";
-import { ReceitasTotais } from "../../components/Calculos DB/ReceitasTotais";
+import getAllVacas from "../../Realm/getAllVacas";
 import { useFocusEffect } from "@react-navigation/native";
 import { AuthContext } from "../../contexts/auth";
+import Modal from "react-native-modal";
+import { scale, verticalScale } from "react-native-size-matters";
 
-function Leite() {
+function Leite({ navigation }) {
+  const [isModalVisible, setModalVisible] = useState(false);
+  const [vacaID, setVacaID] = useState("");
+  function toggleModal() {
+    setModalVisible(!isModalVisible);
+  }
+  const renderItem = ({ item }) => {
+    return (
+      <View>
+        <TouchableOpacity
+          onPress={function ReturnID() {
+            const VacaID = item._id;
+            setVacaID(VacaID);
+            toggleModal();
+          }}
+          style={[
+            styles.cardVacas,
+            {
+              backgroundColor:
+                item.brincoVaca % 2 === 0 ? "#0F6D00" : "#004513",
+            },
+          ]}
+        >
+          <Text style={styles.tituloBotao}>
+            Nome: {item.nomeVaca} - Brinco: {item.brincoVaca}
+          </Text>
+        </TouchableOpacity>
+      </View>
+    );
+  };
   //Escrever no Banco
   async function handleAddLeite() {
     const precoL = Number(precoLV);
     const prodL = Number(prodLV);
-    await writeLeite({
-      _id: uuid.v4(),
-      precoL,
-      prodL,
-      description,
-      createdAt: new Date(),
-    });
+    await writeLeite(
+      {
+        _id: uuid.v4(),
+        precoL,
+        prodL,
+        description,
+        createdAt: new Date(),
+      },
+      vacaID
+    );
+    navigation.navigate("Contas");
   }
   //Buscar no banco
   async function fetchData() {
-    const dataLeite = await getAllLeite();
-    setListaLeite(dataLeite);
-    ListaLeite(dataLeite);
-    const precoLeite = ReceitasTotais(dataLeite);
-    PrecoLeite(precoLeite);
-    dataLeite.addListener((values) => {
-      setListaLeite([...values]);
+    const dataVaca = await getAllVacas();
+    setListaVaca(dataVaca);
+    dataVaca.addListener((values) => {
+      setListaVaca([...values]);
     });
   }
   useFocusEffect(
@@ -48,71 +79,137 @@ function Leite() {
       fetchData();
     }, [])
   );
-  const { ListaLeite, PrecoLeite, rebID } = useContext(AuthContext);
+  const { ListaLeite, PrecoLeite, rebID, fazID } = useContext(AuthContext);
   //Background
   const imgbg1 = "../../../assets/bg10.jpg";
   //States para salvar o input
   const [description, setDescription] = useState("");
   const [precoLV, setPrecoLV] = useState("");
   const [prodLV, setProdLV] = useState("");
-  const [listaLeite, setListaLeite] = useState([]);
+  const [listaVaca, setListaVaca] = useState([]);
   //-----------------------------
-  const renderItem = ({ item }) => {
-    return <Text style={styles.lista2}>{item.description}</Text>;
-  };
+  function CanContinue(vacaID) {
+    if (typeof vacaID == "undefined" || vacaID == "") {
+      const CanContinue = true;
+      return CanContinue;
+    } else {
+      const CanContinue = false;
+      return CanContinue;
+    }
+  }
+  function DisabledStyle(vacaID) {
+    if (typeof vacaID == "undefined" || vacaID == "") {
+      const Style = styles.botaopressdisabled;
+      return Style;
+    } else {
+      const Style = styles.botaopress6;
+      return Style;
+    }
+  }
   return (
     <SafeAreaView style={styles.container}>
       <Header />
-      <ScrollView style={styles.container3}>
-        {/*Preco do leite*/}
-        <View style={styles.containerinfos}>
-          <Text style={styles.tituloinfo}>Preço atual do Leite:</Text>
-          <TextInput
-            style={styles.detalhe}
-            value={precoLV}
-            numeric
-            keyboardType={"numeric"}
-            onChangeText={setPrecoLV}
-          />
-        </View>
-        {/*Produção diaria*/}
-        <View style={styles.containerinfos}>
-          <Text style={styles.tituloinfo}>Produção diaria:</Text>
-          <TextInput
-            style={styles.detalhe}
-            value={prodLV}
-            numeric
-            keyboardType={"numeric"}
-            onChangeText={setProdLV}
-          />
-          <TouchableOpacity style={styles.botaoselecionaranimal}>
-            <Text style={styles.selecionaranimal}>Selecionar Animal</Text>
-          </TouchableOpacity>
-        </View>
-        {/*Descrição*/}
-        <View style={styles.containerinfos}>
-          <Text style={styles.tituloinfo}>Descrição:</Text>
-          <TextInput
-            style={styles.detalhe}
-            multiline={true}
-            value={description}
-            onChangeText={setDescription}
-          />
-        </View>
 
-        <TouchableOpacity style={styles.botaovoltar} onPress={handleAddLeite}>
-          <Text style={styles.textovoltar}>Cadastrar</Text>
-        </TouchableOpacity>
-      </ScrollView>
-      <FlatList
-                data={listaLeite}
-                renderItem={renderItem}
-                keyExtractor={(item) => item._id}
-              />
+      {/*Preco do leite*/}
+      <View style={styles.containerinfos}>
+        <Text style={styles.tituloinfo}>Preço atual do Leite:</Text>
+        <TextInput
+          style={styles.detalhe}
+          value={precoLV}
+          numeric
+          keyboardType={"numeric"}
+          onChangeText={setPrecoLV}
+        />
+      </View>
+      {/*Produção diaria*/}
+      <View style={styles.containerinfos}>
+        <Text style={styles.tituloinfo}>Produção diaria:</Text>
+        <TextInput
+          style={styles.detalhe}
+          value={prodLV}
+          numeric
+          keyboardType={"numeric"}
+          onChangeText={setProdLV}
+        />
+      </View>
+      {/*Descrição*/}
+      <View style={styles.containerinfos}>
+        <Text style={styles.tituloinfo}>Descrição:</Text>
+        <TextInput
+          style={styles.detalhe}
+          value={description}
+          onChangeText={setDescription}
+        />
+      </View>
+      <TouchableOpacity
+        onPress={() => {
+          toggleModal();
+        }}
+        style={styles.botaoselecionaranimal}
+      >
+        <Text style={styles.tituloBotao}>Selecionar Animal</Text>
+        <Modal
+          isVisible={isModalVisible}
+          coverScreen={true}
+          backdropColor={"rgba(234,242,215,0.8)"}
+          animationIn="slideInUp"
+          animationOut="slideOutDown"
+        >
+          <View style={styles.modalContainer}>
+            <Text style={styles.TituloM}>Selecione um animal</Text>
+            <FlatList
+              style={styles.scroll}
+              data={listaVaca}
+              renderItem={renderItem}
+              keyExtractor={(item) => item._id}
+            />
+          </View>
+          <TouchableOpacity
+            style={styles.botaopressM}
+            onPress={() => {
+              toggleModal();
+            }}
+          >
+            <Text style={styles.tituloBotao}>{"Voltar"}</Text>
+          </TouchableOpacity>
+        </Modal>
+      </TouchableOpacity>
+      <TouchableOpacity
+        disabled={CanContinue(vacaID)}
+        style={DisabledStyle(vacaID)}
+        onPress={handleAddLeite}
+      >
+        <Text style={styles.textovoltar}>Cadastrar</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.botaopress}
+        onPress={() => navigation.navigate("Contas")}
+      >
+        <Text style={styles.textovoltar}>Voltar</Text>
+      </TouchableOpacity>
     </SafeAreaView>
   );
 }
 const styles = StyleSheet.create({
+  modalContainer: {
+    backgroundColor: "rgba(234,242,215,1)",
+    position: "absolute",
+    top: verticalScale(10),
+    alignSelf: "center",
+    width: scale(330),
+    borderRadius: 20,
+  },
+  cardVacas: {
+    backgroundColor: "rgba(15, 109, 0, 0.9)",
+    width: scale(300),
+    height: verticalScale(40),
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 18,
+    marginVertical: verticalScale(4),
+    position: "relative",
+    alignSelf: "center",
+  },
   container: {
     flex: 1,
     backgroundColor: "#004513",
@@ -164,7 +261,7 @@ const styles = StyleSheet.create({
     color: "#fff",
   },
   tituloinfo: {
-    color: "#c4c4c4ff",
+    color: "white",
     fontSize: 20,
     marginBottom: 10,
     textAlign: "center",
@@ -177,10 +274,12 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   containerinfos: {
-    marginTop: 10,
-    padding: 10,
+    marginVertical: verticalScale(15),
+    padding: verticalScale(20),
+    width: scale(320),
     backgroundColor: "rgba(15, 109, 0, 0.7)",
-    borderRadius: 8,
+    borderRadius: 20,
+    alignSelf: "center",
   },
   botaoselecionaranimal: {
     backgroundColor: "#004513",
@@ -217,6 +316,75 @@ const styles = StyleSheet.create({
   },
   container3: {
     height: 300,
+  },
+  botaopressM: {
+    borderRadius: 20,
+    backgroundColor: "rgba(15, 109, 0, 0.9)",
+    width: scale(300),
+    height: verticalScale(40),
+    alignItems: "center",
+    justifyContent: "center",
+    alignSelf: "center",
+    top: verticalScale(580),
+    position: "absolute",
+  },
+
+  tituloBotao: {
+    fontSize: verticalScale(14),
+    fontWeight: "bold",
+    color: "#fff",
+  },
+  botaopress: {
+    borderRadius: 20,
+    backgroundColor: "rgba(15, 109, 0, 0.9)",
+    width: scale(300),
+    height: verticalScale(40),
+    alignItems: "center",
+    justifyContent: "center",
+    alignSelf: "center",
+    top: verticalScale(625),
+    position: "absolute",
+  },
+
+  botaopress6: {
+    borderRadius: 20,
+    backgroundColor: "rgba(15, 109, 0, 0.9)",
+    width: scale(300),
+    height: verticalScale(40),
+    alignItems: "center",
+    justifyContent: "center",
+    alignSelf: "center",
+    top: verticalScale(575),
+    position: "absolute",
+  },
+  TituloM: {
+    justifyContent: "center",
+    alignSelf: "center",
+    color: "#004513",
+    fontSize: verticalScale(30),
+    fontWeight: "bold",
+  },
+  botaoselecionaranimal: {
+    borderRadius: 20,
+    backgroundColor: "rgba(15, 109, 0, 0.9)",
+    top: verticalScale(525),
+    position: "absolute",
+    width: scale(300),
+    height: verticalScale(40),
+    alignItems: "center",
+    justifyContent: "center",
+    alignSelf: "center",
+  },
+  botaopressdisabled: {
+    borderRadius: 20,
+    backgroundColor: "rgba(15, 109, 0, 0.4)",
+    width: scale(300),
+    height: verticalScale(40),
+    alignItems: "center",
+    justifyContent: "center",
+    alignSelf: "center",
+    top: verticalScale(575),
+    position: "absolute",
   },
 });
 

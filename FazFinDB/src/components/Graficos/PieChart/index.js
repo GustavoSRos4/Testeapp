@@ -5,8 +5,9 @@ import { useContext } from "react";
 const screenWidth = Dimensions.get("window").width;
 import { AuthContext } from "../../../contexts/auth";
 function PieChartFaz() {
-  const { precoCF } = useContext(AuthContext);
+  const { precoCF ,precoLeite} = useContext(AuthContext);
   const despesas = Number(precoCF);
+  const receitas = Number(precoLeite);
   const chartConfig = {
     color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`,
     backgroundGradientFromOpacity: 0,
@@ -15,17 +16,17 @@ function PieChartFaz() {
   const data = [
     {
       name: "Faturamento",
-      valor: 5000,
+      valor: receitas,
       color: "rgba(15, 109, 0, 0.85)",
       legendFontColor: "#FFF",
-      legendFontSize: 13,
+      legendFontSize: 16,
     },
     {
       name: "Despesas",
       valor: despesas,
       color: "rgba(255,0,0,0.85)",
       legendFontColor: "#FFF",
-      legendFontSize: 13,
+      legendFontSize: 16,
     },
   ];
   return (

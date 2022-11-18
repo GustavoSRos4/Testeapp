@@ -30,6 +30,14 @@ function Despesas() {
       </TouchableOpacity>
     );
   };
+  function getDespesas() {
+    if (typeof precoCF !== "undefined") {
+      return Number(precoCF);
+    } else {
+      return 0;
+    }
+  }
+  const despesas = getDespesas();
   const imgbg1 = "../../../../assets/bg2.jpg";
   const navigation = useNavigation();
   return (
@@ -45,7 +53,7 @@ function Despesas() {
           }}
         >
           <Text style={styles.texto}>Total de despesas:</Text>
-          <Text style={styles.textoValorNeg}>R${precoCF}</Text>
+          <Text style={styles.textoValorNeg}>R${despesas}</Text>
           <View style={styles.lineStyle} />
           <View style={styles.containerChart}>
             <BezierChartDespesas />

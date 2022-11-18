@@ -15,9 +15,13 @@ import Select from "../../components/Select";
 import { AuthContext } from "../../contexts/auth";
 import { DespesasTotais } from "../../components/Calculos DB/DespesasTotais";
 import getAllGastos from "../../Realm/getAllGastos";
+import getAllLeite from "../../Realm/getAllLeite";
+import { ReceitasTotais } from "../../components/Calculos DB/ReceitasTotais";
 function GeralFaz({ navigation }) {
   const [listaReb, setListaReb] = useState([]);
   const [dataGasto, setDataGastos] = useState([]);
+  const [dataReceitas, setDataReceitas] = useState([]);
+
   async function fetchDataReb(fazID) {
     const data = await getAllReb(fazID);
     setListaReb(data);
@@ -25,23 +29,38 @@ function GeralFaz({ navigation }) {
       setListaReb([...values]);
     });
   }
-  async function fetchDataDes(rebID) {
-    const dataGas = await getAllGastos(rebID);
+  async function fetchDataRec(fazID) {
+    const dataRec = await getAllLeite(fazID);
+    setDataReceitas(dataRec);
+    ListaLeite(dataRec);
+    const precoLeite = ReceitasTotais(dataRec);
+    PrecoLeite(precoLeite);
+  }
+  async function fetchDataDes(rebID, fazID) {
+    const dataGas = await getAllGastos(fazID);
     setDataGastos(dataGas);
     ListaAli(dataGas);
     const precoCF = DespesasTotais(dataGas);
     PrecoCF(precoCF);
-    dataGas.addListener((values) => {
-      setDataGastos([...values]);
-    });
   }
   useFocusEffect(
     useCallback(() => {
-      fetchDataDes(rebID);
+      fetchDataDes(rebID, fazID);
       fetchDataReb(fazID);
+      fetchDataRec(fazID);
     }, [])
   );
-  const { precoCF, PrecoCF, ListaAli, fazID, rebID } = useContext(AuthContext);
+  const {
+    precoCF,
+    PrecoCF,
+    ListaAli,
+    fazID,
+    rebID,
+    ListaLeite,
+    precoLeite,
+    PrecoLeite,
+  } = useContext(AuthContext);
+
   function getDespesas() {
     if (typeof precoCF !== "undefined") {
       return Number(precoCF);
@@ -49,7 +68,23 @@ function GeralFaz({ navigation }) {
       return 0;
     }
   }
+  function getReceitas() {
+    if (typeof precoLeite !== "undefined") {
+      return Number(precoLeite);
+    } else {
+      return 0;
+    }
+  }
+  function getTotal(despesas, receitas) {
+    if (despesas !== "0" || receitas !== "0") {
+      return Number(receitas - despesas);
+    } else {
+      return 0;
+    }
+  }
+  const total = getTotal(getDespesas(), getReceitas());
   const despesas = getDespesas();
+  const receitas = getReceitas();
   function CanContinue(rebID) {
     if (typeof rebID == "undefined" || rebID == "") {
       const CanContinue = true;
@@ -66,6 +101,16 @@ function GeralFaz({ navigation }) {
     } else {
       const Style = styles.botaopress;
       return Style;
+    }
+  }
+  function Color(total) {
+    let color;
+    if (total > 0) {
+      color = styles.textoBannerRec;
+      return color;
+    } else {
+      color = styles.textoBannerDes;
+      return color;
     }
   }
   const imgbg1 = "../../../assets/bg4.jpg";
@@ -85,16 +130,16 @@ function GeralFaz({ navigation }) {
             {"Verificar o balanço da Fazenda."}
           </Text>
           <Text style={styles.textoBannerT}>
-            <Text style={styles.textoBanner}>{"Receita Mensal: "}</Text>
-            <Text style={styles.textoBannerRec}>{"R$ 5000,00"}</Text>
+            <Text style={styles.textoBanner}>{"Receitas: "}</Text>
+            <Text style={styles.textoBannerRec}>R${receitas}</Text>
           </Text>
           <Text style={styles.textoBannerT}>
-            <Text style={styles.textoBanner}>{"Gasto Mensal: "}</Text>
+            <Text style={styles.textoBanner}>{"Despesas: "}</Text>
             <Text style={styles.textoBannerDes}>R${despesas}</Text>
           </Text>
           <Text style={styles.textoBannerT}>
-            <Text style={styles.textoBanner}>{"Total Mensal: "}</Text>
-            <Text style={styles.textoBannerRec}>{"R$ 1500,00"}</Text>
+            <Text style={styles.textoBanner}>{"Total: "}</Text>
+            <Text style={Color(total)}>R${total}</Text>
           </Text>
         </TouchableOpacity>
         <TouchableOpacity

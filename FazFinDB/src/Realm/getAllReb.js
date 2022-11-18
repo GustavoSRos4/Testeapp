@@ -9,6 +9,6 @@ async function getAllReb(fazID) {
     return data[0].rebanhos
   } catch (e) {
     Alert.alert("Error", e.message);
-  }
+  }realm.close();
 }
 export default getAllReb;

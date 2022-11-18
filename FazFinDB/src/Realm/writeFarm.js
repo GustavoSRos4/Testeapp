@@ -11,6 +11,6 @@ const writeFarm = async (data) => {
     return createdFarm;
   } catch (e) {
     Alert.alert("Erro", e.message);
-  }
+  }realm.close()
 };
 export default writeFarm;

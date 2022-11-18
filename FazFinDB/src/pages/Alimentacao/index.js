@@ -28,7 +28,7 @@ function Alimentacao({ navigation }) {
       qtdAli,
       valorAli,
       consumoAli,
-    },rebID);
+    },rebID);navigation.navigate("PagelancaContas")
   }
   return (
     <SafeAreaView style={styles.container}>

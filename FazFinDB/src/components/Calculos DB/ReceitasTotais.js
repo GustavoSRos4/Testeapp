@@ -1,8 +1,8 @@
-export function ReceitasTotais(dataLeite) {
+export function ReceitasTotais(dataRec) {
   var testes = 0;
-  for (var i in dataLeite) {
-    testes += (dataLeite[i].precoL * dataLeite[i].prodL);
+  for (var i in dataRec) {
+    testes += (dataRec[i].prodL * dataRec[i].precoL);
   }
-  const precoLeite = testes;
+  const precoLeite = testes.toFixed(2);
   return precoLeite;
 }
