@@ -10,7 +10,6 @@ import {
 import { useFocusEffect } from "@react-navigation/native";
 import getAllReb from "../../Realm/getAllReb";
 import { scale, verticalScale } from "react-native-size-matters";
-import Header from "../../components/Header";
 import Select from "../../components/Select";
 import { AuthContext } from "../../contexts/auth";
 import { DespesasTotais } from "../../components/Calculos DB/DespesasTotais";
@@ -121,7 +120,6 @@ function GeralFaz({ navigation }) {
         source={require(imgbg1)}
         imageStyle={{ opacity: 0.6 }}
       >
-        <Header />
         <TouchableOpacity
           style={styles.bannerButton}
           onPress={() => navigation.navigate("FinanceiroFaz")}

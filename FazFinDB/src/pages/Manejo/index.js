@@ -1,41 +1,272 @@
-import React from "react";
 import {
   Text,
   TouchableOpacity,
   ImageBackground,
   StyleSheet,
   Dimensions,
+  View,
   SafeAreaView,
+  TextInput,
 } from "react-native";
 import Header from "../../components/Header";
+import React, { useState, useContext } from "react";
 import { scale, verticalScale } from "react-native-size-matters";
-import Modal from "../modalVacina/index";
+import writeGastos from "../../Realm/writeGastos";
+import { MaterialCommunityIcons, FontAwesome5 } from "@expo/vector-icons";
+import Modal from "react-native-modal";
+import uuid from "react-native-uuid";
+import { AuthContext } from "../../contexts/auth";
 function Manejo({ navigation }) {
-  const imgbg1 = "../../../assets/bg10.jpg";
+  const [isModalVisible, setModalVisible] = useState(false);
+  const [isModalVisible2, setModalVisible2] = useState(false);
+  const [isModalVisible3, setModalVisible3] = useState(false);
+  const [valorAliS, setValorAliS] = useState("1");
+  const [qtdAliS, SetQtdAliS] = useState("1");
+  const [consumoAliS, SetConsumoAliS] = useState("1");
+  const [tipoAlim, setTipoAlim] = useState("");
+  const { rebID } = useContext(AuthContext);
+  async function handleAddGastos() {
+    const qtdAli = Number(qtdAliS);
+    const valorAli = Number(valorAliS);
+    const consumoAli = Number(consumoAliS);
+    await writeGastos(
+      {
+        _id: uuid.v4(),
+        createdAt: new Date(),
+        tipoAlim,
+        qtdAli,
+        valorAli,
+        consumoAli,
+      },
+      rebID
+    );
+    navigation.navigate("PagelancaContas");
+  }
+  function toggleModal() {
+    setModalVisible(!isModalVisible);
+  }
+  function toggleModal2() {
+    setModalVisible2(!isModalVisible2);
+  }
+  function toggleModal3() {
+    setModalVisible3(!isModalVisible3);
+  }
   return (
     <SafeAreaView style={styles.container}>
-      <ImageBackground
-        style={styles.imgbg}
-        source={require(imgbg1)}
-        imageStyle={{ opacity: 0.6 }}
+      <Header />
+      <TouchableOpacity
+        style={styles.botaoPress2}
+        onPress={() => {
+          toggleModal(true);
+        }}
       >
-        <Header />
-        <Modal />
-        <Modal />
+        <Text style={styles.tituloBotao2}>
+          <MaterialCommunityIcons
+            name="hospital-box-outline"
+            size={scale(30)}
+            color="white"
+          />
+          {"  Vacina e Remedios"}
+        </Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.botaoPress3}
+        onPress={() => {
+          toggleModal2(true);
+        }}
+      >
+        <Text style={styles.tituloBotao2}>
+          <MaterialCommunityIcons
+            name="hammer-screwdriver"
+            size={scale(30)}
+            color="white"
+          />
+          {"  Mão de obra"}
+        </Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.botaoPress4}
+        onPress={() => {
+          toggleModal3(true);
+        }}
+      >
+        <Text style={styles.tituloBotao2}>
+          <FontAwesome5 name="tractor" size={scale(30)} color="white" />
+          {"  Outros"}
+        </Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.botaopress8}
+        onPress={() => navigation.navigate("PagelancaContas")}
+      >
+        <Text style={styles.tituloBotao}>{"Voltar"}</Text>
+      </TouchableOpacity>
+      <Modal
+        statusBarTranslucent
+        isVisible={isModalVisible}
+        coverScreen={true}
+        backdropColor={"rgba(234,242,215,0.8)"}
+        animationIn="slideInUp"
+        animationOut="slideOutDown"
+      >
+        <View style={styles.modalContainer}>
+          <Text style={styles.tituloModal}>Cadastro de Vacina e Remédios</Text>
+          <Text style={styles.tituloBotao}>{"Qual o remédio ou Vacina?"}</Text>
+          <TextInput
+            style={styles.input}
+            value={tipoAlim}
+            onChangeText={setTipoAlim}
+          />
+          <Text style={styles.tituloBotao}>{"Qual o valor do produto?"}</Text>
+          <TextInput
+            style={styles.input}
+            value={valorAliS}
+            numeric
+            keyboardType={"numeric"}
+            onChangeText={setValorAliS}
+          />
+          <Text style={styles.tituloBotao}>{"Qual o volume do produto?"}</Text>
+          <TextInput
+            style={styles.input}
+            value={qtdAliS}
+            numeric
+            keyboardType={"numeric"}
+            onChangeText={SetQtdAliS}
+          />
+          <Text style={styles.tituloBotao}>
+            {"Qual a quantidade aplicada?"}
+          </Text>
+          <TextInput
+            style={styles.input}
+            value={consumoAliS}
+            numeric
+            keyboardType={"numeric"}
+            onChangeText={SetConsumoAliS}
+          />
+        </View>
+        <TouchableOpacity style={styles.botaopress6} onPress={handleAddGastos}>
+          <Text style={styles.tituloBotao}>{"Cadastrar"}</Text>
+        </TouchableOpacity>
         <TouchableOpacity
           style={styles.botaopress}
-          onPress={() => navigation.navigate("PagelancaContas")}
+          onPress={() => {
+            toggleModal(false);
+          }}
         >
-          <Text style={styles.tituloBotao}>{"Voltar"}</Text>
+          <Text style={styles.tituloBotao}>Voltar</Text>
         </TouchableOpacity>
-      </ImageBackground>
+      </Modal>
+      <Modal
+        statusBarTranslucent
+        isVisible={isModalVisible2}
+        coverScreen={true}
+        backdropColor={"rgba(234,242,215,0.8)"}
+        animationIn="slideInUp"
+        animationOut="slideOutDown"
+      >
+        <View style={styles.modalContainer}>
+          <Text style={styles.tituloModal}>Cadastro de mão de obra.</Text>
+          <Text style={styles.tituloBotao}>{"Descrição do serviço."}</Text>
+          <TextInput
+            style={styles.input}
+            value={tipoAlim}
+            onChangeText={setTipoAlim}
+          />
+          <Text style={styles.tituloBotao}>{"Total pago pelo serviço."}</Text>
+          <TextInput
+            style={styles.input}
+            value={valorAliS}
+            numeric
+            keyboardType={"numeric"}
+            onChangeText={setValorAliS}
+          />
+        </View>
+        <TouchableOpacity style={styles.botaopress6} onPress={handleAddGastos}>
+          <Text style={styles.tituloBotao}>{"Cadastrar"}</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.botaopress}
+          onPress={() => {
+            toggleModal2(false);
+          }}
+        >
+          <Text style={styles.tituloBotao}>Voltar</Text>
+        </TouchableOpacity>
+      </Modal>
+
+      <Modal
+        statusBarTranslucent
+        isVisible={isModalVisible3}
+        coverScreen={true}
+        backdropColor={"rgba(234,242,215,0.8)"}
+        animationIn="slideInUp"
+        animationOut="slideOutDown"
+      >
+        <View style={styles.modalContainer}>
+          <Text style={styles.tituloModal}>Cadastro de outras despesas.</Text>
+          <Text style={styles.tituloBotao}>{"Descrição"}</Text>
+          <TextInput
+            style={styles.input}
+            value={tipoAlim}
+            onChangeText={setTipoAlim}
+          />
+          <Text style={styles.tituloBotao}>{"Total pago:"}</Text>
+          <TextInput
+            style={styles.input}
+            value={valorAliS}
+            numeric
+            keyboardType={"numeric"}
+            onChangeText={setValorAliS}
+          />
+        </View>
+        <TouchableOpacity style={styles.botaopress6} onPress={handleAddGastos}>
+          <Text style={styles.tituloBotao}>{"Cadastrar"}</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.botaopress}
+          onPress={() => {
+            toggleModal3(false);
+          }}
+        >
+          <Text style={styles.tituloBotao}>Voltar</Text>
+        </TouchableOpacity>
+      </Modal>
     </SafeAreaView>
   );
 }
 const styles = StyleSheet.create({
+  tituloModal: {
+    fontSize: verticalScale(20),
+    fontWeight: "bold",
+    color: "white",
+    margin: verticalScale(10),
+    alignSelf: "center",
+    top: verticalScale(0),
+    position: "absolute",
+  },
+  modalContainer: {
+    backgroundColor: "rgba(15, 109, 0, 1)",
+    position: "absolute",
+    top: verticalScale(0),
+    alignSelf: "center",
+    width: scale(330),
+    height: verticalScale(500),
+    borderRadius: 20,
+    justifyContent: "center",
+  },
+  input: {
+    backgroundColor: "white",
+    color: "black",
+    width: scale(300),
+    height: verticalScale(40),
+    alignSelf: "center",
+    borderRadius: 20,
+    textAlign: "center",
+    marginBottom: verticalScale(40),
+  },
   container: {
     flex: 1,
-    backgroundColor: "#006773",
+    backgroundColor: "#004513",
   },
   imgbg: {
     flex: 1,
@@ -75,6 +306,17 @@ const styles = StyleSheet.create({
     top: verticalScale(425),
     position: "absolute",
   },
+  botaoPress5: {
+    borderRadius: 20,
+    backgroundColor: "rgba(15, 109, 0, 0.9)",
+    width: scale(300),
+    height: verticalScale(100),
+    alignItems: "center",
+    justifyContent: "center",
+    alignSelf: "center",
+    top: verticalScale(460),
+    position: "absolute",
+  },
   tituloBotao2: {
     fontSize: scale(25),
     fontWeight: "bold",
@@ -88,13 +330,37 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     alignSelf: "center",
+    top: verticalScale(605),
+    position: "absolute",
+  },
+
+  botaopress6: {
+    borderRadius: 20,
+    backgroundColor: "rgba(15, 109, 0, 0.9)",
+    width: scale(300),
+    height: verticalScale(40),
+    alignItems: "center",
+    justifyContent: "center",
+    alignSelf: "center",
+    top: verticalScale(555),
+    position: "absolute",
+  },
+  botaopress8: {
+    borderRadius: 20,
+    backgroundColor: "rgba(15, 109, 0, 0.9)",
+    width: scale(300),
+    height: verticalScale(40),
+    alignItems: "center",
+    justifyContent: "center",
+    alignSelf: "center",
     top: verticalScale(625),
     position: "absolute",
   },
   tituloBotao: {
     fontSize: verticalScale(14),
     fontWeight: "bold",
-    color: "#fff",
+    color: "white",
+    alignSelf: "center",
   },
 });
 export default Manejo;

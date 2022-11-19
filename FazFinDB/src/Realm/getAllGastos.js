@@ -11,8 +11,6 @@ async function getAllGastos(fazID) {
       }
     }
     return testes;
-    // try {
-    //return realm.objects("GastosSchema").sorted("createdAt");
   } catch (e) {
     Alert.alert("Error", e.message);
   }
