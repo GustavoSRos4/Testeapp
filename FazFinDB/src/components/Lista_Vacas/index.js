@@ -277,6 +277,10 @@ function Lista_vacas({ textobarrapesquisa, idrebanho }) {
               }}
             >
               <Text style={styles.textVacas}>{item.nomeVaca}</Text>
+              <View style={styles.containerRendimento}>
+                <Text style={{ color: "#fff", fontSize: scale(14), }}>Rendimento:</Text>
+                <Text style={{ color: -100 >= 0 ? "green" : "red", fontWeight: "bold", fontSize: scale(15), }}>-100</Text>
+              </View>
             </TouchableOpacity>
           </View>
         )}
@@ -287,8 +291,10 @@ function Lista_vacas({ textobarrapesquisa, idrebanho }) {
 
 const styles = StyleSheet.create({
   containerVacas: {
+    flex: 1,
     margin: 5,
     alignItems: "center",
+
   },
   cardVacas: {
     padding: 15,
@@ -391,6 +397,11 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: "#080",
   },
+  containerRendimento: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: "80%",
+  }
 });
 
 export default Lista_vacas;
