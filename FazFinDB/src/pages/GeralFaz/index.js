@@ -124,27 +124,27 @@ function GeralFaz({ navigation }) {
           style={styles.bannerButton}
           onPress={() => navigation.navigate("FinanceiroFaz")}
         >
-          <Text style={styles.bannerText}>
-            {"Verificar o balanço da Fazenda."}
-          </Text>
           <Text style={styles.textoBannerT}>
-            <Text style={styles.textoBanner}>{"Receitas: "}</Text>
+            <Text style={styles.textoBanner}>{"           Receitas: "}</Text>
             <Text style={styles.textoBannerRec}>R${receitas}</Text>
           </Text>
           <Text style={styles.textoBannerT}>
-            <Text style={styles.textoBanner}>{"Despesas: "}</Text>
+            <Text style={styles.textoBanner}>{"           Despesas: "}</Text>
             <Text style={styles.textoBannerDes}>R${despesas}</Text>
           </Text>
           <Text style={styles.textoBannerT}>
-            <Text style={styles.textoBanner}>{"Total: "}</Text>
+            <Text style={styles.textoBanner}>{"           Balanço final: "}</Text>
             <Text style={Color(total)}>R${total}</Text>
+          </Text>
+          <Text style={styles.bannerText}>
+            {"Clique aqui para mais detalhes"}
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.botaoPress3}
           onPress={() => navigation.navigate("CadastroReb")}
         >
-          <Text style={styles.tituloBotao2}>{"Cadastrar rebanho"}</Text>
+          <Text style={styles.tituloBotao2}>{"Cadastrar rebanhos"}</Text>
         </TouchableOpacity>
         <View style={styles.viewtext}>
           <Text style={styles.texto}>Selecionar rebanho</Text>
@@ -195,26 +195,26 @@ const styles = StyleSheet.create({
   },
   bannerText: {
     color: "#fff",
-    fontSize: scale(20),
+    fontSize: scale(13),
     fontWeight: "bold",
     margin: verticalScale(5),
     alignSelf: "center",
   },
   textoBannerT: {
-    textAlign: "center",
-    fontSize: scale(17),
+    textAlign: 'justify',
+    fontSize: scale(20),
   },
   textoBanner: {
     color: "#fff",
-    fontSize: scale(15),
+    fontSize: scale(20),
   },
   textoBannerRec: {
     color: "#0FFF50",
-    fontSize: scale(17),
+    fontSize: scale(20),
   },
   textoBannerDes: {
     color: "#FF3131",
-    fontSize: scale(17),
+    fontSize: scale(20),
   },
   botaoPress3: {
     borderRadius: 20,

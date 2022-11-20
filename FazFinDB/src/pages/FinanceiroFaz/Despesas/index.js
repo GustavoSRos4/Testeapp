@@ -55,6 +55,7 @@ function Despesas() {
           <Text style={styles.texto}>Total de despesas:</Text>
           <Text style={styles.textoValorNeg}>R${despesas}</Text>
           <View style={styles.lineStyle} />
+          <Text style={styles.preGraf}>Clique no gráfico para mais detalhes.</Text>
           <View style={styles.containerChart}>
             <BezierChartDespesas />
           </View>
@@ -97,6 +98,11 @@ function Despesas() {
   );
 }
 const styles = StyleSheet.create({
+  preGraf:{
+    color: 'white',
+    alignSelf: 'center',
+    
+  },
   modalContainer: {
     backgroundColor: "rgba(234,242,215,1)",
     position: "absolute",

@@ -1,11 +1,12 @@
-import React, { useState,useContext} from "react";
+import React, { useState, useContext } from "react";
 import {
   Text,
+  TextInput,
   TouchableOpacity,
   StyleSheet,
   SafeAreaView,
+  View,
 } from "react-native";
-import { CampoTexto } from "./styles";
 import Header from "../../components/Header";
 import { scale, verticalScale } from "react-native-size-matters";
 import uuid from "react-native-uuid";
@@ -18,56 +19,58 @@ function Alimentacao({ navigation }) {
   const [consumoAliS, setConsumoAliS] = useState("");
   const { rebID } = useContext(AuthContext);
   async function handleAddGastos() {
-    const qtdAli = Number(qtdAliS)
-    const valorAli = Number(valorAliS)
-    const consumoAli = Number(consumoAliS)
-    await writeGastos({
-      _id: uuid.v4(),
-      createdAt: new Date(),
-      tipoAlim,
-      qtdAli,
-      valorAli,
-      consumoAli,
-    },rebID);navigation.navigate("PagelancaContas")
+    const qtdAli = Number(qtdAliS);
+    const valorAli = Number(valorAliS);
+    const consumoAli = Number(consumoAliS);
+    await writeGastos(
+      {
+        _id: uuid.v4(),
+        createdAt: new Date(),
+        tipoAlim,
+        qtdAli,
+        valorAli,
+        consumoAli,
+      },
+      rebID
+    );
+    navigation.navigate("PagelancaContas");
   }
   return (
     <SafeAreaView style={styles.container}>
       <Header />
-      <TouchableOpacity style={styles.botaoPress2}>
-        <Text style={styles.tituloBotao}>Qual o trato?</Text>
-        <CampoTexto
+      <View style={styles.containerinput}>
+        <Text style={styles.tituloBotao3}>Qual o trato?</Text>
+        <TextInput
+          style={styles.input}
           placeholder=""
           onChangeText={setTipoAlim}
           value={tipoAlim}
-        ></CampoTexto>
-      </TouchableOpacity>
+        ></TextInput>
 
-      <TouchableOpacity style={styles.botaoPress3}>
-        <Text style={styles.tituloBotao}>{"Qual o peso da saca(KG)?"}</Text>
-        <CampoTexto
+        <Text style={styles.tituloBotao3}>{"Qual o peso da saca(KG)?"}</Text>
+        <TextInput
+          style={styles.input}
           placeholder=""
           onChangeText={setQtdAliS}
           value={qtdAliS}
-        ></CampoTexto>
-      </TouchableOpacity>
+        ></TextInput>
 
-      <TouchableOpacity style={styles.botaoPress4}>
-        <Text style={styles.tituloBotao}>{"Valor por saca(R$)?"}</Text>
-        <CampoTexto
+        <Text style={styles.tituloBotao3}>{"Valor por saca(R$)?"}</Text>
+        <TextInput
+          style={styles.input}
           placeholder=""
           onChangeText={setValorAliS}
           value={valorAliS}
-        ></CampoTexto>
-      </TouchableOpacity>
+        ></TextInput>
 
-      <TouchableOpacity style={styles.botaoPress5}>
-        <Text style={styles.tituloBotao}>{"Quantidade consumida(KG)?"}</Text>
-        <CampoTexto
+        <Text style={styles.tituloBotao3}>{"Quantidade consumida(KG)?"}</Text>
+        <TextInput
+          style={styles.input}
           placeholder=""
           onChangeText={setConsumoAliS}
           value={consumoAliS}
-        ></CampoTexto>
-      </TouchableOpacity>
+        ></TextInput>
+      </View>
       <TouchableOpacity style={styles.botaopress6} onPress={handleAddGastos}>
         <Text style={styles.tituloBotao}>{"Cadastrar"}</Text>
       </TouchableOpacity>
@@ -81,6 +84,26 @@ function Alimentacao({ navigation }) {
   );
 }
 const styles = StyleSheet.create({
+  containerinput: {
+    backgroundColor: "rgba(15, 109, 0, 1)",
+    margin: verticalScale(10),
+    alignItems: "center",
+    width: scale(300),
+    alignSelf: "center",
+    height: verticalScale(500),
+    justifyContent: "center",
+    borderRadius: verticalScale(20),
+  },
+  input: {
+    backgroundColor: "white",
+    color: "black",
+    width: scale(250),
+    height: verticalScale(40),
+    alignSelf: "center",
+    borderRadius: 20,
+    textAlign: "center",
+    marginBottom: verticalScale(30),
+  },
   container: {
     flex: 1,
     backgroundColor: "#00290C",
@@ -150,7 +173,7 @@ const styles = StyleSheet.create({
     top: verticalScale(625),
     position: "absolute",
   },
-  
+
   botaopress6: {
     borderRadius: 20,
     backgroundColor: "rgba(15, 109, 0, 0.9)",
@@ -164,6 +187,11 @@ const styles = StyleSheet.create({
   },
   tituloBotao: {
     fontSize: verticalScale(14),
+    fontWeight: "bold",
+    color: "#fff",
+  },
+  tituloBotao3: {
+    fontSize: verticalScale(20),
     fontWeight: "bold",
     color: "#fff",
   },

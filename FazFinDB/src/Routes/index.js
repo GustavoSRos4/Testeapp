@@ -149,35 +149,6 @@ function Routes() {
           ),
         }}
       />
-
-      <Drawer.Screen
-        name="Leite"
-        component={Leite}
-        options={{
-          title: "Leite",
-          drawerIcon: ({ focused, size, color }) => (
-            <Entypo
-              name={focused ? "bucket" : "bucket"}
-              size={size}
-              color={color}
-            />
-          ),
-        }}
-      />
-      <Drawer.Screen
-        name="Manejo"
-        component={Manejo}
-        options={{
-          title: "Manejo",
-          drawerIcon: ({ focused, size, color }) => (
-            <Fontisto
-              name={focused ? "injection-syringe" : "injection-syringe"}
-              size={size}
-              color={color}
-            />
-          ),
-        }}
-      />
     </Drawer.Navigator>
   );
 }

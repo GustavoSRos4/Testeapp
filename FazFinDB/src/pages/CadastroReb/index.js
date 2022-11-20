@@ -69,14 +69,14 @@ function CadastroReb({}) {
           source={require("../../../assets/FazFin.png")}
         />
         <View style={styles.viewtext}>
-          <Text style={styles.texto}>Nome do Rebanho</Text>
+          <Text style={styles.texto}>Nome do rebanho:</Text>
           <TextInput
             style={styles.campoTexto}
             onChangeText={setNomeReb}
             value={nomeReb}
-            placeholder="Ex: Vaca solteira"
+            placeholder="Ex: Vacas solteiras"
           ></TextInput>
-          <Text style={styles.texto}>Quantidade de animais</Text>
+          <Text style={styles.texto}>Quantidade de animais:</Text>
           <TextInput
             style={styles.campoTexto}
             onChangeText={setQtdAni}

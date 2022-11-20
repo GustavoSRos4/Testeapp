@@ -15,7 +15,7 @@ function PieChartFaz() {
   };
   const data = [
     {
-      name: "Faturamento",
+      name: "Receitas",
       valor: receitas,
       color: "rgba(15, 109, 0, 0.85)",
       legendFontColor: "#FFF",

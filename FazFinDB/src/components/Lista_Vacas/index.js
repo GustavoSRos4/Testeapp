@@ -288,19 +288,19 @@ const styles = StyleSheet.create({
   },
   contasvaca: {
     width: "100%",
-    padding: 10,
+    padding: verticalScale(10),
   },
   text: {
-    fontSize: 18,
+    fontSize: verticalScale(18),
     textAlign: "center",
     backgroundColor: "#f2f2f2",
   },
   rendimento: {
-    fontSize: 25,
+    fontSize: verticalScale(25),
     textAlign: "center",
   },
   rendimentototal: {
-    fontSize: 25,
+    fontSize: verticalScale(25),
     textAlign: "center",
     color: "#080",
   },

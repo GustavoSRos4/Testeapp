@@ -11,7 +11,7 @@ function BezierChartDespesas() {
     labels: ["Agosto", "Setembro", "Outubro", "Novembro"],
     datasets: [
       {
-        data: [3500, 3450, 3200, despesas],
+        data: [0, 0, 0, despesas],
         strokeWidth: 2,
         color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
       },

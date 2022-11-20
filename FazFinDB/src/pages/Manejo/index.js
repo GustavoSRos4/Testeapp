@@ -66,7 +66,7 @@ function Manejo({ navigation }) {
             size={scale(30)}
             color="white"
           />
-          {"  Vacina e Remedios"}
+          {"  Vacina e remédios"}
         </Text>
       </TouchableOpacity>
       <TouchableOpacity
@@ -111,13 +111,13 @@ function Manejo({ navigation }) {
       >
         <View style={styles.modalContainer}>
           <Text style={styles.tituloModal}>Cadastro de Vacina e Remédios</Text>
-          <Text style={styles.tituloBotao}>{"Qual o remédio ou Vacina?"}</Text>
+          <Text style={styles.tituloBotao3}>{"Qual o remédio ou vacina?"}</Text>
           <TextInput
             style={styles.input}
             value={tipoAlim}
             onChangeText={setTipoAlim}
           />
-          <Text style={styles.tituloBotao}>{"Qual o valor do produto?"}</Text>
+          <Text style={styles.tituloBotao3}>{"Qual o valor do produto?"}</Text>
           <TextInput
             style={styles.input}
             value={valorAliS}
@@ -125,7 +125,7 @@ function Manejo({ navigation }) {
             keyboardType={"numeric"}
             onChangeText={setValorAliS}
           />
-          <Text style={styles.tituloBotao}>{"Qual o volume do produto?"}</Text>
+          <Text style={styles.tituloBotao3}>{"Qual o volume do produto?"}</Text>
           <TextInput
             style={styles.input}
             value={qtdAliS}
@@ -133,7 +133,7 @@ function Manejo({ navigation }) {
             keyboardType={"numeric"}
             onChangeText={SetQtdAliS}
           />
-          <Text style={styles.tituloBotao}>
+          <Text style={styles.tituloBotao3}>
             {"Qual a quantidade aplicada?"}
           </Text>
           <TextInput
@@ -164,15 +164,15 @@ function Manejo({ navigation }) {
         animationIn="slideInUp"
         animationOut="slideOutDown"
       >
-        <View style={styles.modalContainer}>
+        <View style={styles.modalContainer2}>
           <Text style={styles.tituloModal}>Cadastro de mão de obra.</Text>
-          <Text style={styles.tituloBotao}>{"Descrição do serviço."}</Text>
+          <Text style={styles.tituloBotao3}>{"Descrição do serviço:"}</Text>
           <TextInput
             style={styles.input}
             value={tipoAlim}
             onChangeText={setTipoAlim}
           />
-          <Text style={styles.tituloBotao}>{"Total pago pelo serviço."}</Text>
+          <Text style={styles.tituloBotao3}>{"Total pago pelo serviço:"}</Text>
           <TextInput
             style={styles.input}
             value={valorAliS}
@@ -182,7 +182,7 @@ function Manejo({ navigation }) {
           />
         </View>
         <TouchableOpacity style={styles.botaopress6} onPress={handleAddGastos}>
-          <Text style={styles.tituloBotao}>{"Cadastrar"}</Text>
+          <Text style={styles.tituloBotao3}>{"Cadastrar"}</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.botaopress}
@@ -190,7 +190,7 @@ function Manejo({ navigation }) {
             toggleModal2(false);
           }}
         >
-          <Text style={styles.tituloBotao}>Voltar</Text>
+          <Text style={styles.tituloBotao3}>Voltar</Text>
         </TouchableOpacity>
       </Modal>
 
@@ -202,15 +202,15 @@ function Manejo({ navigation }) {
         animationIn="slideInUp"
         animationOut="slideOutDown"
       >
-        <View style={styles.modalContainer}>
+        <View style={styles.modalContainer3}>
           <Text style={styles.tituloModal}>Cadastro de outras despesas.</Text>
-          <Text style={styles.tituloBotao}>{"Descrição"}</Text>
+          <Text style={styles.tituloBotao3}>{"Descrição:"}</Text>
           <TextInput
             style={styles.input}
             value={tipoAlim}
             onChangeText={setTipoAlim}
           />
-          <Text style={styles.tituloBotao}>{"Total pago:"}</Text>
+          <Text style={styles.tituloBotao3}>{"Total pago:"}</Text>
           <TextInput
             style={styles.input}
             value={valorAliS}
@@ -236,21 +236,40 @@ function Manejo({ navigation }) {
 }
 const styles = StyleSheet.create({
   tituloModal: {
-    fontSize: verticalScale(20),
+    fontSize: verticalScale(25),
     fontWeight: "bold",
     color: "white",
     margin: verticalScale(10),
     alignSelf: "center",
     top: verticalScale(0),
-    position: "absolute",
   },
   modalContainer: {
+    backgroundColor: "rgba(15, 109, 0, 1)",
+    position: "absolute",
+    top: verticalScale(20),
+    alignSelf: "center",
+    width: scale(330),
+    height: verticalScale(500),
+    borderRadius: 20,
+    justifyContent: "center",
+  },
+  modalContainer2: {
     backgroundColor: "rgba(15, 109, 0, 1)",
     position: "absolute",
     top: verticalScale(0),
     alignSelf: "center",
     width: scale(330),
-    height: verticalScale(500),
+    height: verticalScale(280),
+    borderRadius: 20,
+    justifyContent: "center",
+  },
+  modalContainer3: {
+    backgroundColor: "rgba(15, 109, 0, 1)",
+    position: "absolute",
+    top: verticalScale(0),
+    alignSelf: "center",
+    width: scale(330),
+    height: verticalScale(280),
     borderRadius: 20,
     justifyContent: "center",
   },
@@ -358,6 +377,11 @@ const styles = StyleSheet.create({
   },
   tituloBotao: {
     fontSize: verticalScale(14),
+    fontWeight: "bold",
+    color: "white",
+    alignSelf: "center",
+  },tituloBotao3: {
+    fontSize: verticalScale(20),
     fontWeight: "bold",
     color: "white",
     alignSelf: "center",
