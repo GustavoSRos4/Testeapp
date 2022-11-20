@@ -1,10 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useCallback } from 'react';
 import { Button, Dimensions, View, SafeAreaView, StyleSheet, Text, ImageBackground, } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Header from "../../components/Header";
 import { scale, verticalScale } from "react-native-size-matters";
 import Lista_vacas from '../../components/Lista_Vacas';
 import SearchBar from "../../components/SearchBar";
+import { AuthContext } from "../../contexts/auth";
+import getRebVacas from '../../Realm/getRebVacas';
+import { useFocusEffect } from "@react-navigation/native";
+
+
 
 
 
@@ -15,6 +20,8 @@ const windowHeight = Dimensions.get('window').height;
 
 function PageListavacas({ navigation }) {
     const [Barrapesquisa, setBarrapesquisa] = useState('');
+    const [Lista, setLista] = useState();
+    const { rebID } = useContext(AuthContext);
 
     return (
 
@@ -28,7 +35,7 @@ function PageListavacas({ navigation }) {
                     <SearchBar
                         setChange={(data) => setBarrapesquisa(data)}
                     />
-                    <Lista_vacas textobarrapesquisa={Barrapesquisa} />
+                    <Lista_vacas textobarrapesquisa={Barrapesquisa} idrebanho={rebID} />
                     <View style={styles.contvoltar}>
                         <TouchableOpacity style={styles.botaovoltar} onPress={() => navigation.navigate("GeralReb")}>
                             <Text style={styles.textovoltar}>Voltar</Text>

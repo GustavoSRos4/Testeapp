@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import {
   View,
   TextInput,
@@ -8,25 +8,46 @@ import {
   Dimensions,
 } from "react-native";
 import { FlatList, ScrollView } from "react-native-gesture-handler";
-import { dataVacas } from "./vacas";
+import getRebVacas from "../../Realm/getRebVacas";
 import Graficodetalhesvacas from "../Graficos/Graficodetalhesvacas"
 import Modal from "react-native-modal";
 import { scale, verticalScale } from "react-native-size-matters";
 import { MaterialCommunityIcons, Feather } from '@expo/vector-icons';
+import { useFocusEffect } from "@react-navigation/native";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 const ScreenWidth = Dimensions.get("screen").width;
 const ScreenHeight = Dimensions.get("screen").height;
 
-function Lista_vacas({ textobarrapesquisa }) {
-  const [List, setList] = useState(dataVacas);
-  const [Searchtext, setSearchtext] = useState('');
+function Lista_vacas({ textobarrapesquisa, idrebanho }) {
+  useFocusEffect(
+    useCallback(() => {
+      const fetchVaca = async () => {
+        try {
+          const datavacas = await getRebVacas(idrebanho)
+          //console.log(datavacas, "DATVASs")
+          setList(datavacas)
+          setdata(datavacas)
+        } catch (e) {
+        }
+      };
 
+      fetchVaca();
+
+      return
+
+    }, [])
+  );
+
+  const [List, setList] = useState();
+  const [data, setdata] = useState();
+  const [Searchtext, setSearchtext] = useState('');
   const [isModalVisible, setModalVisible] = useState(false);
   const [isInfoeditable, setisInfoeditable] = useState(false);
   const [Details, setDetails] = useState([]);
 
+  //console.log(List);
   {/*Verifica a barra de pesquisa e salva na state*/ }
   useEffect(() => {
     setSearchtext(textobarrapesquisa)
@@ -35,11 +56,11 @@ function Lista_vacas({ textobarrapesquisa }) {
   useEffect(() => {
     setSearchtext(textobarrapesquisa)
     if (Searchtext === '') {
-      setList(dataVacas);
+      setList(data)
     } else {
       setList(
-        dataVacas.filter(item => {
-          if (item.name.toLowerCase().indexOf(Searchtext.toLowerCase()) > -1 || item.etiqueta.toLowerCase().indexOf(Searchtext.toLowerCase()) > -1) {
+        List.filter(item => {
+          if (item.nomeVaca.toLowerCase().indexOf(Searchtext.toLowerCase()) > -1) {
             return true;
           } else {
             return false;
@@ -159,7 +180,7 @@ function Lista_vacas({ textobarrapesquisa }) {
       </View>
       <FlatList
         data={List}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item._id}
         renderItem={({ item, index }) => (
           <View style={styles.containerVacas}>
             <TouchableOpacity
@@ -170,7 +191,7 @@ function Lista_vacas({ textobarrapesquisa }) {
                 setDetails(item);
               }}
             >
-              <Text style={styles.textVacas}>{item.name}</Text>
+              <Text style={styles.textVacas}>{item.nomeVaca}</Text>
             </TouchableOpacity>
           </View>
         )}

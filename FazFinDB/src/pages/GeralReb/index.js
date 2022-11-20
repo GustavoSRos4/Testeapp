@@ -1,5 +1,4 @@
-import React from "react";
-
+import React, { useState, useContext, useCallback } from "react";
 import {
   Text,
   TouchableOpacity,
@@ -11,6 +10,7 @@ import { scale, verticalScale } from "react-native-size-matters";
 import Header from "../../components/Header";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 function GeralReb({ navigation }) {
+  //Imagem
   const imgbg1 = "../../../assets/bg3.jpg";
   return (
     <SafeAreaView style={styles.container}>

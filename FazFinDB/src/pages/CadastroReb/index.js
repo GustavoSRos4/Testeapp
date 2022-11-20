@@ -16,7 +16,6 @@ import uuid from "react-native-uuid";
 import writeReb from "../../Realm/writeReb";
 import { scale, verticalScale } from "react-native-size-matters";
 import { useNavigation } from "@react-navigation/native";
-import writeVaca from "../../Realm/writeVaca";
 
 function CadastroReb({}) {
   const [nomeReb, setNomeReb] = useState("");
