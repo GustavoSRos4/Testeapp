@@ -306,7 +306,7 @@ const styles = StyleSheet.create({
     paddingTop: "5%",
     paddingBottom: "1%",
     width: windowWidth,
-    paddingBottom: verticalScale(80),
+    paddingBottom: ScreenHeight >= 800 ? verticalScale(135) : verticalScale(110),
   },
   containermodal: {
     backgroundColor: "#005f1d",

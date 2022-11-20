@@ -18,6 +18,8 @@ import Manejo from "../pages/Manejo";
 import Leite from "../pages/Leite";
 import GeralReb from "../pages/GeralReb";
 import FinanceiroFaz from "../pages/FinanceiroFaz";
+import CadastroVaca from "../pages/CadastroVaca";
+
 const Drawer = createDrawerNavigator();
 function Routes() {
   return (

@@ -11,6 +11,7 @@ import PagelancaContas from "../pages/PagelancaContas";
 import PageListavacas from "../pages/PageListavacas";
 import FinanceiroFaz from "../pages/FinanceiroFaz";
 import Alimentacao from "../pages/Alimentacao";
+import CadastroVaca from "../pages/CadastroVaca";
 const Stack = createNativeStackNavigator();
 function StackRoutes() {
   return (
@@ -78,6 +79,14 @@ function StackRoutes() {
           headerShown: false,
         }}
       />
+      <Stack.Screen
+        name="CadastroVaca"
+        component={CadastroVaca}
+        options={{
+          headerShown: false,
+        }}
+      />
+
       <Stack.Screen
         name="FinanceiroFaz"
         component={FinanceiroFaz}

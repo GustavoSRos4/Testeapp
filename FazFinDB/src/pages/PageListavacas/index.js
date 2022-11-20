@@ -32,6 +32,15 @@ function PageListavacas({ navigation }) {
         >
           <SearchBar setChange={(data) => setBarrapesquisa(data)} />
           <Lista_vacas textobarrapesquisa={Barrapesquisa} idrebanho={rebID} />
+
+          <View style={styles.contcad}>
+            <TouchableOpacity
+              style={styles.botaovoltar}
+              onPress={() => navigation.navigate("CadastroVaca")}
+            >
+              <Text style={styles.textovoltar}>Cadastrar Vaca</Text>
+            </TouchableOpacity>
+          </View>
           <View style={styles.contvoltar}>
             <TouchableOpacity
               style={styles.botaovoltar}
@@ -65,6 +74,14 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     color: "rgba(15, 109, 0, 0.9)",
     top: verticalScale(625),
+  },
+  contcad: {
+    position: "absolute",
+    alignItems: "center",
+    justifyContent: "center",
+    alignSelf: "center",
+    color: "rgba(15, 109, 0, 0.9)",
+    top: verticalScale(582),
   },
   botaovoltar: {
     backgroundColor: "rgba(36, 105, 25, 0.9)",
