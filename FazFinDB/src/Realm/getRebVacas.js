@@ -10,6 +10,6 @@ async function getRebVacas(rebID) {
         return pesquisado[0].vacas;
     } catch (e) {
         Alert.alert("Error", e.message);
-    }
+    } realm.close();
 }
 export default getRebVacas;

@@ -7,7 +7,7 @@ const writenewVaca = async (idrebanho, newVaca) => {
         const pesquisado = await realm.objects("RebanhoSchema").filtered(`_id= '${idrebanho}'`);
         let vacasnovas = [...pesquisado[0].vacas]
         vacasnovas.push(newVaca)
-        console.log(vacasnovas)
+        //console.log(vacasnovas)
         realm.write(() => {
             createdvaca = realm.create("RebanhoSchema",
                 {

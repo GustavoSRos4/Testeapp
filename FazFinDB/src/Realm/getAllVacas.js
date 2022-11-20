@@ -7,6 +7,6 @@ async function getAllVacas() {
     return realm.objects("VacasSchema").sorted("createdAt");
   } catch (e) {
     Alert.alert("Error", e.message);
-  }
+  } realm.close();
 }
 export default getAllVacas;

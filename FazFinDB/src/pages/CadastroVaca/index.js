@@ -108,7 +108,7 @@ function CadastroVaca({ navigation }) {
 
                 <TouchableOpacity
                     style={styles.botaopress}
-                    onPress={() => writenewVaca(rebID, CombineData())}
+                    onPress={() => {writenewVaca(rebID, CombineData()), navigation.navigate("PageListavacas")}}
                 >
                     <Text style={styles.textovoltar}>Cadastrar Animal</Text>
                 </TouchableOpacity>
