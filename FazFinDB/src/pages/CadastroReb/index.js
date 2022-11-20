@@ -17,7 +17,7 @@ import writeReb from "../../Realm/writeReb";
 import { scale, verticalScale } from "react-native-size-matters";
 import { useNavigation } from "@react-navigation/native";
 
-function CadastroReb({}) {
+function CadastroReb({ }) {
   const [nomeReb, setNomeReb] = useState("");
   const [QtdAni, setQtdAni] = useState(0);
   const { fazID } = useContext(AuthContext);
@@ -32,8 +32,8 @@ function CadastroReb({}) {
         proximasvacas.push({
           _id: uuid.v4(),
           nomeVaca: "vaca" + i,
-          nascimentoVaca: 0,
-          brincoVaca: i,
+          nascimentoVaca: "2022",
+          brincoVaca: " 00 " + i,
           genero: 1,
           descVaca: "Descricao vazia",
           createdAt: new Date(),
@@ -45,13 +45,13 @@ function CadastroReb({}) {
 
   async function handleAddReb() {
     await writeReb(
-        {
-          _id: uuid.v4(),
-          nomeReb,
-          createdAt: new Date(),
-          vacas: genVacas(QtdAni),
-        },fazID
-    );navigation.navigate("GeralFaz")
+      {
+        _id: uuid.v4(),
+        nomeReb,
+        createdAt: new Date(),
+        vacas: genVacas(QtdAni),
+      }, fazID
+    ); navigation.navigate("GeralFaz")
   }
 
   const navigation = useNavigation();

@@ -14,6 +14,7 @@ import Modal from "react-native-modal";
 import { scale, verticalScale } from "react-native-size-matters";
 import { MaterialCommunityIcons, Feather } from '@expo/vector-icons';
 import { useFocusEffect } from "@react-navigation/native";
+import writeUpdVaca from "../../Realm/writeUpdVaca";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
@@ -46,6 +47,48 @@ function Lista_vacas({ textobarrapesquisa, idrebanho }) {
   const [isModalVisible, setModalVisible] = useState(false);
   const [isInfoeditable, setisInfoeditable] = useState(false);
   const [Details, setDetails] = useState([]);
+  const [macho, setmacho] = useState("");
+  const [femea, setfemea] = useState("");
+
+  const [nomeVaca, setnomeVaca] = useState("");
+  const [genero, setgenero] = useState();
+  const [nascimentoVaca, setnascimentoVaca] = useState("");
+  const [brincoVaca, setbrincoVaca] = useState("");
+  const [IdVaca, setIdVaca] = useState("");
+  const [descVaca, setdescVaca] = useState("");
+
+
+
+  var infoedited = false;
+
+  function setInputs(item) {
+    verificagenero()
+    setnomeVaca(item.nomeVaca)
+    setgenero(item.genero)
+    setnascimentoVaca(item.nascimentoVaca)
+    setbrincoVaca(item.brincoVaca)
+    setdescVaca(item.descVaca)
+    var idvaca = item._id
+    setIdVaca(idvaca)
+    console.log(IdVaca, "IDVACA");
+    console.log(item._id, "IDVACA");
+    //console.log(genero, "Initialized info 2")
+  }
+
+  function UpdateinfoVaca() {
+    infoedited = true;
+    const data2mod = {
+      _id: IdVaca,
+      nomeVaca: nomeVaca,
+      nascimentoVaca: nascimentoVaca,
+      brincoVaca: brincoVaca,
+      descVaca: descVaca,
+      genero: genero,
+    }
+    writeUpdVaca(data2mod)
+    toggleModal()
+    console.log(genero, "Update info")
+  }
 
   //console.log(List);
   {/*Verifica a barra de pesquisa e salva na state*/ }
@@ -59,7 +102,7 @@ function Lista_vacas({ textobarrapesquisa, idrebanho }) {
       setList(data)
     } else {
       setList(
-        List.filter(item => {
+        data.filter(item => {
           if (item.nomeVaca.toLowerCase().indexOf(Searchtext.toLowerCase()) > -1) {
             return true;
           } else {
@@ -72,15 +115,33 @@ function Lista_vacas({ textobarrapesquisa, idrebanho }) {
 
 
   function toggleModal() {
+    if (isModalVisible === true) {
+    }
     setModalVisible(!isModalVisible);
+  }
+  function CanContinue() {
+    if (isInfoeditable === true) {
+      return true;
+    } else {
+      return false;
+    }
   }
   function editarinfos() {
     setisInfoeditable(!isInfoeditable);
   }
-  function verificagenero(a) {
-    if (Details.genero === a) { return "check-square" }
-    return "square"
+
+  function verificagenero() {
+    if (Details.genero === 1) {
+      setgenero(1);
+      setmacho("check-square");
+      setfemea("square")
+    } else {
+      () => setgenero(0);
+      setmacho("square");
+      setfemea("check-square")
+    }
   }
+
   function Contasvaca(a) {
     if (a == 1) return Details.lucro;
     else if (a == 2) return Details.gasto;
@@ -112,44 +173,58 @@ function Lista_vacas({ textobarrapesquisa, idrebanho }) {
                 <View style={styles.Vacaavatar}>
                   <TextInput
                     style={styles.textavatar}
-                    value={Details.name}
-                    editable={isInfoeditable} />
+                    value={nomeVaca}
+                    editable={isInfoeditable}
+                    onChangeText={setnomeVaca}
+
+                  />
                   <MaterialCommunityIcons name="cow" size={verticalScale(60)} color="white" />
                 </View>
                 {/*Sexo*/}
                 <View style={[styles.containerinfos, { flexDirection: "row", justifyContent: "space-around" }]}>
                   <View>
-                    <Text style={styles.tituloinfo} >Macho</Text>
-                    <Feather name={verificagenero(1)} size={scale(25)} color="white" />
+                    <TouchableOpacity
+                      onPress={() => { setgenero(1), setmacho("check-square"), setfemea("square") }}
+                      disabled={!isInfoeditable}>
+                      <Text style={styles.tituloinfo} >Macho</Text>
+                      <Feather name={macho} size={scale(25)} color="white" />
+                    </TouchableOpacity>
                   </View>
-                  <View>
-                    <Text style={styles.tituloinfo} >Fêmea</Text>
-                    <Feather name={verificagenero(0)} size={scale(25)} color="white" />
-                  </View>
+                  <TouchableOpacity
+                    onPress={() => { setgenero(0), setfemea("check-square"), setmacho("square") }}
+                    disabled={!isInfoeditable}>
+                    <View>
+                      <Text style={styles.tituloinfo} >Fêmea</Text>
+                      <Feather name={femea} size={scale(25)} color="white" />
+                    </View>
+                  </TouchableOpacity>
                 </View>
                 {/*Data de Nascimento*/}
                 <View style={styles.containerinfos}>
                   <Text style={styles.tituloinfo}>Data de Nascimento:</Text>
                   <TextInput
                     style={styles.detalhe}
-                    value={Details.anonasc}
-                    editable={isInfoeditable} />
+                    value={nascimentoVaca}
+                    editable={isInfoeditable}
+                    onChangeText={setnascimentoVaca} />
                 </View>
                 {/*Indentificação*/}
                 <View style={styles.containerinfos}>
                   <Text style={styles.tituloinfo}>Indentificação(brinco):</Text>
                   <TextInput
                     style={styles.detalhe}
-                    value={Details.etiqueta}
-                    editable={isInfoeditable} />
+                    value={brincoVaca}
+                    editable={isInfoeditable}
+                    onChangeText={setbrincoVaca} />
                 </View>
                 {/*Descrição*/}
                 <View style={styles.containerinfos}>
                   <Text style={styles.tituloinfo}>Descrição:</Text>
                   <TextInput
                     style={styles.detalhe}
-                    value={Details.descricao}
+                    value={descVaca}
                     editable={isInfoeditable}
+                    onChangeText={setdescVaca}
                     multiline={true} />
                 </View>
 
@@ -164,6 +239,15 @@ function Lista_vacas({ textobarrapesquisa, idrebanho }) {
                   }}
                 >
                   <Text style={styles.texteditar}>Editar</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={[styles.botaoeditar, { backgroundColor: CanContinue() === true ? "#004513" : "#0f6d00b3" }]}
+                  onPress={() => {
+                    UpdateinfoVaca()
+                  }}
+                  disabled={!CanContinue()}
+                >
+                  <Text style={styles.texteditar}>Confirmar modificações</Text>
                 </TouchableOpacity>
               </View>
             </View>
@@ -187,8 +271,9 @@ function Lista_vacas({ textobarrapesquisa, idrebanho }) {
               activeOpacity={0.5}
               style={[styles.cardVacas, { backgroundColor: index % 2 === 0 ? "#0F6D00" : "#004513" }]}
               onPress={() => {
-                toggleModal();
                 setDetails(item);
+                setInputs(item);
+                toggleModal();
               }}
             >
               <Text style={styles.textVacas}>{item.nomeVaca}</Text>
@@ -258,11 +343,13 @@ const styles = StyleSheet.create({
   },
 
   botaovoltar: {
-    backgroundColor: "rgba(15, 109, 0, 0.9)",
+    backgroundColor: "#00641c",
     width: scale(300),
     height: verticalScale(40),
     alignItems: "center",
     justifyContent: "center",
+    borderColor: "#111",
+    borderWidth: scale(2),
     borderRadius: 18,
     position: "absolute",
     top: ScreenHeight >= 800 ? verticalScale(633) : verticalScale(605),
