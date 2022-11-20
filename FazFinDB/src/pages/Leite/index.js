@@ -28,7 +28,7 @@ function Leite({ navigation }) {
   }
   const renderItem = ({ item }) => {
     return (
-      <View>
+      <View style={styles.modalContainer2}>
         <TouchableOpacity
           onPress={function ReturnID() {
             const VacaID = item._id;
@@ -196,6 +196,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: verticalScale(10),
     alignSelf: "center",
+    height:verticalScale(550),
     width: scale(330),
     borderRadius: 20,
   },

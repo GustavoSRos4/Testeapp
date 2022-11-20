@@ -20,27 +20,43 @@ function Manejo({ navigation }) {
   const [isModalVisible, setModalVisible] = useState(false);
   const [isModalVisible2, setModalVisible2] = useState(false);
   const [isModalVisible3, setModalVisible3] = useState(false);
-  const [valorAliS, setValorAliS] = useState("1");
-  const [qtdAliS, SetQtdAliS] = useState("1");
-  const [consumoAliS, SetConsumoAliS] = useState("1");
+  const [valorAliS, setValorAliS] = useState("");
+  const [qtdAliS, SetQtdAliS] = useState("");
+  const [consumoAliS, SetConsumoAliS] = useState("");
   const [tipoAlim, setTipoAlim] = useState("");
   const { rebID } = useContext(AuthContext);
   async function handleAddGastos() {
-    const qtdAli = Number(qtdAliS);
-    const valorAli = Number(valorAliS);
-    const consumoAli = Number(consumoAliS);
-    await writeGastos(
-      {
-        _id: uuid.v4(),
-        createdAt: new Date(),
-        tipoAlim,
-        qtdAli,
-        valorAli,
-        consumoAli,
-      },
-      rebID
-    );
-    navigation.navigate("PagelancaContas");
+    if (qtdAliS == "" || consumoAliS == "") {
+      const valorAli = Number(valorAliS);
+      await writeGastos(
+        {
+          _id: uuid.v4(),
+          createdAt: new Date(),
+          tipoAlim,
+          qtdAli : 1,
+          valorAli,
+          consumoAli: 1,
+        },
+        rebID
+      );
+      navigation.navigate("PagelancaContas");
+    } else {
+      const qtdAli = Number(qtdAliS);
+      const valorAli = Number(valorAliS);
+      const consumoAli = Number(consumoAliS);
+      await writeGastos(
+        {
+          _id: uuid.v4(),
+          createdAt: new Date(),
+          tipoAlim,
+          qtdAli,
+          valorAli,
+          consumoAli,
+        },
+        rebID
+      );
+      navigation.navigate("PagelancaContas");
+    }
   }
   function toggleModal() {
     setModalVisible(!isModalVisible);
@@ -380,7 +396,8 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "white",
     alignSelf: "center",
-  },tituloBotao3: {
+  },
+  tituloBotao3: {
     fontSize: verticalScale(20),
     fontWeight: "bold",
     color: "white",
