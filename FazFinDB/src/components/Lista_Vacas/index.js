@@ -9,10 +9,10 @@ import {
 } from "react-native";
 import { FlatList, ScrollView } from "react-native-gesture-handler";
 import getRebVacas from "../../Realm/getRebVacas";
-import Graficodetalhesvacas from "../Graficos/Graficodetalhesvacas"
+import Graficodetalhesvacas from "../Graficos/Graficodetalhesvacas";
 import Modal from "react-native-modal";
 import { scale, verticalScale } from "react-native-size-matters";
-import { MaterialCommunityIcons, Feather } from '@expo/vector-icons';
+import { MaterialCommunityIcons, Feather } from "@expo/vector-icons";
 import { useFocusEffect } from "@react-navigation/native";
 import writeUpdVaca from "../../Realm/writeUpdVaca";
 
@@ -22,28 +22,25 @@ const ScreenWidth = Dimensions.get("screen").width;
 const ScreenHeight = Dimensions.get("screen").height;
 
 function Lista_vacas({ textobarrapesquisa, idrebanho }) {
+  async function fetchVaca() {
+    try {
+      const datavacas = await getRebVacas(idrebanho);
+      //console.log(datavacas, "DATVASs")
+      setList(datavacas);
+      setdata(datavacas);
+      setisInfoeditable(false);
+    } catch (e) {}
+  }
+
   useFocusEffect(
     useCallback(() => {
-      const fetchVaca = async () => {
-        try {
-          const datavacas = await getRebVacas(idrebanho)
-          //console.log(datavacas, "DATVASs")
-          setList(datavacas)
-          setdata(datavacas)
-        } catch (e) {
-        }
-      };
-
       fetchVaca();
-
-      return
-
     }, [])
   );
 
   const [List, setList] = useState();
   const [data, setdata] = useState();
-  const [Searchtext, setSearchtext] = useState('');
+  const [Searchtext, setSearchtext] = useState("");
   const [isModalVisible, setModalVisible] = useState(false);
   const [isInfoeditable, setisInfoeditable] = useState(false);
   const [Details, setDetails] = useState([]);
@@ -57,24 +54,21 @@ function Lista_vacas({ textobarrapesquisa, idrebanho }) {
   const [IdVaca, setIdVaca] = useState("");
   const [descVaca, setdescVaca] = useState("");
 
-
-
   var infoedited = false;
 
   function setInputs(item) {
-    verificagenero()
-    setnomeVaca(item.nomeVaca)
-    setgenero(item.genero)
-    setnascimentoVaca(item.nascimentoVaca)
-    setbrincoVaca(item.brincoVaca)
-    setdescVaca(item.descVaca)
-    var idvaca = item._id
-    setIdVaca(idvaca)
+    verificagenero();
+    setnomeVaca(item.nomeVaca);
+    setgenero(item.genero);
+    setnascimentoVaca(item.nascimentoVaca);
+    setbrincoVaca(item.brincoVaca);
+    setdescVaca(item.descVaca);
+    var idvaca = item._id;
+    setIdVaca(idvaca);
     console.log(IdVaca, "IDVACA");
     console.log(item._id, "IDVACA");
     //console.log(genero, "Initialized info 2")
   }
-
   function UpdateinfoVaca() {
     infoedited = true;
     const data2mod = {
@@ -84,26 +78,34 @@ function Lista_vacas({ textobarrapesquisa, idrebanho }) {
       brincoVaca: brincoVaca,
       descVaca: descVaca,
       genero: genero,
-    }
-    writeUpdVaca(data2mod)
-    toggleModal()
-    console.log(genero, "Update info")
+    };
+    writeUpdVaca(data2mod);
+    fetchVaca();
+    toggleModal();
+    console.log(genero, "Update info");
+    console.log(infoedited);
   }
 
   //console.log(List);
-  {/*Verifica a barra de pesquisa e salva na state*/ }
+  {
+    /*Verifica a barra de pesquisa e salva na state*/
+  }
   useEffect(() => {
-    setSearchtext(textobarrapesquisa)
+    setSearchtext(textobarrapesquisa);
   }, [textobarrapesquisa]);
-  {/*Verifica o state da barra de pesquisa, se ouver mudanca atualiza a lista*/ }
+  {
+    /*Verifica o state da barra de pesquisa, se ouver mudanca atualiza a lista*/
+  }
   useEffect(() => {
-    setSearchtext(textobarrapesquisa)
-    if (Searchtext === '') {
-      setList(data)
+    setSearchtext(textobarrapesquisa);
+    if (Searchtext === "") {
+      setList(data);
     } else {
       setList(
-        data.filter(item => {
-          if (item.nomeVaca.toLowerCase().indexOf(Searchtext.toLowerCase()) > -1) {
+        data.filter((item) => {
+          if (
+            item.nomeVaca.toLowerCase().indexOf(Searchtext.toLowerCase()) > -1
+          ) {
             return true;
           } else {
             return false;
@@ -112,7 +114,6 @@ function Lista_vacas({ textobarrapesquisa, idrebanho }) {
       );
     }
   }, [Searchtext]);
-
 
   function toggleModal() {
     if (isModalVisible === true) {
@@ -134,11 +135,11 @@ function Lista_vacas({ textobarrapesquisa, idrebanho }) {
     if (Details.genero === 1) {
       setgenero(1);
       setmacho("check-square");
-      setfemea("square")
+      setfemea("square");
     } else {
       () => setgenero(0);
       setmacho("square");
-      setfemea("check-square")
+      setfemea("check-square");
     }
   }
 
@@ -147,7 +148,6 @@ function Lista_vacas({ textobarrapesquisa, idrebanho }) {
     else if (a == 2) return Details.gasto;
     else if (a == 3) return Details.media;
   }
-
 
   return (
     <View style={styles.Tudocont}>
@@ -166,8 +166,9 @@ function Lista_vacas({ textobarrapesquisa, idrebanho }) {
           }}
           Style={{ margin: 0 }}
           statusBarTranslucent
-        ><ScrollView>
-            <View style={{ paddingBottom: verticalScale(70), }}>
+        >
+          <ScrollView>
+            <View style={{ paddingBottom: verticalScale(70) }}>
               <View style={styles.containermodal}>
                 {/*NOME DA VACA E IMAGEM*/}
                 <View style={styles.Vacaavatar}>
@@ -176,25 +177,43 @@ function Lista_vacas({ textobarrapesquisa, idrebanho }) {
                     value={nomeVaca}
                     editable={isInfoeditable}
                     onChangeText={setnomeVaca}
-
                   />
-                  <MaterialCommunityIcons name="cow" size={verticalScale(60)} color="white" />
+                  <MaterialCommunityIcons
+                    name="cow"
+                    size={verticalScale(60)}
+                    color="white"
+                  />
                 </View>
                 {/*Sexo*/}
-                <View style={[styles.containerinfos, { flexDirection: "row", justifyContent: "space-around" }]}>
+                <View
+                  style={[
+                    styles.containerinfos,
+                    { flexDirection: "row", justifyContent: "space-around" },
+                  ]}
+                >
                   <View>
                     <TouchableOpacity
-                      onPress={() => { setgenero(1), setmacho("check-square"), setfemea("square") }}
-                      disabled={!isInfoeditable}>
-                      <Text style={styles.tituloinfo} >Macho</Text>
+                      onPress={() => {
+                        setgenero(1),
+                          setmacho("check-square"),
+                          setfemea("square");
+                      }}
+                      disabled={!isInfoeditable}
+                    >
+                      <Text style={styles.tituloinfo}>Macho</Text>
                       <Feather name={macho} size={scale(25)} color="white" />
                     </TouchableOpacity>
                   </View>
                   <TouchableOpacity
-                    onPress={() => { setgenero(0), setfemea("check-square"), setmacho("square") }}
-                    disabled={!isInfoeditable}>
+                    onPress={() => {
+                      setgenero(0),
+                        setfemea("check-square"),
+                        setmacho("square");
+                    }}
+                    disabled={!isInfoeditable}
+                  >
                     <View>
-                      <Text style={styles.tituloinfo} >Fêmea</Text>
+                      <Text style={styles.tituloinfo}>Fêmea</Text>
                       <Feather name={femea} size={scale(25)} color="white" />
                     </View>
                   </TouchableOpacity>
@@ -206,7 +225,8 @@ function Lista_vacas({ textobarrapesquisa, idrebanho }) {
                     style={styles.detalhe}
                     value={nascimentoVaca}
                     editable={isInfoeditable}
-                    onChangeText={setnascimentoVaca} />
+                    onChangeText={setnascimentoVaca}
+                  />
                 </View>
                 {/*Indentificação*/}
                 <View style={styles.containerinfos}>
@@ -215,7 +235,8 @@ function Lista_vacas({ textobarrapesquisa, idrebanho }) {
                     style={styles.detalhe}
                     value={brincoVaca}
                     editable={isInfoeditable}
-                    onChangeText={setbrincoVaca} />
+                    onChangeText={setbrincoVaca}
+                  />
                 </View>
                 {/*Descrição*/}
                 <View style={styles.containerinfos}>
@@ -225,10 +246,16 @@ function Lista_vacas({ textobarrapesquisa, idrebanho }) {
                     value={descVaca}
                     editable={isInfoeditable}
                     onChangeText={setdescVaca}
-                    multiline={true} />
+                    multiline={true}
+                  />
                 </View>
 
-                <View style={{ backgroundColor: "rgba(15, 109, 0, 0.7)", marginTop: verticalScale(10), }}>
+                <View
+                  style={{
+                    backgroundColor: "rgba(15, 109, 0, 0.7)",
+                    marginTop: verticalScale(10),
+                  }}
+                >
                   <Graficodetalhesvacas />
                 </View>
 
@@ -241,9 +268,15 @@ function Lista_vacas({ textobarrapesquisa, idrebanho }) {
                   <Text style={styles.texteditar}>Editar</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                  style={[styles.botaoeditar, { backgroundColor: CanContinue() === true ? "#004513" : "#0f6d00b3" }]}
+                  style={[
+                    styles.botaoeditar,
+                    {
+                      backgroundColor:
+                        CanContinue() === true ? "#004513" : "#0f6d00b3",
+                    },
+                  ]}
                   onPress={() => {
-                    UpdateinfoVaca()
+                    UpdateinfoVaca();
                   }}
                   disabled={!CanContinue()}
                 >
@@ -269,7 +302,10 @@ function Lista_vacas({ textobarrapesquisa, idrebanho }) {
           <View style={styles.containerVacas}>
             <TouchableOpacity
               activeOpacity={0.5}
-              style={[styles.cardVacas, { backgroundColor: index % 2 === 0 ? "#0F6D00" : "#004513" }]}
+              style={[
+                styles.cardVacas,
+                { backgroundColor: index % 2 === 0 ? "#0F6D00" : "#004513" },
+              ]}
               onPress={() => {
                 setDetails(item);
                 setInputs(item);
@@ -278,8 +314,18 @@ function Lista_vacas({ textobarrapesquisa, idrebanho }) {
             >
               <Text style={styles.textVacas}>{item.nomeVaca}</Text>
               <View style={styles.containerRendimento}>
-                <Text style={{ color: "#fff", fontSize: scale(14), }}>Rendimento:</Text>
-                <Text style={{ color: -100 >= 0 ? "green" : "red", fontWeight: "bold", fontSize: scale(15), }}>-100</Text>
+                <Text style={{ color: "#fff", fontSize: scale(14) }}>
+                  Rendimento:
+                </Text>
+                <Text
+                  style={{
+                    color: -100 >= 0 ? "green" : "red",
+                    fontWeight: "bold",
+                    fontSize: scale(15),
+                  }}
+                >
+                  -100
+                </Text>
               </View>
             </TouchableOpacity>
           </View>
@@ -294,7 +340,6 @@ const styles = StyleSheet.create({
     flex: 1,
     margin: 5,
     alignItems: "center",
-
   },
   cardVacas: {
     padding: 15,
@@ -312,7 +357,8 @@ const styles = StyleSheet.create({
     paddingTop: "5%",
     paddingBottom: "1%",
     width: windowWidth,
-    paddingBottom: ScreenHeight >= 800 ? verticalScale(135) : verticalScale(110),
+    paddingBottom:
+      ScreenHeight >= 800 ? verticalScale(135) : verticalScale(110),
   },
   containermodal: {
     backgroundColor: "#005f1d",
@@ -377,7 +423,7 @@ const styles = StyleSheet.create({
   },
   texteditar: {
     fontSize: verticalScale(16),
-    color: 'white',
+    color: "white",
   },
   contasvaca: {
     width: "100%",
@@ -401,7 +447,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     width: "80%",
-  }
+  },
 });
 
 export default Lista_vacas;
