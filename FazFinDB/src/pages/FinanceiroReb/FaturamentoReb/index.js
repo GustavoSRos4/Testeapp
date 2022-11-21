@@ -11,12 +11,12 @@ import {
   FlatList,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import BezierChartFaturamento from "../../../components/Graficos/BezierChartFaturamento";
+import BezierChartFaturamentoReb from "../../../components/Graficos/BezierChartFaturamentoReb";
 import { scale, verticalScale } from "react-native-size-matters";
 import Modal from "react-native-modal";
 import { AuthContext } from "../../../contexts/auth";
 function FaturamentoReb() {
-  const { precoCF, listaAli, listaLeite, precoLeite } = useContext(AuthContext);
+  const { precoCFReb, listaAliReb, listaLeiteReb, precoLeiteReb } = useContext(AuthContext);
   const [isModalVisible, setModalVisible] = useState(false);
   function toggleModal() {
     setModalVisible(!isModalVisible);
@@ -32,8 +32,8 @@ function FaturamentoReb() {
     );
   };
   function getReceitas() {
-    if (typeof precoLeite !== "undefined") {
-      return Number(precoLeite);
+    if (typeof precoLeiteReb !== "undefined") {
+      return Number(precoLeiteReb);
     } else {
       return 0;
     }
@@ -52,11 +52,12 @@ function FaturamentoReb() {
             toggleModal();
           }}
         >
-          <Text style={styles.texto}>Total de Faturamento:</Text>
+          <Text style={styles.texto}>Total de receitas:</Text>
           <Text style={styles.textoValorPos}>R${receitas}</Text>
           <View style={styles.lineStyle} />
+          <Text style={styles.preGraf}>Clique no gráfico para mais detalhes.</Text>
           <View style={styles.containerChart}>
-            <BezierChartFaturamento />
+            <BezierChartFaturamentoReb />
           </View>
           <Modal
             isVisible={isModalVisible}
@@ -66,10 +67,10 @@ function FaturamentoReb() {
             animationOut="slideOutDown"
           >
             <View style={styles.modalContainer}>
-              <Text style={styles.tituloModal}>Detalhes de Faturamento:</Text>
+              <Text style={styles.tituloModal}>Detalhes de receitas:</Text>
               <FlatList
                 style={styles.scroll}
-                data={listaLeite}
+                data={listaLeiteReb}
                 renderItem={renderItem}
                 keyExtractor={(item) => item._id}
               />
@@ -86,7 +87,7 @@ function FaturamentoReb() {
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.botaopress}
-          onPress={() => navigation.navigate("GeralFaz")}
+          onPress={() => navigation.navigate("GeralReb")}
         >
           <Text style={styles.tituloBotao}>{"Voltar"}</Text>
         </TouchableOpacity>
@@ -95,6 +96,11 @@ function FaturamentoReb() {
   );
 }
 const styles = StyleSheet.create({
+  preGraf:{
+    color: 'white',
+    alignSelf: 'center',
+
+  },
   modalContainer: {
     backgroundColor: "rgba(234,242,215,1)",
     position: "absolute",

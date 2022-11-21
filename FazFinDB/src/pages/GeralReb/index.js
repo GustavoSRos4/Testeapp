@@ -1,4 +1,5 @@
 import React, { useState, useContext, useCallback } from "react";
+import { useFocusEffect } from "@react-navigation/native";
 import {
   Text,
   TouchableOpacity,
@@ -9,8 +10,80 @@ import {
 import { scale, verticalScale } from "react-native-size-matters";
 import Header from "../../components/Header";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import getAllLeiteReb from "../../Realm/getAllLeiteReb";
+import getAllGastosReb from "../../Realm/getAllGastosReb";
+import { ReceitasTotais } from "../../components/Calculos DB/ReceitasTotais";
+import { DespesasTotais } from "../../components/Calculos DB/DespesasTotais";
+import { AuthContext } from "../../contexts/auth";
 function GeralReb({ navigation }) {
-  //Imagem
+  const [dataGasto, setDataGastos] = useState([]);
+  const [dataReceitas, setDataReceitas] = useState([]);
+
+  async function fetchDataRec(rebID) {
+    const dataRec = await getAllLeiteReb(rebID);
+    setDataReceitas(dataRec);
+    ListaLeiteReb(dataRec);
+    const precoLeite = ReceitasTotais(dataRec);
+    PrecoLeiteReb(precoLeite);
+  }
+  async function fetchDataDes(rebID) {
+    const dataGas = await getAllGastosReb(rebID);
+    setDataGastos(dataGas);
+    ListaAliReb(dataGas);
+    const precoCF = DespesasTotais(dataGas);
+    PrecoCFReb(precoCF);
+  }
+  useFocusEffect(
+    useCallback(() => {
+      fetchDataDes(rebID);
+      fetchDataRec(rebID);
+    }, [])
+  );
+  const {
+    precoCFReb,
+    PrecoCFReb,
+    rebID,
+    ListaLeiteReb,
+    precoLeiteReb,
+    PrecoLeiteReb,
+    ListaAliReb,
+  } = useContext(AuthContext);
+
+  function getDespesas() {
+    if (typeof precoCFReb !== "undefined") {
+      return Number(precoCFReb);
+    } else {
+      return 0;
+    }
+  }
+  function getReceitas() {
+    if (typeof precoLeiteReb !== "undefined") {
+      return Number(precoLeiteReb);
+    } else {
+      return 0;
+    }
+  }
+  function getTotal(despesas, receitas) {
+    if (despesas !== "0" || receitas !== "0") {
+      return Number(receitas - despesas);
+    } else {
+      return 0;
+    }
+  }
+  const total = getTotal(getDespesas(), getReceitas());
+  const despesas = getDespesas();
+  const receitas = getReceitas();
+
+  function Color(total) {
+    let color;
+    if (total > 0) {
+      color = styles.textoBannerRec;
+      return color;
+    } else {
+      color = styles.textoBannerDes;
+      return color;
+    }
+  }
   const imgbg1 = "../../../assets/bg3.jpg";
   return (
     <SafeAreaView style={styles.container}>
@@ -19,25 +92,27 @@ function GeralReb({ navigation }) {
         source={require(imgbg1)}
         imageStyle={{ opacity: 0.6 }}
       >
-        <Header title="Olá, Carlos" />
+        <Header />
         <TouchableOpacity
-         style={styles.bannerButton}
-         onPress={() => navigation.navigate("FinanceiroReb")}
-         >
+          style={styles.bannerButton}
+          onPress={() => navigation.navigate("FinanceiroReb")}
+        >
+          <Text style={styles.textoBannerT}>
+            <Text style={styles.textoBanner}>{"           Receitas: "}</Text>
+            <Text style={styles.textoBannerRec}>R${receitas}</Text>
+          </Text>
+          <Text style={styles.textoBannerT}>
+            <Text style={styles.textoBanner}>{"           Despesas: "}</Text>
+            <Text style={styles.textoBannerDes}>R${despesas}</Text>
+          </Text>
+          <Text style={styles.textoBannerT}>
+            <Text style={styles.textoBanner}>
+              {"           Balanço final: "}
+            </Text>
+            <Text style={Color(total)}>R${total}</Text>
+          </Text>
           <Text style={styles.bannerText}>
-            {"Verificar o balanço do rebanho."}
-          </Text>
-          <Text style={styles.textoBannerT}>
-            <Text style={styles.textoBanner}>{"Receita Mensal: "}</Text>
-            <Text style={styles.textoBannerRec}>{"R$ 1500,00"}</Text>
-          </Text>
-          <Text style={styles.textoBannerT}>
-            <Text style={styles.textoBanner}>{"Gasto Mensal: "}</Text>
-            <Text style={styles.textoBannerDes}>{"R$ 500,00"}</Text>
-          </Text>
-          <Text style={styles.textoBannerT}>
-            <Text style={styles.textoBanner}>{"Total Mensal: "}</Text>
-            <Text style={styles.textoBannerRec}>{"R$ 1000,00"}</Text>
+            {"Clique aqui para mais detalhes"}
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
@@ -98,26 +173,26 @@ const styles = StyleSheet.create({
   },
   bannerText: {
     color: "#fff",
-    fontSize: scale(20),
+    fontSize: scale(13),
     fontWeight: "bold",
     margin: verticalScale(5),
     alignSelf: "center",
   },
   textoBannerT: {
-    textAlign: "center",
-    fontSize: scale(17),
+    textAlign: "justify",
+    fontSize: scale(20),
   },
   textoBanner: {
     color: "#fff",
-    fontSize: scale(15),
+    fontSize: scale(20),
   },
   textoBannerRec: {
     color: "#0FFF50",
-    fontSize: scale(17),
+    fontSize: scale(20),
   },
   textoBannerDes: {
     color: "#FF3131",
-    fontSize: scale(17),
+    fontSize: scale(20),
   },
   botaoPress3: {
     borderRadius: 20,

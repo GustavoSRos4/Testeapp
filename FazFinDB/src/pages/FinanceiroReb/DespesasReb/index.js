@@ -10,12 +10,12 @@ import {
   FlatList,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import BezierChartDespesas from "../../../components/Graficos/BezierChartDespesas";
+import BezierChartDespesasReb from "../../../components/Graficos/BezierChartDespesasReb";
 import { scale, verticalScale } from "react-native-size-matters";
 import Modal from "react-native-modal";
 import { AuthContext } from "../../../contexts/auth";
 function DespesasReb() {
-  const { precoCF,listaAli } = useContext(AuthContext);
+  const { precoCFReb,listaAliReb } = useContext(AuthContext);
   const [isModalVisible, setModalVisible] = useState(false);
   function toggleModal() {
     setModalVisible(!isModalVisible);
@@ -30,14 +30,14 @@ function DespesasReb() {
       </TouchableOpacity>
     );
   };
-  function getDespesasReb() {
-    if (typeof precoCF !== "undefined") {
-      return Number(precoCF);
+  function getDespesas() {
+    if (typeof precoCFReb !== "undefined") {
+      return Number(precoCFReb);
     } else {
       return 0;
     }
   }
-  const despesas = getDespesasReb();
+  const despesas = getDespesas();
   const imgbg1 = "../../../../assets/bg2.jpg";
   const navigation = useNavigation();
   return (
@@ -55,8 +55,9 @@ function DespesasReb() {
           <Text style={styles.texto}>Total de despesas:</Text>
           <Text style={styles.textoValorNeg}>R${despesas}</Text>
           <View style={styles.lineStyle} />
+          <Text style={styles.preGraf}>Clique no gráfico para mais detalhes.</Text>
           <View style={styles.containerChart}>
-            <BezierChartDespesas />
+            <BezierChartDespesasReb />
           </View>
 
           <Modal
@@ -71,7 +72,7 @@ function DespesasReb() {
 
               <FlatList
                 style={styles.scroll}
-                data={listaAli}
+                data={listaAliReb}
                 renderItem={renderItem}
                 keyExtractor={(item) => item._id}
               />
@@ -88,7 +89,7 @@ function DespesasReb() {
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.botaopress}
-          onPress={() => navigation.navigate("GeralFaz")}
+          onPress={() => navigation.navigate("GeralReb")}
         >
           <Text style={styles.tituloBotao}>{"Voltar"}</Text>
         </TouchableOpacity>
@@ -97,6 +98,11 @@ function DespesasReb() {
   );
 }
 const styles = StyleSheet.create({
+  preGraf:{
+    color: 'white',
+    alignSelf: 'center',
+    
+  },
   modalContainer: {
     backgroundColor: "rgba(234,242,215,1)",
     position: "absolute",

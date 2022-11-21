@@ -7,6 +7,7 @@ import {
   MaterialIcons,
   Entypo,
   Fontisto,
+  AntDesign,
 } from "@expo/vector-icons";
 import CadastroFaz from "../pages/CadastroFaz";
 import StackRoutes from "../Routes/stackRoutes";
@@ -124,6 +125,20 @@ function Routes() {
         }}
       />
       <Drawer.Screen
+        name="FinanceiroReb"
+        component={FinanceiroReb}
+        options={{
+          title: "Financeiro Rebanho",
+          drawerIcon: ({ focused, size, color }) => (
+            <AntDesign
+              name={focused ? "linechart" : "linechart"}
+              size={size}
+              color={color}
+            />
+          ),
+        }}
+      />
+      <Drawer.Screen
         name="Vacas"
         component={PageListavacas}
         options={{
@@ -151,7 +166,6 @@ function Routes() {
           ),
         }}
       />
-
 
       <Drawer.Screen
         name="Leite"
@@ -181,24 +195,6 @@ function Routes() {
           ),
         }}
       />
-      <Drawer.Screen
-        name="FinanceiroReb"
-        component={FinanceiroReb}
-        options={{
-          title: "Financeiro Rebanho",
-          drawerIcon: ({ focused, size, color }) => (
-            <MaterialCommunityIcons
-              name={
-                focused ? "calculator-variant-outline" : "calculator-variant"
-              }
-              size={size}
-              color={color}
-            />
-          ),
-        }}
-      />
-
-
     </Drawer.Navigator>
   );
 }
