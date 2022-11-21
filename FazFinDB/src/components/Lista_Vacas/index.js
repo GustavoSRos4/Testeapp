@@ -6,6 +6,7 @@ import {
   Text,
   TouchableOpacity,
   Dimensions,
+  Alert,
 } from "react-native";
 import { FlatList, ScrollView } from "react-native-gesture-handler";
 import getRebVacas from "../../Realm/getRebVacas";
@@ -29,7 +30,7 @@ function Lista_vacas({ textobarrapesquisa, idrebanho }) {
       setList(datavacas);
       setdata(datavacas);
       setisInfoeditable(false);
-    } catch (e) {}
+    } catch (e) { }
   }
 
   useFocusEffect(
@@ -70,7 +71,6 @@ function Lista_vacas({ textobarrapesquisa, idrebanho }) {
     //console.log(genero, "Initialized info 2")
   }
   function UpdateinfoVaca() {
-    infoedited = true;
     const data2mod = {
       _id: IdVaca,
       nomeVaca: nomeVaca,
@@ -83,7 +83,6 @@ function Lista_vacas({ textobarrapesquisa, idrebanho }) {
     fetchVaca();
     toggleModal();
     console.log(genero, "Update info");
-    console.log(infoedited);
   }
 
   //console.log(List);
@@ -116,7 +115,8 @@ function Lista_vacas({ textobarrapesquisa, idrebanho }) {
   }, [Searchtext]);
 
   function toggleModal() {
-    if (isModalVisible === true) {
+    if (isModalVisible === false) {
+      setisInfoeditable(false);
     }
     setModalVisible(!isModalVisible);
   }
@@ -129,6 +129,7 @@ function Lista_vacas({ textobarrapesquisa, idrebanho }) {
   }
   function editarinfos() {
     setisInfoeditable(!isInfoeditable);
+    Alert.alert("Editar Informações da Vaca", "logo apos confirme no botao confirmar alterações")
   }
 
   function verificagenero() {

@@ -71,48 +71,40 @@ function Manejo({ navigation }) {
     <SafeAreaView style={styles.container}>
       <Header />
       <TouchableOpacity
-        style={styles.botaoPress2}
+        style={styles.containerinfos}
         onPress={() => {
           toggleModal(true);
         }}
       >
         <Text style={styles.tituloBotao2}>
-          <MaterialCommunityIcons
-            name="hospital-box-outline"
-            size={scale(30)}
-            color="white"
-          />
+          
           {"  Vacina e remédios"}
         </Text>
       </TouchableOpacity>
       <TouchableOpacity
-        style={styles.botaoPress3}
+        style={styles.containerinfos}
         onPress={() => {
           toggleModal2(true);
         }}
       >
         <Text style={styles.tituloBotao2}>
-          <MaterialCommunityIcons
-            name="hammer-screwdriver"
-            size={scale(30)}
-            color="white"
-          />
+          
           {"  Mão de obra"}
         </Text>
       </TouchableOpacity>
       <TouchableOpacity
-        style={styles.botaoPress4}
+        style={styles.containerinfos}
         onPress={() => {
           toggleModal3(true);
         }}
       >
         <Text style={styles.tituloBotao2}>
-          <FontAwesome5 name="tractor" size={scale(30)} color="white" />
+          
           {"  Outros"}
         </Text>
       </TouchableOpacity>
       <TouchableOpacity
-        style={styles.botaopress8}
+        style={styles.botaopress}
         onPress={() => navigation.navigate("PagelancaContas")}
       >
         <Text style={styles.tituloBotao}>{"Voltar"}</Text>
@@ -308,54 +300,19 @@ const styles = StyleSheet.create({
     resizeMode: "cover",
     width: "100%",
   },
-  botaoPress2: {
-    borderRadius: 20,
-    backgroundColor: "rgba(15, 109, 0, 0.9)",
-    width: scale(300),
-    height: verticalScale(150),
-    alignItems: "center",
-    justifyContent: "center",
+  containerinfos: {
+    marginVertical: verticalScale(15),
+    padding: verticalScale(50),
+    width: scale(320),
+    backgroundColor: "rgba(15, 109, 0, 0.7)",
+    borderRadius: 15,
     alignSelf: "center",
-    top: verticalScale(75),
-    position: "absolute",
-  },
-  botaoPress3: {
-    borderRadius: 20,
-    backgroundColor: "rgba(15, 109, 0, 0.9)",
-    width: scale(300),
-    height: verticalScale(150),
-    alignItems: "center",
-    justifyContent: "center",
-    alignSelf: "center",
-    top: verticalScale(250),
-    position: "absolute",
-  },
-  botaoPress4: {
-    borderRadius: 20,
-    backgroundColor: "rgba(15, 109, 0, 0.9)",
-    width: scale(300),
-    height: verticalScale(150),
-    alignItems: "center",
-    justifyContent: "center",
-    alignSelf: "center",
-    top: verticalScale(425),
-    position: "absolute",
-  },
-  botaoPress5: {
-    borderRadius: 20,
-    backgroundColor: "rgba(15, 109, 0, 0.9)",
-    width: scale(300),
-    height: verticalScale(100),
-    alignItems: "center",
-    justifyContent: "center",
-    alignSelf: "center",
-    top: verticalScale(460),
-    position: "absolute",
   },
   tituloBotao2: {
     fontSize: scale(25),
     fontWeight: "bold",
     color: "#fff",
+    alignSelf: "center",
   },
   botaopress: {
     borderRadius: 20,
@@ -368,7 +325,6 @@ const styles = StyleSheet.create({
     top: verticalScale(605),
     position: "absolute",
   },
-
   botaopress6: {
     borderRadius: 20,
     backgroundColor: "rgba(15, 109, 0, 0.9)",
@@ -378,17 +334,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignSelf: "center",
     top: verticalScale(555),
-    position: "absolute",
-  },
-  botaopress8: {
-    borderRadius: 20,
-    backgroundColor: "rgba(15, 109, 0, 0.9)",
-    width: scale(300),
-    height: verticalScale(40),
-    alignItems: "center",
-    justifyContent: "center",
-    alignSelf: "center",
-    top: verticalScale(625),
     position: "absolute",
   },
   tituloBotao: {
