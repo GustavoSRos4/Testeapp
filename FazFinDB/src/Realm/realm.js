@@ -11,6 +11,6 @@ export const getRealm = async () =>
   await Realm.open({
     path: "fazfin-app",
     schema: [LeiteSchema, Fazenda, RebanhoSchema, VacasSchema, GastosSchema],
-    schemaVersion: 2,
+    schemaVersion: 1,
     deleteRealmIfMigrationNeeded: true,
   });

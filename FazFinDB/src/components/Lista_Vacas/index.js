@@ -30,6 +30,7 @@ function Lista_vacas({ textobarrapesquisa, idrebanho }) {
       setList(datavacas);
       setdata(datavacas);
       setisInfoeditable(false);
+      console.log(datavacas[0])
     } catch (e) { }
   }
 

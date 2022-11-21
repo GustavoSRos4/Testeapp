@@ -6,10 +6,11 @@ async function getAllLeiteReb(rebID) {
   try {
     const data = realm.objects("RebanhoSchema").filtered(`_id= '${rebID}'`);
     for (var i in data[0].vacas) {
-      for (var j in data[0].vacas[i].receitas[j]) {
+      for (var j in data[0].vacas[i].receitas) {
         testes.push(data[0].vacas[i].receitas[j]);
       }
     }
+    console.log(data[0].vacas[0]);
     return testes;
   } catch (e) {
     Alert.alert("Error", e.message);

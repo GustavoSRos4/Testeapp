@@ -33,6 +33,8 @@ function CadastroVaca({ navigation }) {
             descVaca: descVaca,
             createdAt: new Date(),
             genero: genero,
+            gastosV: 0,
+            receitas:[],
             assignee: {
                 type: "linkingObjects",
                 objectType: "RebanhoSchema",

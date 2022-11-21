@@ -35,6 +35,8 @@ function CadastroReb({ }) {
           nascimentoVaca: "2022",
           brincoVaca: " 00 " + i,
           genero: 1,
+          gastosV: 0,
+          receitas:[],
           descVaca: "Descricao vazia",
           createdAt: new Date(),
         });

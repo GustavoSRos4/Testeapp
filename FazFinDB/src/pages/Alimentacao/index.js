@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useCallback } from "react";
 import {
   Text,
   TextInput,
@@ -10,14 +10,25 @@ import {
 import Header from "../../components/Header";
 import { scale, verticalScale } from "react-native-size-matters";
 import uuid from "react-native-uuid";
+import { useFocusEffect } from "@react-navigation/native";
 import writeGastos from "../../Realm/writeGastos";
 import { AuthContext } from "../../contexts/auth";
+import getAllVacas from "../../Realm/getAllVacas";
+import getAllGastosReb from "../../Realm/getAllGastosReb";
+import writeGastoVaca from "../../Realm/writeGastoVaca";
 function Alimentacao({ navigation }) {
   const [tipoAlim, setTipoAlim] = useState("");
   const [qtdAliS, setQtdAliS] = useState("");
   const [valorAliS, setValorAliS] = useState("");
   const [consumoAliS, setConsumoAliS] = useState("");
   const { rebID } = useContext(AuthContext);
+  const totalVaca = (Number(valorAliS) / Number(qtdAliS)) * Number(consumoAliS);
+  async function fetchVacas(rebID, totalVaca) {
+    const dataVacas = await getAllVacas(rebID);
+    const gastosVaca = Number(totalVaca / dataVacas.length);
+    console.log(typeof gastosVaca)
+    await writeGastoVaca(gastosVaca, rebID);
+  }
   async function handleAddGastos() {
     const qtdAli = Number(qtdAliS);
     const valorAli = Number(valorAliS);
@@ -33,6 +44,7 @@ function Alimentacao({ navigation }) {
       },
       rebID
     );
+    await fetchVacas(rebID, totalVaca);
     navigation.navigate("PagelancaContas");
   }
   return (
