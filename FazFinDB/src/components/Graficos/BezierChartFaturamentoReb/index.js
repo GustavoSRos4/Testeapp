@@ -1,17 +1,17 @@
 import { LineChart } from "react-native-chart-kit";
 import { Dimensions } from "react-native";
 import { scale, verticalScale } from "react-native-size-matters";
+import { AuthContext } from "../../../contexts/auth";
 import { useContext } from "react";
 const screenWidth = Dimensions.get("window").width;
-import { AuthContext } from "../../../contexts/auth";
-function BezierChartDespesasReb() {
-  const { precoCFReb } = useContext(AuthContext);
-  const despesas = Number(precoCFReb);
+function BezierChartFaturamentoReb() {
+  const { precoLeiteReb } = useContext(AuthContext);
+  const receitas = Number(precoLeiteReb);
   const data = {
-    labels: ["Agosto", "Setembro", "Outubro", "Novembro"],
+    labels: ["Julho", "Agosto", "Setembro", "Outubro"],
     datasets: [
       {
-        data: [0, 0, 0, despesas],
+        data: [0, 0, 0, receitas],
         strokeWidth: 2,
         color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
       },
@@ -34,4 +34,4 @@ function BezierChartDespesasReb() {
     />
   );
 }
-export default BezierChartDespesasReb;
+export default BezierChartFaturamentoReb;

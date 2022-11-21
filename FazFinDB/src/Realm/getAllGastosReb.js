@@ -1,13 +1,12 @@
 import { getRealm } from "./realm";
 import { Alert } from "react-native";
-
-async function getAllVacas(rebID) {
+async function getAllGastos(rebID) {
   let testes = [];
   const realm = await getRealm();
   try {
     const data = realm.objects("RebanhoSchema").filtered(`_id= '${rebID}'`);
-    for (var i in data[0].vacas) {
-      testes.push(data[0].vacas[i]);
+    for (var i in data[0].gastos) {
+      testes.push(data[0].gastos[i]);
     }
     return testes;
   } catch (e) {
@@ -15,4 +14,4 @@ async function getAllVacas(rebID) {
   }
   realm.close();
 }
-export default getAllVacas;
+export default getAllGastos;

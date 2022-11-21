@@ -33,6 +33,22 @@ function AuthProvider({ children }) {
   function PrecoLeite(precoLeite) {
     SetPrecoLeite(precoLeite);
   }
+  const [precoCFReb, SetPrecoCFReb] = useState();
+  function PrecoCFReb(precoCF) {
+    SetPrecoCFReb(precoCF);
+  }
+  const [listaLeiteReb, SetListaLeiteReb] = useState();
+  function ListaLeiteReb(dataLeite) {
+    SetListaLeiteReb(dataLeite);
+  }
+  const [precoLeiteReb, SetPrecoLeiteReb] = useState();
+  function PrecoLeiteReb(precoLeite) {
+    SetPrecoLeiteReb(precoLeite);
+  }
+  const [listaAliReb, SetListaAliReb] = useState();
+  function ListaAliReb(dataGas) {
+    SetListaAliReb(dataGas);
+  }
   return (
     <AuthContext.Provider
       value={{
@@ -49,7 +65,15 @@ function AuthProvider({ children }) {
         ListaLeite,
         listaLeite,
         PrecoLeite,
-        precoLeite
+        precoLeite,
+        ListaLeiteReb,
+        listaLeiteReb,
+        PrecoLeiteReb,
+        precoLeiteReb,
+        PrecoCFReb,
+        precoCFReb,
+        listaAliReb,
+        ListaAliReb,
       }}
     >
       {children}

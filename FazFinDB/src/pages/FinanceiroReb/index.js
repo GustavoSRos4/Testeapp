@@ -10,8 +10,8 @@ import FaturamentoReb from "./FaturamentoReb";
 import { AuthContext } from "../../contexts/auth";
 import { DespesasTotais } from "../../components/Calculos DB/DespesasTotais";
 import { ReceitasTotais } from "../../components/Calculos DB/ReceitasTotais";
-import getAllGastos from "../../Realm/getAllGastos";
-import getAllLeite from "../../Realm/getAllLeite";
+import getAllGastosReb from "../../Realm/getAllGastosReb";
+import getAllLeiteReb from "../../Realm/getAllLeiteReb";
 const FirstRoute = () => <RelatorioReb />;
 
 const SecondRoute = () => <DespesasReb />;
@@ -24,28 +24,28 @@ const renderScene = SceneMap({
 });
 
 export default function FinanceiroReb({ navigation }) {
-  const { PrecoCF, ListaAli, fazID, PrecoLeite, ListaLeite } =
+  const { PrecoCFReb, ListaAliReb, fazID, rebID, PrecoLeiteReb, ListaLeiteReb } =
     useContext(AuthContext);
   const [dataGasto, setDataGastos] = useState([]);
   const [dataReceitas, setDataReceitas] = useState([]);
-  async function fetchDataDes(fazID) {
-    const dataGas = await getAllGastos(fazID);
+  async function fetchDataDes(rebID) {
+    const dataGas = await getAllGastosReb(rebID);
     setDataGastos(dataGas);
-    ListaAli(dataGas);
+    ListaAliReb(dataGas);
     const precoCF = DespesasTotais(dataGas);
-    PrecoCF(precoCF);
+    PrecoCFReb(precoCF);
   }
-  async function fetchDataRec(fazID) {
-    const dataRec = await getAllLeite(fazID);
+  async function fetchDataRec(rebID) {
+    const dataRec = await getAllLeiteReb(rebID);
     setDataReceitas(dataRec);
-    ListaLeite(dataRec);
+    ListaLeiteReb(dataRec);
     const precoLeite = ReceitasTotais(dataRec);
-    PrecoLeite(precoLeite);
+    PrecoLeiteReb(precoLeite);
   }
   useFocusEffect(
     useCallback(() => {
-      fetchDataRec(fazID);
-      fetchDataDes(fazID);
+      fetchDataRec(rebID);
+      fetchDataDes(rebID);
     }, [])
   );
 

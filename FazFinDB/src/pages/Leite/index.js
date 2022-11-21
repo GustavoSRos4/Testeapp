@@ -25,6 +25,8 @@ function Leite({ navigation }) {
   const [vacaID, setVacaID] = useState("");
   function toggleModal() {
     setModalVisible(!isModalVisible);
+    setSearchText("");
+    setLista(listaVaca);
   }
   const renderItem = ({ item }) => {
     return (
@@ -67,16 +69,13 @@ function Leite({ navigation }) {
     navigation.navigate("Contas");
   }
   //Buscar no banco
-  async function fetchData() {
-    const dataVaca = await getAllVacas();
+  async function fetchData(rebID) {
+    const dataVaca = await getAllVacas(rebID);
     setListaVaca(dataVaca);
-    dataVaca.addListener((values) => {
-      setListaVaca([...values]);
-    });
   }
   useFocusEffect(
     useCallback(() => {
-      fetchData();
+      fetchData(rebID);
     }, [])
   );
   const { ListaLeite, PrecoLeite, rebID, fazID } = useContext(AuthContext);
@@ -87,6 +86,8 @@ function Leite({ navigation }) {
   const [precoLV, setPrecoLV] = useState("");
   const [prodLV, setProdLV] = useState("");
   const [listaVaca, setListaVaca] = useState([]);
+  const [lista, setLista] = useState(listaVaca);
+  const [searchText, setSearchText] = useState("");
   //-----------------------------
   function CanContinue(vacaID) {
     if (typeof vacaID == "undefined" || vacaID == "") {
@@ -106,6 +107,26 @@ function Leite({ navigation }) {
       return Style;
     }
   }
+  useEffect(() => {
+    if (searchText === "") {
+      setLista(lista);
+    } else {
+      setLista(
+        listaVaca.filter(
+          (item) =>
+            item.nomeVaca.toLowerCase().indexOf(searchText.toLowerCase()) > -1
+        )
+      );
+    }
+  }, [searchText]);
+
+  const handleFilterNome = () => {
+    let newList = [...lista];
+    newList.sort((a, b) =>
+      a.nomeVaca > b.nomeVaca ? 1 : b.nomeVaca > a.nomeVaca ? -1 : 0
+    );
+    setLista(newList);
+  };
   return (
     <SafeAreaView style={styles.container}>
       <Header />
@@ -157,9 +178,21 @@ function Leite({ navigation }) {
         >
           <View style={styles.modalContainer}>
             <Text style={styles.TituloM}>Selecione um animal</Text>
+            <TouchableOpacity
+              style={styles.filtroNome}
+              onPress={handleFilterNome}
+            >
+              <Text style={styles.tituloBotao}>Filtrar por nome</Text>
+            </TouchableOpacity>
+            <TextInput
+              style={styles.search}
+              placeholder="Pesquise um animal pelo nome."
+              value={searchText}
+              onChangeText={(t) => setSearchText(t)}
+            ></TextInput>
             <FlatList
               style={styles.scroll}
-              data={listaVaca}
+              data={lista}
               renderItem={renderItem}
               keyExtractor={(item) => item._id}
             />
@@ -191,12 +224,34 @@ function Leite({ navigation }) {
   );
 }
 const styles = StyleSheet.create({
+  filtroNome: {
+    backgroundColor: "rgba(15, 109, 0, 0.9)",
+    borderRadius: 20,
+    width: scale(100),
+    height: verticalScale(30),
+    margin:verticalScale(5),
+    alignItems: "center",
+    justifyContent: "center",
+    alignSelf: "center",
+
+  },
+  search: {
+    backgroundColor: "rgba(15, 109, 0, 0.9)",
+    fontSize: verticalScale(20),
+    color: "white",
+    textAlign: "center",
+    alignSelf: "center",
+    height: verticalScale(40),
+    width: scale(300),
+    margin: verticalScale(20),
+    borderRadius: 20,
+  },
   modalContainer: {
     backgroundColor: "rgba(234,242,215,1)",
     position: "absolute",
     top: verticalScale(10),
     alignSelf: "center",
-    height:verticalScale(550),
+    height: verticalScale(550),
     width: scale(330),
     borderRadius: 20,
   },
