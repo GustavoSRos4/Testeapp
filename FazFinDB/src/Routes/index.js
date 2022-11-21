@@ -18,6 +18,7 @@ import Manejo from "../pages/Manejo";
 import Leite from "../pages/Leite";
 import GeralReb from "../pages/GeralReb";
 import FinanceiroFaz from "../pages/FinanceiroFaz";
+import FinanceiroReb from "../pages/FinanceiroReb";
 const Drawer = createDrawerNavigator();
 function Routes() {
   return (
@@ -172,6 +173,22 @@ function Routes() {
           drawerIcon: ({ focused, size, color }) => (
             <Fontisto
               name={focused ? "injection-syringe" : "injection-syringe"}
+              size={size}
+              color={color}
+            />
+          ),
+        }}
+      />
+      <Drawer.Screen
+        name="FinanceiroReb"
+        component={FinanceiroReb}
+        options={{
+          title: "Financeiro Rebanho",
+          drawerIcon: ({ focused, size, color }) => (
+            <MaterialCommunityIcons
+              name={
+                focused ? "calculator-variant-outline" : "calculator-variant"
+              }
               size={size}
               color={color}
             />

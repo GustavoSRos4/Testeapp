@@ -20,7 +20,10 @@ function GeralReb({ navigation }) {
         imageStyle={{ opacity: 0.6 }}
       >
         <Header title="Olá, Carlos" />
-        <TouchableOpacity style={styles.bannerButton}>
+        <TouchableOpacity
+         style={styles.bannerButton}
+         onPress={() => navigation.navigate("FinanceiroReb")}
+         >
           <Text style={styles.bannerText}>
             {"Verificar o balanço do rebanho."}
           </Text>

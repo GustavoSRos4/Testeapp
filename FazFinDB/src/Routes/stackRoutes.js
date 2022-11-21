@@ -11,6 +11,7 @@ import PagelancaContas from "../pages/PagelancaContas";
 import PageListavacas from "../pages/PageListavacas";
 import FinanceiroFaz from "../pages/FinanceiroFaz";
 import Alimentacao from "../pages/Alimentacao";
+import FinanceiroReb from "../pages/FinanceiroReb";
 const Stack = createNativeStackNavigator();
 function StackRoutes() {
   return (
@@ -89,6 +90,13 @@ function StackRoutes() {
       <Stack.Screen
         name="Alimentacao"
         component={Alimentacao}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="FinanceiroReb"
+        component={FinanceiroReb}
         options={{
           headerShown: false,
         }}
