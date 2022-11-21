@@ -1,7 +1,7 @@
 import {
   Text,
   TouchableOpacity,
-  ImageBackground,
+  
   StyleSheet,
   Dimensions,
   View,
@@ -77,8 +77,12 @@ function Manejo({ navigation }) {
         }}
       >
         <Text style={styles.tituloBotao2}>
-          
-          {"  Vacina e remédios"}
+        <MaterialCommunityIcons
+            name="hospital-box-outline"
+            size={scale(30)}
+            color="white"
+          />
+          {"Vacina e Remedios"}
         </Text>
       </TouchableOpacity>
       <TouchableOpacity
@@ -88,7 +92,11 @@ function Manejo({ navigation }) {
         }}
       >
         <Text style={styles.tituloBotao2}>
-          
+        <MaterialCommunityIcons
+            name="hammer-screwdriver"
+            size={scale(30)}
+            color="white"
+          />
           {"  Mão de obra"}
         </Text>
       </TouchableOpacity>
@@ -99,7 +107,7 @@ function Manejo({ navigation }) {
         }}
       >
         <Text style={styles.tituloBotao2}>
-          
+        <FontAwesome5 name="tractor" size={scale(30)} color="white" /> 
           {"  Outros"}
         </Text>
       </TouchableOpacity>
@@ -118,21 +126,28 @@ function Manejo({ navigation }) {
         animationOut="slideOutDown"
       >
         <View style={styles.modalContainer}>
-          <Text style={styles.tituloModal}>Cadastro de Vacina e Remédios</Text>
-          <Text style={styles.tituloBotao3}>{"Qual o remédio ou vacina?"}</Text>
-          <TextInput
-            style={styles.input}
-            value={tipoAlim}
-            onChangeText={setTipoAlim}
-          />
-          <Text style={styles.tituloBotao3}>{"Qual o valor do produto?"}</Text>
-          <TextInput
-            style={styles.input}
-            value={valorAliS}
-            numeric
-            keyboardType={"numeric"}
-            onChangeText={setValorAliS}
-          />
+            <Text style={styles.tituloModal}>Cadastro de Vacina e Remédios</Text>
+            
+            <View style={styles.containerinfosmodal}>
+              <Text style={styles.tituloBotao3}>{"Qual o remédio ou vacina?"}</Text>
+              
+              <TextInput
+                style={styles.input}
+                value={tipoAlim}
+                onChangeText={setTipoAlim}
+            />
+            </View>
+            <View style={styles.containerinfosmodal}> 
+              <Text style={styles.tituloBotao3}>{"Qual o valor do produto?"}</Text>
+              <TextInput
+                style={styles.input}
+                value={valorAliS}
+                numeric
+                keyboardType={"numeric"}
+                onChangeText={setValorAliS}
+              />
+            </View>
+            <View style={styles.containerinfosmodal}>
           <Text style={styles.tituloBotao3}>{"Qual o volume do produto?"}</Text>
           <TextInput
             style={styles.input}
@@ -141,6 +156,8 @@ function Manejo({ navigation }) {
             keyboardType={"numeric"}
             onChangeText={SetQtdAliS}
           />
+          </View> 
+          <View style={styles.containerinfosmodal}>
           <Text style={styles.tituloBotao3}>
             {"Qual a quantidade aplicada?"}
           </Text>
@@ -151,6 +168,7 @@ function Manejo({ navigation }) {
             keyboardType={"numeric"}
             onChangeText={SetConsumoAliS}
           />
+          </View>
         </View>
         <TouchableOpacity style={styles.botaopress6} onPress={handleAddGastos}>
           <Text style={styles.tituloBotao}>{"Cadastrar"}</Text>
@@ -174,12 +192,15 @@ function Manejo({ navigation }) {
       >
         <View style={styles.modalContainer2}>
           <Text style={styles.tituloModal}>Cadastro de mão de obra.</Text>
+          <View style={styles.containerinfosmodal}>
           <Text style={styles.tituloBotao3}>{"Descrição do serviço:"}</Text>
           <TextInput
             style={styles.input}
             value={tipoAlim}
             onChangeText={setTipoAlim}
           />
+          </View>
+          <View style={styles.containerinfosmodal}>
           <Text style={styles.tituloBotao3}>{"Total pago pelo serviço:"}</Text>
           <TextInput
             style={styles.input}
@@ -188,6 +209,7 @@ function Manejo({ navigation }) {
             keyboardType={"numeric"}
             onChangeText={setValorAliS}
           />
+          </View>
         </View>
         <TouchableOpacity style={styles.botaopress6} onPress={handleAddGastos}>
           <Text style={styles.tituloBotao3}>{"Cadastrar"}</Text>
@@ -212,12 +234,15 @@ function Manejo({ navigation }) {
       >
         <View style={styles.modalContainer3}>
           <Text style={styles.tituloModal}>Cadastro de outras despesas.</Text>
+          <View style={styles.containerinfosmodal}>
           <Text style={styles.tituloBotao3}>{"Descrição:"}</Text>
           <TextInput
             style={styles.input}
             value={tipoAlim}
             onChangeText={setTipoAlim}
           />
+          </View>
+          <View style={styles.containerinfosmodal}>
           <Text style={styles.tituloBotao3}>{"Total pago:"}</Text>
           <TextInput
             style={styles.input}
@@ -226,6 +251,7 @@ function Manejo({ navigation }) {
             keyboardType={"numeric"}
             onChangeText={setValorAliS}
           />
+          </View>
         </View>
         <TouchableOpacity style={styles.botaopress6} onPress={handleAddGastos}>
           <Text style={styles.tituloBotao}>{"Cadastrar"}</Text>
@@ -252,17 +278,17 @@ const styles = StyleSheet.create({
     top: verticalScale(0),
   },
   modalContainer: {
-    backgroundColor: "rgba(15, 109, 0, 1)",
+    backgroundColor: "#004513",
     position: "absolute",
     top: verticalScale(20),
     alignSelf: "center",
     width: scale(330),
-    height: verticalScale(500),
+    height: verticalScale(510),
     borderRadius: 20,
     justifyContent: "center",
   },
   modalContainer2: {
-    backgroundColor: "rgba(15, 109, 0, 1)",
+    backgroundColor: "#004513",
     position: "absolute",
     top: verticalScale(0),
     alignSelf: "center",
@@ -272,7 +298,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   modalContainer3: {
-    backgroundColor: "rgba(15, 109, 0, 1)",
+    backgroundColor: "#004513",
     position: "absolute",
     top: verticalScale(0),
     alignSelf: "center",
@@ -285,11 +311,12 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     color: "black",
     width: scale(300),
-    height: verticalScale(40),
+    height: verticalScale(37),
     alignSelf: "center",
     borderRadius: 20,
     textAlign: "center",
-    marginBottom: verticalScale(40),
+    marginBottom: verticalScale(20),
+    marginVertical: verticalScale(5),
   },
   container: {
     flex: 1,
@@ -301,18 +328,28 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   containerinfos: {
-    marginVertical: verticalScale(15),
+    marginVertical: verticalScale(10),
     padding: verticalScale(50),
     width: scale(320),
     backgroundColor: "rgba(15, 109, 0, 0.7)",
     borderRadius: 15,
     alignSelf: "center",
+    top: verticalScale(30),
+  },
+  containerinfosmodal: {
+    marginVertical: verticalScale(5),
+    padding: verticalScale(5),
+    width: scale(310),
+    backgroundColor: "rgba(15, 109, 0, 0.7)",
+    borderRadius: 15,
+    alignSelf: "center",
   },
   tituloBotao2: {
-    fontSize: scale(25),
+    fontSize: scale(23),
     fontWeight: "bold",
     color: "#fff",
     alignSelf: "center",
+    
   },
   botaopress: {
     borderRadius: 20,
@@ -336,6 +373,8 @@ const styles = StyleSheet.create({
     top: verticalScale(555),
     position: "absolute",
   },
+  
+  
   tituloBotao: {
     fontSize: verticalScale(14),
     fontWeight: "bold",
@@ -347,6 +386,12 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "white",
     alignSelf: "center",
+  },
+  tituloinfo: {
+    color: "white",
+    fontSize: verticalScale(20),
+    marginBottom: verticalScale(10),
+    textAlign: "center",
   },
 });
 export default Manejo;

@@ -38,7 +38,8 @@ function Alimentacao({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       <Header />
-      <View style={styles.containerinput}>
+      <View style={styles.containerinfos}>
+      
         <Text style={styles.tituloBotao3}>Qual o trato?</Text>
         <TextInput
           style={styles.input}
@@ -46,7 +47,8 @@ function Alimentacao({ navigation }) {
           onChangeText={setTipoAlim}
           value={tipoAlim}
         ></TextInput>
-
+      </View>  
+      <View style={styles.containerinfos}>
         <Text style={styles.tituloBotao3}>{"Qual o peso da saca(KG)?"}</Text>
         <TextInput
           style={styles.input}
@@ -54,7 +56,8 @@ function Alimentacao({ navigation }) {
           onChangeText={setQtdAliS}
           value={qtdAliS}
         ></TextInput>
-
+      </View>
+      <View style={styles.containerinfos}>
         <Text style={styles.tituloBotao3}>{"Valor por saca(R$)?"}</Text>
         <TextInput
           style={styles.input}
@@ -62,7 +65,8 @@ function Alimentacao({ navigation }) {
           onChangeText={setValorAliS}
           value={valorAliS}
         ></TextInput>
-
+      </View>
+      <View style={styles.containerinfos}>
         <Text style={styles.tituloBotao3}>{"Quantidade consumida(KG)?"}</Text>
         <TextInput
           style={styles.input}
@@ -84,25 +88,16 @@ function Alimentacao({ navigation }) {
   );
 }
 const styles = StyleSheet.create({
-  containerinput: {
-    backgroundColor: "rgba(15, 109, 0, 1)",
-    margin: verticalScale(10),
-    alignItems: "center",
-    width: scale(300),
-    alignSelf: "center",
-    height: verticalScale(500),
-    justifyContent: "center",
-    borderRadius: verticalScale(20),
-  },
+ 
   input: {
     backgroundColor: "white",
     color: "black",
     width: scale(250),
-    height: verticalScale(40),
+    height: verticalScale(30),
     alignSelf: "center",
     borderRadius: 20,
     textAlign: "center",
-    marginBottom: verticalScale(30),
+    marginBottom: verticalScale(3),
   },
   container: {
     flex: 1,
@@ -194,6 +189,15 @@ const styles = StyleSheet.create({
     fontSize: verticalScale(20),
     fontWeight: "bold",
     color: "#fff",
+    alignSelf: "center",
+  },
+  containerinfos: {
+    marginVertical: verticalScale(10),
+    padding: verticalScale(25),
+    width: scale(320),
+    backgroundColor: "rgba(15, 109, 0, 0.7)",
+    borderRadius: 15,
+    alignSelf: "center",
   },
 });
 export default Alimentacao;
