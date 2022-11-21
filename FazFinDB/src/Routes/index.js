@@ -18,6 +18,7 @@ import Manejo from "../pages/Manejo";
 import Leite from "../pages/Leite";
 import GeralReb from "../pages/GeralReb";
 import FinanceiroFaz from "../pages/FinanceiroFaz";
+import CadastroVaca from "../pages/CadastroVaca";
 import FinanceiroReb from "../pages/FinanceiroReb";
 const Drawer = createDrawerNavigator();
 function Routes() {
@@ -151,6 +152,7 @@ function Routes() {
         }}
       />
 
+
       <Drawer.Screen
         name="Leite"
         component={Leite}
@@ -195,6 +197,8 @@ function Routes() {
           ),
         }}
       />
+
+
     </Drawer.Navigator>
   );
 }

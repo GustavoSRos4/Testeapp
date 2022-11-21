@@ -52,9 +52,10 @@ function Faturamento() {
             toggleModal();
           }}
         >
-          <Text style={styles.texto}>Total de Faturamento:</Text>
+          <Text style={styles.texto}>Total de receitas:</Text>
           <Text style={styles.textoValorPos}>R${receitas}</Text>
           <View style={styles.lineStyle} />
+          <Text style={styles.preGraf}>Clique no gráfico para mais detalhes.</Text>
           <View style={styles.containerChart}>
             <BezierChartFaturamento />
           </View>
@@ -66,7 +67,7 @@ function Faturamento() {
             animationOut="slideOutDown"
           >
             <View style={styles.modalContainer}>
-              <Text style={styles.tituloModal}>Detalhes de Faturamento:</Text>
+              <Text style={styles.tituloModal}>Detalhes de receitas:</Text>
               <FlatList
                 style={styles.scroll}
                 data={listaLeite}
@@ -95,6 +96,11 @@ function Faturamento() {
   );
 }
 const styles = StyleSheet.create({
+  preGraf:{
+    color: 'white',
+    alignSelf: 'center',
+
+  },
   modalContainer: {
     backgroundColor: "rgba(234,242,215,1)",
     position: "absolute",

@@ -1,7 +1,8 @@
 import * as React from "react";
-import { useState,useContext } from "react";
+import { useState, useContext } from "react";
 import {
-  View,FlatList,
+  View,
+  FlatList,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -16,7 +17,7 @@ import Modal from "react-native-modal";
 import { AuthContext } from "../../../contexts/auth";
 function Relatorio() {
   const precoTotal = precoLeite - precoCF;
-  const { precoCF,listaAli,listaLeite,precoLeite} = useContext(AuthContext);
+  const { precoCF, listaAli, listaLeite, precoLeite } = useContext(AuthContext);
   const [isModalVisible, setModalVisible] = useState(false);
   function toggleModal() {
     setModalVisible(!isModalVisible);
@@ -25,7 +26,7 @@ function Relatorio() {
     return (
       <TouchableOpacity style={styles.listaDet}>
         <Text style={styles.tituloBotao}>
-        {item.description} - R$ {(item.prodL * item.precoL).toFixed(2)}
+          {item.description} - R$ {(item.prodL * item.precoL).toFixed(2)}
         </Text>
       </TouchableOpacity>
     );
@@ -41,12 +42,12 @@ function Relatorio() {
     );
   };
   function Color(total) {
-    let color
+    let color;
     if (total > 0) {
-      color = styles.textoValorPos
+      color = styles.textoValorPos;
       return color;
     } else {
-      color = styles.textoValorNeg
+      color = styles.textoValorNeg;
       return color;
     }
   }
@@ -88,7 +89,7 @@ function Relatorio() {
             toggleModal();
           }}
         >
-          <Text style={styles.texto}>Total de Faturamento:</Text>
+          <Text style={styles.texto}>Total de receitas:</Text>
           <Text style={styles.textoValorPos}>R$ {receitas}</Text>
           <View style={styles.lineStyle} />
           <Text style={styles.texto}>Total de despesas:</Text>
@@ -97,6 +98,9 @@ function Relatorio() {
           <Text style={styles.texto}>Balanço final:</Text>
           <Text style={Color()}>R${total}</Text>
           <View style={styles.lineStyle} />
+          <Text style={styles.preGraf}>
+            Clique no gráfico para mais detalhes.
+          </Text>
           <View style={styles.containerChart}>
             <PieChartFaz />
           </View>
@@ -109,14 +113,14 @@ function Relatorio() {
             animationOut="slideOutDown"
           >
             <View style={styles.modalContainer}>
-              <Text style={styles.tituloModal}>Detalhes de Faturamento:</Text>
+              <Text style={styles.tituloModal}>Detalhes de receitas:</Text>
               <FlatList
                 style={styles.scroll}
                 data={listaLeite}
                 renderItem={renderItem2}
                 keyExtractor={(item) => item._id}
               />
-              <Text style={styles.tituloModal}>Detalhes de Despesas:</Text>
+              <Text style={styles.tituloModal}>Detalhes de despesas:</Text>
               <FlatList
                 style={styles.scroll}
                 data={listaAli}
@@ -145,6 +149,10 @@ function Relatorio() {
   );
 }
 const styles = StyleSheet.create({
+  preGraf: {
+    color: "white",
+    alignSelf: "center",
+  },
   modalContainer: {
     backgroundColor: "rgba(234,242,215,1)",
     position: "absolute",

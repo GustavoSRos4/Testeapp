@@ -28,7 +28,7 @@ function Leite({ navigation }) {
   }
   const renderItem = ({ item }) => {
     return (
-      <View>
+      <View style={styles.modalContainer2}>
         <TouchableOpacity
           onPress={function ReturnID() {
             const VacaID = item._id;
@@ -112,7 +112,7 @@ function Leite({ navigation }) {
 
       {/*Preco do leite*/}
       <View style={styles.containerinfos}>
-        <Text style={styles.tituloinfo}>Preço atual do Leite:</Text>
+        <Text style={styles.tituloinfo}>Preço atual do leite:</Text>
         <TextInput
           style={styles.detalhe}
           value={precoLV}
@@ -123,7 +123,7 @@ function Leite({ navigation }) {
       </View>
       {/*Produção diaria*/}
       <View style={styles.containerinfos}>
-        <Text style={styles.tituloinfo}>Produção diaria:</Text>
+        <Text style={styles.tituloinfo}>Produção diária:</Text>
         <TextInput
           style={styles.detalhe}
           value={prodLV}
@@ -147,7 +147,7 @@ function Leite({ navigation }) {
         }}
         style={styles.botaoselecionaranimal}
       >
-        <Text style={styles.tituloBotao}>Selecionar Animal</Text>
+        <Text style={styles.tituloBotao}>Selecionar animal</Text>
         <Modal
           isVisible={isModalVisible}
           coverScreen={true}
@@ -196,6 +196,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: verticalScale(10),
     alignSelf: "center",
+    height:verticalScale(550),
     width: scale(330),
     borderRadius: 20,
   },
@@ -220,58 +221,58 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignSelf: "center",
     color: "rgba(15, 109, 0, 0.9)",
-    top: 625,
+    top: verticalScale(625),
   },
   botaovoltar: {
     backgroundColor: "rgba(15, 109, 0, 0.9)",
-    width: 300,
-    height: 40,
+    width: scale(300),
+    height: verticalScale(40),
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 18,
-    marginVertical: 5,
+    marginVertical: verticalScale(5),
     position: "relative",
     alignSelf: "center",
   },
   botaovoltar2: {
     backgroundColor: "rgba(15, 109, 0, 0.9)",
-    width: 300,
-    height: 40,
+    width: scale(300),
+    height: verticalScale(40),
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 18,
-    marginVertical: 5,
+    marginVertical: verticalScale(5),
     position: "relative",
     alignSelf: "center",
   },
   botaovoltar3: {
     backgroundColor: "rgba(15, 109, 0, 0.9)",
-    width: 300,
-    height: 40,
+    width: scale(300),
+    height: verticalScale(40),
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 18,
-    marginVertical: 5,
+    marginVertical: verticalScale(5),
     position: "relative",
     alignSelf: "center",
   },
   textovoltar: {
-    fontSize: 14,
+    fontSize: verticalScale(14),
     fontWeight: "bold",
     color: "#fff",
   },
   tituloinfo: {
     color: "white",
-    fontSize: 20,
-    marginBottom: 10,
+    fontSize: verticalScale(20),
+    marginBottom: verticalScale(10),
     textAlign: "center",
   },
   detalhe: {
-    fontSize: 20,
+    fontSize: verticalScale(20),
     color: "black",
     backgroundColor: "white",
-    borderRadius: 5,
-    marginBottom: 20,
+    borderRadius: verticalScale(5),
+    marginBottom: verticalScale(20),
   },
   containerinfos: {
     marginVertical: verticalScale(15),
@@ -283,8 +284,8 @@ const styles = StyleSheet.create({
   },
   botaoselecionaranimal: {
     backgroundColor: "#004513",
-    width: 215,
-    height: 40,
+    width: scale(215),
+    height: verticalScale(40),
     alignItems: "center",
     justifyContent: "center",
     alignSelf: "center",
@@ -293,29 +294,29 @@ const styles = StyleSheet.create({
   },
   selecionaranimal: {
     color: "white",
-    fontSize: 20,
+    fontSize: verticalScale(20),
   },
   container2: {
     flex: 1,
-    height: 100,
+    height: verticalScale(100),
     backgroundColor: "white",
   },
   lista2: {
     backgroundColor: "rgba(15, 109, 0, 0.9)",
-    width: 300,
-    height: 40,
+    width: scale(300),
+    height: verticalScale(40),
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 18,
     alignSelf: "center",
-    marginVertical: 5,
+    marginVertical: verticalScale(5),
     color: "white",
     textAlign: "center",
-    fontSize: 20,
+    fontSize: verticalScale(20),
     fontWeight: "bold",
   },
   container3: {
-    height: 300,
+    height: verticalScale(300),
   },
   botaopressM: {
     borderRadius: 20,

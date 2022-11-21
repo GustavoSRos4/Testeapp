@@ -13,6 +13,6 @@ const writeGastos = async (data, rebID) => {
     return createdGastos;
   } catch (e) {
     Alert.alert("Erro", e.message);
-  }
+  } realm.close();
 };
 export default writeGastos;

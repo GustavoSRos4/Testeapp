@@ -62,7 +62,7 @@ function CadastroFaz() {
             style={styles.campoTexto}
             onChangeText={setTipoprod}
             value={tipoprod}
-            placeholder="Ex: Pecuaria Leiteira"
+            placeholder="Ex: Pecuária Leiteira"
           ></TextInput>
         </View>
         <TouchableOpacity style={styles.botaopress} onPress={handleAddFarm}>

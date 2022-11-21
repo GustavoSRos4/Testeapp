@@ -11,7 +11,7 @@ function BezierChartFaturamento() {
     labels: ["Julho", "Agosto", "Setembro", "Outubro"],
     datasets: [
       {
-        data: [2500, 2700, 4550, receitas],
+        data: [0, 0, 0, receitas],
         strokeWidth: 2,
         color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
       },

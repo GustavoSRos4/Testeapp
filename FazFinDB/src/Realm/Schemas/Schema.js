@@ -48,8 +48,8 @@ export const VacasSchema = {
   properties: {
     _id: "string",
     nomeVaca: "string",
-    nascimentoVaca: "float",
-    brincoVaca: "float",
+    nascimentoVaca: "string",
+    brincoVaca: "string",
     descVaca: "string",
     createdAt: "date",
     genero: "float",
