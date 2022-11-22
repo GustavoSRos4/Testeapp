@@ -1,7 +1,6 @@
 import {
   Text,
   TouchableOpacity,
-  
   StyleSheet,
   Dimensions,
   View,
@@ -33,7 +32,7 @@ function Manejo({ navigation }) {
           _id: uuid.v4(),
           createdAt: new Date(),
           tipoAlim,
-          qtdAli : 1,
+          qtdAli: 1,
           valorAli,
           consumoAli: 1,
         },
@@ -60,24 +59,24 @@ function Manejo({ navigation }) {
   }
   function toggleModal() {
     setModalVisible(!isModalVisible);
-    setValorAliS(0);
-    SetQtdAliS(0);
-    SetConsumoAliS(0);
-    setTipoAlim(0);
+    setValorAliS("");
+    SetQtdAliS("");
+    SetConsumoAliS("");
+    setTipoAlim("");
   }
   function toggleModal2() {
     setModalVisible2(!isModalVisible2);
-    setValorAliS(0);
-    SetQtdAliS(0);
-    SetConsumoAliS(0);
-    setTipoAlim(0);
+    setValorAliS("");
+    SetQtdAliS("");
+    SetConsumoAliS("");
+    setTipoAlim("");
   }
   function toggleModal3() {
     setModalVisible3(!isModalVisible3);
-    setValorAliS(0);
-    SetQtdAliS(0);
-    SetConsumoAliS(0);
-    setTipoAlim(0);
+    setValorAliS("");
+    SetQtdAliS("");
+    SetConsumoAliS("");
+    setTipoAlim("");
   }
   return (
     <SafeAreaView style={styles.container}>
@@ -89,8 +88,7 @@ function Manejo({ navigation }) {
         }}
       >
         <Text style={styles.tituloBotao2}>
-        <MaterialCommunityIcons
-          
+          <MaterialCommunityIcons
             name="hospital-box-outline"
             size={scale(30)}
             color="white"
@@ -105,8 +103,7 @@ function Manejo({ navigation }) {
         }}
       >
         <Text style={styles.tituloBotao2}>
-        <MaterialCommunityIcons
-          
+          <MaterialCommunityIcons
             name="hammer-screwdriver"
             size={scale(30)}
             color="white"
@@ -140,48 +137,58 @@ function Manejo({ navigation }) {
         animationOut="slideOutDown"
       >
         <View style={styles.modalContainer}>
-            <Text style={styles.tituloModal}>Cadastro de Vacina e Remédios</Text>
-            
-            <View style={styles.containerinfosmodal}>
-              <Text style={styles.tituloBotao3}>{"Qual o remédio ou vacina?"}</Text>
-              
-              <TextInput
-                style={styles.input}
-                value={tipoAlim}
-                onChangeText={setTipoAlim}
-            />
-            </View>
-            <View style={styles.containerinfosmodal}> 
-              <Text style={styles.tituloBotao3}>{"Qual o valor do produto?"}</Text>
-              <TextInput
-                style={styles.input}
-                value={valorAliS}
-                numeric
-                keyboardType={"numeric"}
-                onChangeText={setValorAliS}
-              />
-            </View>
-            <View style={styles.containerinfosmodal}>
-          <Text style={styles.tituloBotao3}>{"Qual o volume do produto?"}</Text>
-          <TextInput
-            style={styles.input}
-            value={qtdAliS}
-            numeric
-            keyboardType={"numeric"}
-            onChangeText={SetQtdAliS}
-          />
-          </View> 
+          <Text style={styles.tituloModal}>Cadastro de Vacina e Remédios</Text>
+
           <View style={styles.containerinfosmodal}>
-          <Text style={styles.tituloBotao3}>
-            {"Qual a quantidade aplicada?"}
-          </Text>
-          <TextInput
-            style={styles.input}
-            value={consumoAliS}
-            numeric
-            keyboardType={"numeric"}
-            onChangeText={SetConsumoAliS}
-          />
+            <Text style={styles.tituloBotao3}>
+              {"Qual o remédio ou vacina?"}
+            </Text>
+
+            <TextInput
+              style={styles.input}
+              value={tipoAlim}
+              onChangeText={setTipoAlim}
+              placeholder="Ex: Lepecid"
+            />
+          </View>
+          <View style={styles.containerinfosmodal}>
+            <Text style={styles.tituloBotao3}>
+              {"Qual o valor do produto?(R$)"}
+            </Text>
+            <TextInput
+              style={styles.input}
+              value={valorAliS}
+              numeric
+              keyboardType={"numeric"}
+              onChangeText={setValorAliS}
+              placeholder="Ex: 98.90"
+            />
+          </View>
+          <View style={styles.containerinfosmodal}>
+            <Text style={styles.tituloBotao3}>
+              {"Qual o volume do produto?(ml)"}
+            </Text>
+            <TextInput
+              style={styles.input}
+              value={qtdAliS}
+              numeric
+              keyboardType={"numeric"}
+              onChangeText={SetQtdAliS}
+              placeholder="Ex: 50"
+            />
+          </View>
+          <View style={styles.containerinfosmodal}>
+            <Text style={styles.tituloBotao3}>
+              {"Qual a quantidade aplicada?(ml)"}
+            </Text>
+            <TextInput
+              style={styles.input}
+              value={consumoAliS}
+              numeric
+              keyboardType={"numeric"}
+              onChangeText={SetConsumoAliS}
+              placeholder="Ex: 5"
+            />
           </View>
         </View>
         <TouchableOpacity style={styles.botaopress6} onPress={handleAddGastos}>
@@ -207,22 +214,26 @@ function Manejo({ navigation }) {
         <View style={styles.modalContainer2}>
           <Text style={styles.tituloModal}>Cadastro de mão de obra.</Text>
           <View style={styles.containerinfosmodal}>
-          <Text style={styles.tituloBotao3}>{"Descrição do serviço:"}</Text>
-          <TextInput
-            style={styles.input}
-            value={tipoAlim}
-            onChangeText={setTipoAlim}
-          />
+            <Text style={styles.tituloBotao3}>{"Descrição do serviço:"}</Text>
+            <TextInput
+              style={styles.input}
+              value={tipoAlim}
+              onChangeText={setTipoAlim}
+              placeholder="Ex: Visita veterinária"
+            />
           </View>
           <View style={styles.containerinfosmodal}>
-          <Text style={styles.tituloBotao3}>{"Total pago pelo serviço:"}</Text>
-          <TextInput
-            style={styles.input}
-            value={valorAliS}
-            numeric
-            keyboardType={"numeric"}
-            onChangeText={setValorAliS}
-          />
+            <Text style={styles.tituloBotao3}>
+              {"Total pago pelo serviço(R$):"}
+            </Text>
+            <TextInput
+              style={styles.input}
+              value={valorAliS}
+              numeric
+              keyboardType={"numeric"}
+              onChangeText={setValorAliS}
+              placeholder="Ex: 2500.50"
+            />
           </View>
         </View>
         <TouchableOpacity style={styles.botaopress6} onPress={handleAddGastos}>
@@ -249,22 +260,24 @@ function Manejo({ navigation }) {
         <View style={styles.modalContainer3}>
           <Text style={styles.tituloModal}>Cadastro de outras despesas.</Text>
           <View style={styles.containerinfosmodal}>
-          <Text style={styles.tituloBotao3}>{"Descrição:"}</Text>
-          <TextInput
-            style={styles.input}
-            value={tipoAlim}
-            onChangeText={setTipoAlim}
-          />
+            <Text style={styles.tituloBotao3}>{"Descrição:"}</Text>
+            <TextInput
+              style={styles.input}
+              value={tipoAlim}
+              onChangeText={setTipoAlim}
+              placeholder="Ex: Reforma pasto"
+            />
           </View>
           <View style={styles.containerinfosmodal}>
-          <Text style={styles.tituloBotao3}>{"Total pago:"}</Text>
-          <TextInput
-            style={styles.input}
-            value={valorAliS}
-            numeric
-            keyboardType={"numeric"}
-            onChangeText={setValorAliS}
-          />
+            <Text style={styles.tituloBotao3}>{"Total pago:"}</Text>
+            <TextInput
+              style={styles.input}
+              value={valorAliS}
+              numeric
+              keyboardType={"numeric"}
+              onChangeText={setValorAliS}
+              placeholder="Ex: 10000.20"
+            />
           </View>
         </View>
         <TouchableOpacity style={styles.botaopress6} onPress={handleAddGastos}>
@@ -357,7 +370,7 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(15, 109, 0, 0.7)",
     borderRadius: 15,
     alignSelf: "center",
-  },  
+  },
   botaoPress2: {
     borderRadius: 20,
     backgroundColor: "rgba(15, 109, 0, 0.9)",
@@ -407,7 +420,6 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#fff",
     alignSelf: "center",
-    
   },
   botaopress: {
     borderRadius: 20,
@@ -432,8 +444,7 @@ const styles = StyleSheet.create({
     top: verticalScale(555),
     position: "absolute",
   },
-  
-  
+
   botaopress8: {
     borderRadius: 20,
     backgroundColor: "rgba(15, 109, 0, 0.9)",
