@@ -51,7 +51,12 @@ function Alimentacao({ navigation }) {
         consumoAli,
       },
       rebID
-    );navigation.navigate("Contas");
+    );
+    navigation.navigate("Contas");
+    setTipoAlim("");
+    setQtdAliS("");
+    setValorAliS("");
+    setConsumoAliS("");
   }
   return (
     <SafeAreaView style={styles.container}>
