@@ -118,7 +118,7 @@ function Manejo({ navigation }) {
         }}
       >
         <Text style={styles.tituloBotao2}>
-          <FontAwesome5 name="tractor" size={scale(30)} color="white" />
+        <FontAwesome5 name="tractor" size={scale(30)} color="white" /> 
           {"  Outros"}
         </Text>
       </TouchableOpacity>
