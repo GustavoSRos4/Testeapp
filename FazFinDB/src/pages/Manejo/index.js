@@ -93,8 +93,7 @@ function Manejo({ navigation }) {
             size={scale(30)}
             color="white"
           />
-          {"Vacina e Remedios"}
-          {"  Vacina e remédios"}
+          {"  Vacinas e remédios"}
         </Text>
       </TouchableOpacity>
       <TouchableOpacity
