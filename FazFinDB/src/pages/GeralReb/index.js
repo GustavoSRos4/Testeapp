@@ -99,17 +99,17 @@ function GeralReb({ navigation }) {
         >
           <Text style={styles.textoBannerT}>
             <Text style={styles.textoBanner}>{"           Receitas: "}</Text>
-            <Text style={styles.textoBannerRec}>R${receitas}</Text>
+            <Text style={styles.textoBannerRec}>R${receitas.toFixed(2)}</Text>
           </Text>
           <Text style={styles.textoBannerT}>
             <Text style={styles.textoBanner}>{"           Despesas: "}</Text>
-            <Text style={styles.textoBannerDes}>R${despesas}</Text>
+            <Text style={styles.textoBannerDes}>R${despesas.toFixed(2)}</Text>
           </Text>
           <Text style={styles.textoBannerT}>
             <Text style={styles.textoBanner}>
               {"           Balanço final: "}
             </Text>
-            <Text style={Color(total)}>R${total}</Text>
+            <Text style={Color(total)}>R${total.toFixed(2)}</Text>
           </Text>
           <Text style={styles.bannerText}>
             {"Clique aqui para mais detalhes"}

@@ -53,7 +53,7 @@ function Despesas() {
           }}
         >
           <Text style={styles.texto}>Total de despesas:</Text>
-          <Text style={styles.textoValorNeg}>R${despesas}</Text>
+          <Text style={styles.textoValorNeg}>R${despesas.toFixed(2)}</Text>
           <View style={styles.lineStyle} />
           <Text style={styles.preGraf}>Clique no gráfico para mais detalhes.</Text>
           <View style={styles.containerChart}>

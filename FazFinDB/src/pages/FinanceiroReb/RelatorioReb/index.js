@@ -90,13 +90,13 @@ function RelatorioReb() {
           }}
         >
           <Text style={styles.texto}>Total de receitas:</Text>
-          <Text style={styles.textoValorPos}>R$ {receitas}</Text>
+          <Text style={styles.textoValorPos}>R$ {receitas.toFixed(2)}</Text>
           <View style={styles.lineStyle} />
           <Text style={styles.texto}>Total de despesas:</Text>
-          <Text style={styles.textoValorNeg}>R${despesas}</Text>
+          <Text style={styles.textoValorNeg}>R${despesas.toFixed(2)}</Text>
           <View style={styles.lineStyle} />
           <Text style={styles.texto}>Balanço final:</Text>
-          <Text style={Color()}>R${total}</Text>
+          <Text style={Color()}>R${total.toFixed(2)}</Text>
           <View style={styles.lineStyle} />
           <Text style={styles.preGraf}>
             Clique no gráfico para mais detalhes.

@@ -232,7 +232,7 @@ const styles = StyleSheet.create({
   filtroNome: {
     backgroundColor: "rgba(15, 109, 0, 0.9)",
     borderRadius: 20,
-    width: scale(100),
+    width: scale(140),
     height: verticalScale(30),
     margin: verticalScale(5),
     alignItems: "center",
@@ -325,6 +325,7 @@ const styles = StyleSheet.create({
     fontSize: verticalScale(20),
     marginBottom: verticalScale(10),
     textAlign: "center",
+    fontWeight: "bold",
   },
   detalhe: {
     fontSize: verticalScale(20),
@@ -332,7 +333,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderRadius: verticalScale(5),
     marginBottom: verticalScale(20),
-    textAlign : "center",
+    textAlign: "center",
   },
   containerinfos: {
     marginVertical: verticalScale(15),

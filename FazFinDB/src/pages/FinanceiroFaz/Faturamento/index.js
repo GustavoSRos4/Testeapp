@@ -53,7 +53,7 @@ function Faturamento() {
           }}
         >
           <Text style={styles.texto}>Total de receitas:</Text>
-          <Text style={styles.textoValorPos}>R${receitas}</Text>
+          <Text style={styles.textoValorPos}>R${receitas.toFixed(2)}</Text>
           <View style={styles.lineStyle} />
           <Text style={styles.preGraf}>Clique no gráfico para mais detalhes.</Text>
           <View style={styles.containerChart}>
