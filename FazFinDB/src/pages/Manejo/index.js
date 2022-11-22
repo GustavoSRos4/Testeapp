@@ -60,12 +60,24 @@ function Manejo({ navigation }) {
   }
   function toggleModal() {
     setModalVisible(!isModalVisible);
+    setValorAliS(0);
+    SetQtdAliS(0);
+    SetConsumoAliS(0);
+    setTipoAlim(0);
   }
   function toggleModal2() {
     setModalVisible2(!isModalVisible2);
+    setValorAliS(0);
+    SetQtdAliS(0);
+    SetConsumoAliS(0);
+    setTipoAlim(0);
   }
   function toggleModal3() {
     setModalVisible3(!isModalVisible3);
+    setValorAliS(0);
+    SetQtdAliS(0);
+    SetConsumoAliS(0);
+    setTipoAlim(0);
   }
   return (
     <SafeAreaView style={styles.container}>
@@ -83,7 +95,6 @@ function Manejo({ navigation }) {
             size={scale(30)}
             color="white"
           />
-          {"Vacina e Remedios"}
           {"  Vacina e remédios"}
         </Text>
       </TouchableOpacity>
@@ -111,7 +122,6 @@ function Manejo({ navigation }) {
       >
         <Text style={styles.tituloBotao2}>
         <FontAwesome5 name="tractor" size={scale(30)} color="white" /> 
-          <FontAwesome5 name="tractor" size={scale(30)} color="white" />
           {"  Outros"}
         </Text>
       </TouchableOpacity>
