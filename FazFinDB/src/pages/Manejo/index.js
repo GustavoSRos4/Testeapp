@@ -148,7 +148,7 @@ function Manejo({ navigation }) {
               style={styles.input}
               value={tipoAlim}
               onChangeText={setTipoAlim}
-              placeholder="Ex: Lepecid"
+              placeholder="Exemplo: Lepecid"
             />
           </View>
           <View style={styles.containerinfosmodal}>
@@ -161,7 +161,7 @@ function Manejo({ navigation }) {
               numeric
               keyboardType={"numeric"}
               onChangeText={setValorAliS}
-              placeholder="Ex: 98.90"
+              placeholder="Exemplo: 98.90"
             />
           </View>
           <View style={styles.containerinfosmodal}>
@@ -174,7 +174,7 @@ function Manejo({ navigation }) {
               numeric
               keyboardType={"numeric"}
               onChangeText={SetQtdAliS}
-              placeholder="Ex: 50"
+              placeholder="Exemplo: 50"
             />
           </View>
           <View style={styles.containerinfosmodal}>
@@ -187,7 +187,7 @@ function Manejo({ navigation }) {
               numeric
               keyboardType={"numeric"}
               onChangeText={SetConsumoAliS}
-              placeholder="Ex: 5"
+              placeholder="Exemplo: 5"
             />
           </View>
         </View>
@@ -219,7 +219,7 @@ function Manejo({ navigation }) {
               style={styles.input}
               value={tipoAlim}
               onChangeText={setTipoAlim}
-              placeholder="Ex: Visita veterinária"
+              placeholder="Exemplo: Visita veterinária"
             />
           </View>
           <View style={styles.containerinfosmodal}>
@@ -232,7 +232,7 @@ function Manejo({ navigation }) {
               numeric
               keyboardType={"numeric"}
               onChangeText={setValorAliS}
-              placeholder="Ex: 2500.50"
+              placeholder="Exemplo: 2500.50"
             />
           </View>
         </View>
@@ -265,7 +265,7 @@ function Manejo({ navigation }) {
               style={styles.input}
               value={tipoAlim}
               onChangeText={setTipoAlim}
-              placeholder="Ex: Reforma pasto"
+              placeholder="Exemplo: Reforma pasto"
             />
           </View>
           <View style={styles.containerinfosmodal}>
@@ -276,7 +276,7 @@ function Manejo({ navigation }) {
               numeric
               keyboardType={"numeric"}
               onChangeText={setValorAliS}
-              placeholder="Ex: 10000.20"
+              placeholder="Exemplo: 10000.20"
             />
           </View>
         </View>
