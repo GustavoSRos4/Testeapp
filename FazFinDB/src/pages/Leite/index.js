@@ -130,38 +130,43 @@ function Leite({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       <Header />
-
-      {/*Preco do leite*/}
-      <View style={styles.containerinfos}>
-        <Text style={styles.tituloinfo}>Preço atual do leite:</Text>
-        <TextInput
-          style={styles.detalhe}
-          value={precoLV}
-          numeric
-          keyboardType={"numeric"}
-          onChangeText={setPrecoLV}
-        />
-      </View>
-      {/*Produção diaria*/}
-      <View style={styles.containerinfos}>
-        <Text style={styles.tituloinfo}>Produção diária:</Text>
-        <TextInput
-          style={styles.detalhe}
-          value={prodLV}
-          numeric
-          keyboardType={"numeric"}
-          onChangeText={setProdLV}
-        />
-      </View>
       {/*Descrição*/}
+
       <View style={styles.containerinfos}>
         <Text style={styles.tituloinfo}>Descrição:</Text>
         <TextInput
           style={styles.detalhe}
           value={description}
           onChangeText={setDescription}
+          placeholder="Exemplo: Leite 22/11 Vaca Araçá"
         />
       </View>
+      {/*Preco do leite*/}
+      <View style={styles.containerinfos}>
+        <Text style={styles.tituloinfo}>Preço atual do leite(R$):</Text>
+        <TextInput
+          style={styles.detalhe}
+          value={precoLV}
+          numeric
+          keyboardType={"numeric"}
+          onChangeText={setPrecoLV}
+          placeholder="Exemplo: 3.1"
+        />
+      </View>
+      {/*Produção diaria*/}
+      <View style={styles.containerinfos}>
+        <Text style={styles.tituloinfo}>Produção da vaca hoje(litros):</Text>
+        <TextInput
+          style={styles.detalhe}
+          value={prodLV}
+          numeric
+          keyboardType={"numeric"}
+          onChangeText={setProdLV}
+          placeholder="Exemplo: 10.2"
+        />
+      </View>
+      {/*Descrição*/}
+
       <TouchableOpacity
         onPress={() => {
           toggleModal();
@@ -229,11 +234,10 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     width: scale(100),
     height: verticalScale(30),
-    margin:verticalScale(5),
+    margin: verticalScale(5),
     alignItems: "center",
     justifyContent: "center",
     alignSelf: "center",
-
   },
   search: {
     backgroundColor: "rgba(15, 109, 0, 0.9)",
@@ -328,6 +332,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderRadius: verticalScale(5),
     marginBottom: verticalScale(20),
+    textAlign : "center",
   },
   containerinfos: {
     marginVertical: verticalScale(15),

@@ -65,38 +65,39 @@ function Alimentacao({ navigation }) {
         <Text style={styles.tituloBotao3}>Qual o trato?</Text>
         <TextInput
           style={styles.input}
-          placeholder=""
+          placeholder="Exemplo: Silagem de milho 22/11"
           onChangeText={setTipoAlim}
           value={tipoAlim}
-        ></TextInput>
-      </View>
-      <View style={styles.containerinfos}>
-        <Text style={styles.tituloBotao3}>{"Qual o peso da saca(KG)?"}</Text>
-        <TextInput
-          style={styles.input}
-          placeholder=""
-          onChangeText={setQtdAliS}
-          value={qtdAliS}
-        ></TextInput>
-      </View>
-      <View style={styles.containerinfos}>
-        <Text style={styles.tituloBotao3}>{"Valor por saca(R$)?"}</Text>
-        <TextInput
-          style={styles.input}
-          placeholder=""
-          onChangeText={setValorAliS}
-          value={valorAliS}
         ></TextInput>
       </View>
       <View style={styles.containerinfos}>
         <Text style={styles.tituloBotao3}>{"Quantidade consumida(KG)?"}</Text>
         <TextInput
           style={styles.input}
-          placeholder=""
           onChangeText={setConsumoAliS}
           value={consumoAliS}
+          placeholder="Exemplo: 0.5"
         ></TextInput>
       </View>
+      <View style={styles.containerinfos}>
+        <Text style={styles.tituloBotao3}>{"Qual o peso da saca(KG)?"}</Text>
+        <TextInput
+          style={styles.input}
+          onChangeText={setQtdAliS}
+          value={qtdAliS}
+          placeholder="Exemplo: 50"
+        ></TextInput>
+      </View>
+      <View style={styles.containerinfos}>
+        <Text style={styles.tituloBotao3}>{"Valor por saca(R$)?"}</Text>
+        <TextInput
+          style={styles.input}
+          onChangeText={setValorAliS}
+          value={valorAliS}
+          placeholder="Exemplo: 120"
+        ></TextInput>
+      </View>
+
       <TouchableOpacity style={styles.botaopress6} onPress={handleAddGastos}>
         <Text style={styles.tituloBotao}>{"Cadastrar"}</Text>
       </TouchableOpacity>
