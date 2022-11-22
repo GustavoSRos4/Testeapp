@@ -1,16 +1,18 @@
 import { getRealm } from "./realm";
 import { Alert } from "react-native";
 
-const writeGastoVaca = async (gastosVaca, rebID) => {
+const writeGastoVaca = async (rebID, gastos2) => {
   const realm = await getRealm();
-  console.log(typeof gastosVaca);
   try {
     realm.write(() => {
       const rebanho = realm
         .objects("RebanhoSchema")
-        .filtered(`_id= '${rebID}'`);
-      for (var i in rebanho[0].vacas) {
-        rebanho[0].vacas[i].gastosV = rebanho[0].vacas[i].gastosV + gastosVaca;
+        .filtered(`_id= '${rebID}'`)[0];
+      for (const cows of rebanho.vacas) {
+        for (var i in rebanho.vacas) {
+          cows.gastosV = gastos2[i];
+          console.log(rebanho.vacas[i].gastosV);
+        }
       }
     });
 

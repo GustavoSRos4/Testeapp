@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useContext } from "react";
 import {
   View,
   TextInput,
@@ -16,6 +16,7 @@ import { scale, verticalScale } from "react-native-size-matters";
 import { MaterialCommunityIcons, Feather } from "@expo/vector-icons";
 import { useFocusEffect } from "@react-navigation/native";
 import writeUpdVaca from "../../Realm/writeUpdVaca";
+import { AuthContext } from "../../contexts/auth";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
@@ -23,6 +24,7 @@ const ScreenWidth = Dimensions.get("screen").width;
 const ScreenHeight = Dimensions.get("screen").height;
 
 function Lista_vacas({ textobarrapesquisa, idrebanho }) {
+  const { precoCFReb, GrafVaca } = useContext(AuthContext);
   async function fetchVaca() {
     try {
       const datavacas = await getRebVacas(idrebanho);
@@ -30,8 +32,9 @@ function Lista_vacas({ textobarrapesquisa, idrebanho }) {
       setList(datavacas);
       setdata(datavacas);
       setisInfoeditable(false);
-      console.log(datavacas[0])
-    } catch (e) { }
+      var gasto = precoCFReb / datavacas.length;
+      setGastoReb(gasto);
+    } catch (e) {}
   }
 
   useFocusEffect(
@@ -39,7 +42,7 @@ function Lista_vacas({ textobarrapesquisa, idrebanho }) {
       fetchVaca();
     }, [])
   );
-
+  const [gastoReb, setGastoReb] = useState(0);
   const [List, setList] = useState();
   const [data, setdata] = useState();
   const [Searchtext, setSearchtext] = useState("");
@@ -55,8 +58,15 @@ function Lista_vacas({ textobarrapesquisa, idrebanho }) {
   const [brincoVaca, setbrincoVaca] = useState("");
   const [IdVaca, setIdVaca] = useState("");
   const [descVaca, setdescVaca] = useState("");
-
+  const [resultL, setResultL] = useState(0);
   var infoedited = false;
+  function getResultL(item) {
+    var resultLeite = 0;
+    for (var i in item.receitas) {
+      resultLeite += item.receitas[i].prodL * item.receitas[i].precoL;
+    }
+    return resultLeite;
+  }
 
   function setInputs(item) {
     verificagenero();
@@ -67,6 +77,9 @@ function Lista_vacas({ textobarrapesquisa, idrebanho }) {
     setdescVaca(item.descVaca);
     var idvaca = item._id;
     setIdVaca(idvaca);
+    const resultLeite = getResultL(item);
+    setResultL(resultLeite);
+    GrafVaca(resultLeite - gastoReb);
     console.log(IdVaca, "IDVACA");
     console.log(item._id, "IDVACA");
     //console.log(genero, "Initialized info 2")
@@ -130,7 +143,10 @@ function Lista_vacas({ textobarrapesquisa, idrebanho }) {
   }
   function editarinfos() {
     setisInfoeditable(!isInfoeditable);
-    Alert.alert("Editar Informações da Vaca", "logo apos confirme no botao confirmar alterações")
+    Alert.alert(
+      "Editar Informações da Vaca",
+      "logo apos confirme no botao confirmar alterações"
+    );
   }
 
   function verificagenero() {
@@ -150,7 +166,10 @@ function Lista_vacas({ textobarrapesquisa, idrebanho }) {
     else if (a == 2) return Details.gasto;
     else if (a == 3) return Details.media;
   }
-
+  function getResultNumber(item) {
+    const result = (getResultL(item) - gastoReb).toFixed(2);
+    return result;
+  }
   return (
     <View style={styles.Tudocont}>
       <View>
@@ -251,7 +270,12 @@ function Lista_vacas({ textobarrapesquisa, idrebanho }) {
                     multiline={true}
                   />
                 </View>
-
+                <View style={styles.containerinfos}>
+                  <Text style={styles.tituloinfo}>Resultado:</Text>
+                  <Text style={styles.detalhe}>
+                    R${(resultL - gastoReb).toFixed(2)}
+                  </Text>
+                </View>
                 <View
                   style={{
                     backgroundColor: "rgba(15, 109, 0, 0.7)",
@@ -321,12 +345,12 @@ function Lista_vacas({ textobarrapesquisa, idrebanho }) {
                 </Text>
                 <Text
                   style={{
-                    color: -100 >= 0 ? "green" : "red",
+                    color: getResultNumber(item) >= 0 ? "#0FFF50" : "#FF3131",
                     fontWeight: "bold",
                     fontSize: scale(15),
                   }}
                 >
-                  -100
+                  R${getResultNumber(item)}
                 </Text>
               </View>
             </TouchableOpacity>

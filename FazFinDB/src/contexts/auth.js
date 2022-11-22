@@ -49,9 +49,13 @@ function AuthProvider({ children }) {
   function ListaAliReb(dataGas) {
     SetListaAliReb(dataGas);
   }
+  const [grafVaca, SetGrafVaca] = useState();
+  function GrafVaca(data) {
+    SetGrafVaca(data);
+  }
   return (
     <AuthContext.Provider
-      value={{
+      value={{GrafVaca,grafVaca,
         FazendaID,
         fazID,
         RebanhoID,

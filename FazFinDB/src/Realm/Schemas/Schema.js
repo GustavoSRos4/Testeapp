@@ -54,7 +54,6 @@ export const VacasSchema = {
     createdAt: "date",
     genero: "float",
     receitas: "LeiteSchema[]",
-    gastosV: "float?",
     assignee: {
       type: "linkingObjects",
       objectType: "RebanhoSchema",

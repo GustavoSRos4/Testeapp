@@ -23,15 +23,15 @@ function GeralReb({ navigation }) {
     const dataRec = await getAllLeiteReb(rebID);
     setDataReceitas(dataRec);
     ListaLeiteReb(dataRec);
-    const precoLeite = ReceitasTotais(dataRec);
-    PrecoLeiteReb(precoLeite);
+    const precoLeiteReb = ReceitasTotais(dataRec);
+    PrecoLeiteReb(precoLeiteReb);
   }
   async function fetchDataDes(rebID) {
     const dataGas = await getAllGastosReb(rebID);
     setDataGastos(dataGas);
     ListaAliReb(dataGas);
-    const precoCF = DespesasTotais(dataGas);
-    PrecoCFReb(precoCF);
+    const precoCFReb = DespesasTotais(dataGas);
+    PrecoCFReb(precoCFReb);
   }
   useFocusEffect(
     useCallback(() => {

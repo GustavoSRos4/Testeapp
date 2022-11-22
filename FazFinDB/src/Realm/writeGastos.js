@@ -5,9 +5,9 @@ const writeGastos = async (data, rebID) => {
   const realm = await getRealm();
   try {
     realm.write(() => {
-      const reb = realm.objects("RebanhoSchema").filtered(`_id= '${rebID}'`);
+      const reb = realm.objects("RebanhoSchema").filtered(`_id= '${rebID}'`)[0];
       createdGastos = realm.create("GastosSchema", data);
-      reb[0].gastos.push(createdGastos);
+      reb.gastos.push(createdGastos);
     });
     Alert.alert("Dados cadastrados com sucesso!");
     return createdGastos;

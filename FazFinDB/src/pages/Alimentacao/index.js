@@ -21,13 +21,21 @@ function Alimentacao({ navigation }) {
   const [qtdAliS, setQtdAliS] = useState("");
   const [valorAliS, setValorAliS] = useState("");
   const [consumoAliS, setConsumoAliS] = useState("");
+  const [dataV, setDataV] = useState([]);
   const { rebID } = useContext(AuthContext);
-  const totalVaca = (Number(valorAliS) / Number(qtdAliS)) * Number(consumoAliS);
-  async function fetchVacas(rebID, totalVaca) {
+  const totalVaca = (
+    (Number(valorAliS) / Number(qtdAliS)) *
+    Number(consumoAliS)
+  ).toFixed(2);
+  async function fetchVacas(totalVaca) {
     const dataVacas = await getAllVacas(rebID);
+    let gastos = [];
     const gastosVaca = Number(totalVaca / dataVacas.length);
-    console.log(typeof gastosVaca)
-    await writeGastoVaca(gastosVaca, rebID);
+    for (var i in dataVacas) {
+      gastos.push(dataVacas[i].gastosV);
+    }
+    const gastos2 = gastos.map((gastos) => gastos + gastosVaca);
+    await writeGastoVaca(rebID, gastos2);
   }
   async function handleAddGastos() {
     const qtdAli = Number(qtdAliS);
@@ -43,15 +51,12 @@ function Alimentacao({ navigation }) {
         consumoAli,
       },
       rebID
-    );
-    await fetchVacas(rebID, totalVaca);
-    navigation.navigate("PagelancaContas");
+    );navigation.navigate("Contas");
   }
   return (
     <SafeAreaView style={styles.container}>
       <Header />
       <View style={styles.containerinfos}>
-      
         <Text style={styles.tituloBotao3}>Qual o trato?</Text>
         <TextInput
           style={styles.input}
@@ -59,7 +64,7 @@ function Alimentacao({ navigation }) {
           onChangeText={setTipoAlim}
           value={tipoAlim}
         ></TextInput>
-      </View>  
+      </View>
       <View style={styles.containerinfos}>
         <Text style={styles.tituloBotao3}>{"Qual o peso da saca(KG)?"}</Text>
         <TextInput
@@ -100,7 +105,6 @@ function Alimentacao({ navigation }) {
   );
 }
 const styles = StyleSheet.create({
- 
   input: {
     backgroundColor: "white",
     color: "black",

@@ -10,7 +10,6 @@ async function getAllLeiteReb(rebID) {
         testes.push(data[0].vacas[i].receitas[j]);
       }
     }
-    console.log(data[0].vacas[0]);
     return testes;
   } catch (e) {
     Alert.alert("Error", e.message);
