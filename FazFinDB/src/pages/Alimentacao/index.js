@@ -4,7 +4,7 @@ import {
   TextInput,
   TouchableOpacity,
   StyleSheet,
-  SafeAreaView,
+  ScrollView,
   View,
 } from "react-native";
 import Header from "../../components/Header";
@@ -59,7 +59,7 @@ function Alimentacao({ navigation }) {
     setConsumoAliS("");
   }
   return (
-    <SafeAreaView style={styles.container}>
+    <ScrollView style={styles.container}>
       <Header />
       <View style={styles.containerinfos}>
         <Text style={styles.tituloBotao3}>Qual o trato?</Text>
@@ -107,7 +107,7 @@ function Alimentacao({ navigation }) {
       >
         <Text style={styles.tituloBotao}>{"Voltar"}</Text>
       </TouchableOpacity>
-    </SafeAreaView>
+    </ScrollView>
   );
 }
 const styles = StyleSheet.create({
@@ -117,13 +117,15 @@ const styles = StyleSheet.create({
     width: scale(250),
     height: verticalScale(30),
     alignSelf: "center",
-    borderRadius: 20,
+    borderRadius: verticalScale(5),
     textAlign: "center",
     marginBottom: verticalScale(3),
+    fontSize: scale(20),
   },
   container: {
     flex: 1,
-    backgroundColor: "#00290C",
+    backgroundColor: "#004513",
+    paddingBottom: verticalScale(50),
   },
   imgbg: {
     flex: 1,
@@ -138,8 +140,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     alignSelf: "center",
-    top: verticalScale(75),
-    position: "absolute",
   },
   botaoPress3: {
     borderRadius: 20,
@@ -187,8 +187,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     alignSelf: "center",
-    top: verticalScale(625),
-    position: "absolute",
+    marginBottom: verticalScale(30),
   },
 
   botaopress6: {
@@ -196,11 +195,11 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(15, 109, 0, 0.9)",
     width: scale(300),
     height: verticalScale(40),
+    marginBottom: scale(10),
+    marginVertical: verticalScale(10),
     alignItems: "center",
     justifyContent: "center",
     alignSelf: "center",
-    top: verticalScale(575),
-    position: "absolute",
   },
   tituloBotao: {
     fontSize: verticalScale(14),
@@ -208,10 +207,11 @@ const styles = StyleSheet.create({
     color: "#fff",
   },
   tituloBotao3: {
+    color: "white",
     fontSize: verticalScale(20),
+    marginBottom: verticalScale(10),
+    textAlign: "center",
     fontWeight: "bold",
-    color: "#fff",
-    alignSelf: "center",
   },
   containerinfos: {
     marginVertical: verticalScale(10),

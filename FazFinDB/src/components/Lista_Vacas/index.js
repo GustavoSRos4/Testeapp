@@ -182,9 +182,6 @@ function Lista_vacas({ textobarrapesquisa, idrebanho }) {
           onBackButtonPress={() => {
             toggleModal();
           }}
-          onBackdropPress={() => {
-            toggleModal();
-          }}
           Style={{ margin: 0 }}
           statusBarTranslucent
         >

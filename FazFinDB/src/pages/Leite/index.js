@@ -128,7 +128,7 @@ function Leite({ navigation }) {
     setLista(newList);
   };
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <Header />
       {/*Descrição*/}
       <ScrollView>
@@ -223,7 +223,7 @@ function Leite({ navigation }) {
       >
         <Text style={styles.textovoltar}>Voltar</Text>
       </TouchableOpacity>
-    </SafeAreaView>
+    </View>
   );
 }
 const styles = StyleSheet.create({
@@ -332,9 +332,10 @@ const styles = StyleSheet.create({
     borderRadius: verticalScale(5),
     marginBottom: verticalScale(20),
     textAlign: "center",
+    width: scale(280),
   },
   containerinfos: {
-    marginVertical: verticalScale(15),
+    marginVertical: verticalScale(10),
     padding: verticalScale(20),
     width: scale(320),
     backgroundColor: "rgba(15, 109, 0, 0.7)",

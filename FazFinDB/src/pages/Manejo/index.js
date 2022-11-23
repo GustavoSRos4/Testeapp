@@ -17,6 +17,11 @@ import uuid from "react-native-uuid";
 import { AuthContext } from "../../contexts/auth";
 import { ScrollView } from "react-native-gesture-handler";
 function Manejo({ navigation }) {
+  const ScreenWidth = Dimensions.get("screen").width;
+  const ScreenHeight = Dimensions.get("screen").height;
+  const windowWidth = Dimensions.get("window").width;
+  const windowHeight = Dimensions.get("window").height;
+
   const [isModalVisible, setModalVisible] = useState(false);
   const [isModalVisible2, setModalVisible2] = useState(false);
   const [isModalVisible3, setModalVisible3] = useState(false);
@@ -133,63 +138,69 @@ function Manejo({ navigation }) {
         statusBarTranslucent
         isVisible={isModalVisible}
         coverScreen={true}
+        deviceHeight={ScreenHeight}
+        deviceWidth={ScreenWidth}
         backdropColor={"rgba(234,242,215,0.8)"}
         animationIn="slideInUp"
         animationOut="slideOutDown"
       >
-        <View style={styles.modalContainer}>
-          <ScrollView>
-            <Text style={styles.tituloModal}>
-              Cadastro de Vacina e Remédios
-            </Text>
+        <View style={{flex:1, alignItems: "center",}}>
+          <ScrollView style={styles.ScrollviewModal1}>
+            <View style={{}}>
+              <View style={styles.modalContainer}>
+                <Text style={styles.tituloModal}>
+                  Cadastro de Vacina e Remédios
+                </Text>
 
-            <View style={styles.containerinfosmodal}>
-              <Text style={styles.tituloBotao3}>
-                {"Qual o remédio ou vacina?"}
-              </Text>
+                <View style={styles.containerinfosmodal}>
+                  <Text style={styles.tituloBotao3}>
+                    {"Qual o remédio ou vacina?"}
+                  </Text>
 
-              <TextInput
-                style={styles.input}
-                value={tipoAlim}
-                onChangeText={setTipoAlim}
-                placeholder="Exemplo: Lepecid"
-              />
-            </View>
-            <View style={styles.containerinfosmodal}>
-              <Text style={styles.tituloBotao3}>
-                {"Qual o valor do produto?(R$)"}
-              </Text>
-              <TextInput
-                style={styles.input}
-                value={valorAliS}
-                keyboardType="number-pad"
-                onChangeText={setValorAliS}
-                placeholder="Exemplo: 98.90"
-              />
-            </View>
-            <View style={styles.containerinfosmodal}>
-              <Text style={styles.tituloBotao3}>
-                {"Qual o volume do produto?(ml)"}
-              </Text>
-              <TextInput
-                style={styles.input}
-                value={qtdAliS}
-                keyboardType="number-pad"
-                onChangeText={SetQtdAliS}
-                placeholder="Exemplo: 50"
-              />
-            </View>
-            <View style={styles.containerinfosmodal}>
-              <Text style={styles.tituloBotao3}>
-                {"Qual a quantidade aplicada?(ml)"}
-              </Text>
-              <TextInput
-                style={styles.input}
-                value={consumoAliS}
-                keyboardType="number-pad"
-                onChangeText={SetConsumoAliS}
-                placeholder="Exemplo: 5"
-              />
+                  <TextInput
+                    style={styles.input}
+                    value={tipoAlim}
+                    onChangeText={setTipoAlim}
+                    placeholder="Exemplo: Lepecid"
+                  />
+                </View>
+                <View style={styles.containerinfosmodal}>
+                  <Text style={styles.tituloBotao3}>
+                    {"Qual o valor do produto?(R$)"}
+                  </Text>
+                  <TextInput
+                    style={styles.input}
+                    value={valorAliS}
+                    keyboardType="number-pad"
+                    onChangeText={setValorAliS}
+                    placeholder="Exemplo: 98.90"
+                  />
+                </View>
+                <View style={styles.containerinfosmodal}>
+                  <Text style={styles.tituloBotao3}>
+                    {"Qual o volume do produto?(ml)"}
+                  </Text>
+                  <TextInput
+                    style={styles.input}
+                    value={qtdAliS}
+                    keyboardType="number-pad"
+                    onChangeText={SetQtdAliS}
+                    placeholder="Exemplo: 50"
+                  />
+                </View>
+                <View style={[styles.containerinfosmodal, {marginBottom:verticalScale(30),}]}>
+                  <Text style={styles.tituloBotao3}>
+                    {"Qual a quantidade aplicada?(ml)"}
+                  </Text>
+                  <TextInput
+                    style={styles.input}
+                    value={consumoAliS}
+                    keyboardType="number-pad"
+                    onChangeText={SetConsumoAliS}
+                    placeholder="Exemplo: 5"
+                  />
+                </View>
+              </View>
             </View>
           </ScrollView>
         </View>
@@ -209,6 +220,8 @@ function Manejo({ navigation }) {
         statusBarTranslucent
         isVisible={isModalVisible2}
         coverScreen={true}
+        deviceHeight={ScreenHeight}
+        deviceWidth={ScreenWidth}
         backdropColor={"rgba(234,242,215,0.8)"}
         animationIn="slideInUp"
         animationOut="slideOutDown"
@@ -238,7 +251,7 @@ function Manejo({ navigation }) {
           </View>
         </View>
         <TouchableOpacity style={styles.botaopress6} onPress={handleAddGastos}>
-          <Text style={styles.tituloBotao3}>{"Cadastrar"}</Text>
+          <Text style={styles.tituloBotao}>{"Cadastrar"}</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.botaopress}
@@ -246,7 +259,7 @@ function Manejo({ navigation }) {
             toggleModal2(false);
           }}
         >
-          <Text style={styles.tituloBotao3}>Voltar</Text>
+          <Text style={styles.tituloBotao}>Voltar</Text>
         </TouchableOpacity>
       </Modal>
 
@@ -254,6 +267,8 @@ function Manejo({ navigation }) {
         statusBarTranslucent
         isVisible={isModalVisible3}
         coverScreen={true}
+        deviceHeight={ScreenHeight}
+        deviceWidth={ScreenWidth}
         backdropColor={"rgba(234,242,215,0.8)"}
         animationIn="slideInUp"
         animationOut="slideOutDown"
@@ -292,7 +307,7 @@ function Manejo({ navigation }) {
           <Text style={styles.tituloBotao}>Voltar</Text>
         </TouchableOpacity>
       </Modal>
-    </SafeAreaView>
+    </SafeAreaView >
   );
 }
 const styles = StyleSheet.create({
@@ -306,33 +321,32 @@ const styles = StyleSheet.create({
   },
   modalContainer: {
     backgroundColor: "#004513",
-    position: "absolute",
-    top: verticalScale(20),
     alignSelf: "center",
     width: scale(330),
-    height: verticalScale(510),
     borderRadius: 20,
     justifyContent: "center",
+    top: verticalScale(20),
+
   },
   modalContainer2: {
     backgroundColor: "#004513",
     position: "absolute",
-    top: verticalScale(0),
     alignSelf: "center",
     width: scale(330),
-    height: verticalScale(280),
     borderRadius: 20,
     justifyContent: "center",
+    padding: scale(10),
+    top: verticalScale(20),
   },
   modalContainer3: {
     backgroundColor: "#004513",
-    position: "absolute",
-    top: verticalScale(0),
     alignSelf: "center",
     width: scale(330),
-    height: verticalScale(280),
     borderRadius: 20,
     justifyContent: "center",
+    padding: scale(10),
+    top: verticalScale(20),
+    position: "absolute",
   },
   modalContainer4: {
     backgroundColor: "#004513",
@@ -344,13 +358,15 @@ const styles = StyleSheet.create({
   input: {
     backgroundColor: "white",
     color: "black",
-    width: scale(300),
+    width: scale(280),
+    fontSize: scale(20),
     height: verticalScale(37),
     alignSelf: "center",
-    borderRadius: 20,
+    borderRadius: verticalScale(5),
     textAlign: "center",
     marginBottom: verticalScale(20),
     marginVertical: verticalScale(5),
+
   },
   container: {
     flex: 1,
@@ -372,8 +388,8 @@ const styles = StyleSheet.create({
   },
   containerinfosmodal: {
     marginVertical: verticalScale(5),
-    padding: verticalScale(5),
-    width: scale(310),
+    padding: verticalScale(20),
+    width: scale(320),
     backgroundColor: "rgba(15, 109, 0, 0.7)",
     borderRadius: 15,
     alignSelf: "center",
@@ -470,10 +486,11 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
   tituloBotao3: {
-    fontSize: verticalScale(20),
-    fontWeight: "bold",
     color: "white",
-    alignSelf: "center",
+    fontSize: verticalScale(20),
+    marginBottom: verticalScale(10),
+    textAlign: "center",
+    fontWeight: "bold",
   },
   tituloinfo: {
     color: "white",
@@ -481,5 +498,9 @@ const styles = StyleSheet.create({
     marginBottom: verticalScale(10),
     textAlign: "center",
   },
+  ScrollviewModal1: {
+    marginBottom: verticalScale(150),
+    width: scale(330),
+  }
 });
 export default Manejo;
