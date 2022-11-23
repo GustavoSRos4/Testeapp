@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     fontSize: verticalScale(22),
     fontWeight: "bold",
     alignSelf: "center",
-    paddingRight: scale(80),
+    paddingRight: scale(60),
   },
 });
 export default Header;

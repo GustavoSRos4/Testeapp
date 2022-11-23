@@ -189,7 +189,7 @@ function Leite({ navigation }) {
             </TouchableOpacity>
             <TextInput
               style={styles.search}
-              placeholder="Pesquise um animal pelo nome."
+              placeholder="Pesquise pelo nome."
               value={searchText}
               onChangeText={(t) => setSearchText(t)}
             ></TextInput>
@@ -239,7 +239,7 @@ const styles = StyleSheet.create({
   },
   search: {
     backgroundColor: "rgba(15, 109, 0, 0.9)",
-    fontSize: verticalScale(20),
+    fontSize: verticalScale(15),
     color: "white",
     textAlign: "center",
     alignSelf: "center",
