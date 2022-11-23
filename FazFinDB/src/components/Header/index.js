@@ -1,6 +1,6 @@
-import React,{useContext} from "react";
+import React, { useContext } from "react";
 import { Feather } from "@expo/vector-icons";
-import { SafeAreaView, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { SafeAreaView, Text, TouchableOpacity, StyleSheet, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { scale, verticalScale } from "react-native-size-matters";
 import { AuthContext } from "../../contexts/auth";
@@ -18,6 +18,7 @@ function Header() {
         <Feather name="menu" size={verticalScale(30)} color="#FFF" />
       </TouchableOpacity>
       <Text style={styles.title}>{header}</Text>
+      <View style={{ width: verticalScale(30), padding: scale(20), }}></View>
     </SafeAreaView>
   );
 }
@@ -35,11 +36,12 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
   title: {
+    flex: 1,
     color: "#FFF",
     fontSize: verticalScale(22),
     fontWeight: "bold",
     alignSelf: "center",
-    paddingRight: scale(80),
+    textAlign: "center",
   },
 });
 export default Header;
