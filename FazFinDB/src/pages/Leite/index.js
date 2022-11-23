@@ -109,7 +109,7 @@ function Leite({ navigation }) {
   }
   useEffect(() => {
     if (searchText === "") {
-      setLista(lista);
+      setLista(listaVaca);
     } else {
       setLista(
         listaVaca.filter(
