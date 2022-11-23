@@ -58,8 +58,8 @@ function Routes() {
         options={{
           title: "Cadastro de fazendas",
           drawerIcon: ({ focused, size, color }) => (
-            <Entypo
-              name={focused ? "address" : "address"}
+            <Ionicons
+              name={focused ? "ios-trail-sign" : "ios-trail-sign-outline"}
               size={size}
               color={color}
             />

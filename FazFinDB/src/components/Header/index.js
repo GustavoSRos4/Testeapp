@@ -24,7 +24,6 @@ function Header() {
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row-reverse",
-    alignItems: "center",
     backgroundColor: "rgba(15, 109, 0, 0.9)",
     height: verticalScale(50),
     paddingLeft: scale(10),
@@ -33,11 +32,14 @@ const styles = StyleSheet.create({
     height: verticalScale(30),
     justifyContent: "center",
     paddingLeft: scale(15),
+    alignSelf: "center",
   },
   title: {
     color: "#FFF",
-    fontSize: verticalScale(25),
+    fontSize: verticalScale(22),
     fontWeight: "bold",
+    alignSelf: "center",
+    paddingRight: scale(80),
   },
 });
 export default Header;

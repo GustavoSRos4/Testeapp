@@ -125,15 +125,15 @@ function GeralFaz({ navigation }) {
           onPress={() => navigation.navigate("FinanceiroFaz")}
         >
           <Text style={styles.textoBannerT}>
-            <Text style={styles.textoBanner}>{"           Receitas: "}</Text>
+            <Text style={styles.textoBanner}>{"Receitas: "}</Text>
             <Text style={styles.textoBannerRec}>R${receitas.toFixed(2)}</Text>
           </Text>
           <Text style={styles.textoBannerT}>
-            <Text style={styles.textoBanner}>{"           Despesas: "}</Text>
+            <Text style={styles.textoBanner}>{"Despesas: "}</Text>
             <Text style={styles.textoBannerDes}>R${despesas.toFixed(2)}</Text>
           </Text>
           <Text style={styles.textoBannerT}>
-            <Text style={styles.textoBanner}>{"           Balanço final: "}</Text>
+            <Text style={styles.textoBanner}>{"Resultado: "}</Text>
             <Text style={Color(total)}>R${total.toFixed(2)}</Text>
           </Text>
           <Text style={styles.bannerText}>
@@ -195,26 +195,25 @@ const styles = StyleSheet.create({
   },
   bannerText: {
     color: "#fff",
-    fontSize: scale(13),
-    fontWeight: "bold",
+    fontSize: scale(12  ),
     margin: verticalScale(5),
     alignSelf: "center",
   },
   textoBannerT: {
-    textAlign: 'justify',
-    fontSize: scale(20),
+    textAlign: 'center',
+    fontSize: scale(15),
   },
   textoBanner: {
     color: "#fff",
-    fontSize: scale(20),
+    fontSize: scale(17),
   },
   textoBannerRec: {
     color: "#0FFF50",
-    fontSize: scale(20),
+    fontSize: scale(17),
   },
   textoBannerDes: {
     color: "#FF3131",
-    fontSize: scale(20),
+    fontSize: scale(17),
   },
   botaoPress3: {
     borderRadius: 20,
@@ -228,7 +227,7 @@ const styles = StyleSheet.create({
     position: "absolute",
   },
   tituloBotao2: {
-    fontSize: scale(17),
+    fontSize: scale(16),
     fontWeight: "bold",
     color: "#fff",
   },

@@ -17,7 +17,7 @@ import writeReb from "../../Realm/writeReb";
 import { scale, verticalScale } from "react-native-size-matters";
 import { useNavigation } from "@react-navigation/native";
 
-function CadastroReb({ }) {
+function CadastroReb({}) {
   const [nomeReb, setNomeReb] = useState("");
   const [QtdAni, setQtdAni] = useState(0);
   const { fazID } = useContext(AuthContext);
@@ -35,7 +35,7 @@ function CadastroReb({ }) {
           nascimentoVaca: "2022",
           brincoVaca: " 00 " + i,
           genero: 1,
-          receitas:[],
+          receitas: [],
           descVaca: "Descricao vazia",
           createdAt: new Date(),
         });
@@ -51,8 +51,10 @@ function CadastroReb({ }) {
         nomeReb,
         createdAt: new Date(),
         vacas: genVacas(QtdAni),
-      }, fazID
-    ); navigation.navigate("GeralFaz")
+      },
+      fazID
+    );
+    navigation.navigate("GeralFaz");
   }
 
   const navigation = useNavigation();
@@ -64,7 +66,6 @@ function CadastroReb({ }) {
         source={require(imgbg1)}
         imageStyle={{ opacity: 0.6 }}
       >
-        <Header title={"Cadastro Rebanho"} />
         <Image
           style={styles.logo}
           source={require("../../../assets/FazFin.png")}
@@ -82,6 +83,7 @@ function CadastroReb({ }) {
             style={styles.campoTexto}
             onChangeText={setQtdAni}
             value={QtdAni}
+            keyboardType="number-pad"
             placeholder="Quantos animais no rebanho?"
           ></TextInput>
         </View>

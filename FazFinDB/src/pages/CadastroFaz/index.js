@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
     height: verticalScale(90),
     width: verticalScale(90),
     position: "absolute",
-    top: verticalScale(75),
+    top: verticalScale(30),
     alignSelf: "center",
   },
   texto: {
@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
   viewtext: {
     alignSelf: "center",
     position: "absolute",
-    top: verticalScale(225),
+    top: verticalScale(150),
   },
   campoTexto: {
     backgroundColor: "#ffffff",

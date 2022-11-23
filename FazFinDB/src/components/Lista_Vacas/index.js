@@ -247,6 +247,7 @@ function Lista_vacas({ textobarrapesquisa, idrebanho }) {
                     value={nascimentoVaca}
                     editable={isInfoeditable}
                     onChangeText={setnascimentoVaca}
+                    keyboardType="number-pad"
                   />
                 </View>
                 {/*Indentificação*/}
@@ -257,6 +258,7 @@ function Lista_vacas({ textobarrapesquisa, idrebanho }) {
                     value={brincoVaca}
                     editable={isInfoeditable}
                     onChangeText={setbrincoVaca}
+                    keyboardType="number-pad"
                   />
                 </View>
                 {/*Descrição*/}

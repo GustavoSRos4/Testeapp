@@ -15,6 +15,7 @@ import { MaterialCommunityIcons, FontAwesome5 } from "@expo/vector-icons";
 import Modal from "react-native-modal";
 import uuid from "react-native-uuid";
 import { AuthContext } from "../../contexts/auth";
+import { ScrollView } from "react-native-gesture-handler";
 function Manejo({ navigation }) {
   const [isModalVisible, setModalVisible] = useState(false);
   const [isModalVisible2, setModalVisible2] = useState(false);
@@ -118,7 +119,7 @@ function Manejo({ navigation }) {
         }}
       >
         <Text style={styles.tituloBotao2}>
-        <FontAwesome5 name="tractor" size={scale(30)} color="white" /> 
+          <FontAwesome5 name="tractor" size={scale(30)} color="white" />
           {"  Outros"}
         </Text>
       </TouchableOpacity>
@@ -137,59 +138,60 @@ function Manejo({ navigation }) {
         animationOut="slideOutDown"
       >
         <View style={styles.modalContainer}>
-          <Text style={styles.tituloModal}>Cadastro de Vacina e Remédios</Text>
-
-          <View style={styles.containerinfosmodal}>
-            <Text style={styles.tituloBotao3}>
-              {"Qual o remédio ou vacina?"}
+          <ScrollView>
+            <Text style={styles.tituloModal}>
+              Cadastro de Vacina e Remédios
             </Text>
 
-            <TextInput
-              style={styles.input}
-              value={tipoAlim}
-              onChangeText={setTipoAlim}
-              placeholder="Exemplo: Lepecid"
-            />
-          </View>
-          <View style={styles.containerinfosmodal}>
-            <Text style={styles.tituloBotao3}>
-              {"Qual o valor do produto?(R$)"}
-            </Text>
-            <TextInput
-              style={styles.input}
-              value={valorAliS}
-              numeric
-              keyboardType={"numeric"}
-              onChangeText={setValorAliS}
-              placeholder="Exemplo: 98.90"
-            />
-          </View>
-          <View style={styles.containerinfosmodal}>
-            <Text style={styles.tituloBotao3}>
-              {"Qual o volume do produto?(ml)"}
-            </Text>
-            <TextInput
-              style={styles.input}
-              value={qtdAliS}
-              numeric
-              keyboardType={"numeric"}
-              onChangeText={SetQtdAliS}
-              placeholder="Exemplo: 50"
-            />
-          </View>
-          <View style={styles.containerinfosmodal}>
-            <Text style={styles.tituloBotao3}>
-              {"Qual a quantidade aplicada?(ml)"}
-            </Text>
-            <TextInput
-              style={styles.input}
-              value={consumoAliS}
-              numeric
-              keyboardType={"numeric"}
-              onChangeText={SetConsumoAliS}
-              placeholder="Exemplo: 5"
-            />
-          </View>
+            <View style={styles.containerinfosmodal}>
+              <Text style={styles.tituloBotao3}>
+                {"Qual o remédio ou vacina?"}
+              </Text>
+
+              <TextInput
+                style={styles.input}
+                value={tipoAlim}
+                onChangeText={setTipoAlim}
+                placeholder="Exemplo: Lepecid"
+              />
+            </View>
+            <View style={styles.containerinfosmodal}>
+              <Text style={styles.tituloBotao3}>
+                {"Qual o valor do produto?(R$)"}
+              </Text>
+              <TextInput
+                style={styles.input}
+                value={valorAliS}
+                keyboardType="number-pad"
+                onChangeText={setValorAliS}
+                placeholder="Exemplo: 98.90"
+              />
+            </View>
+            <View style={styles.containerinfosmodal}>
+              <Text style={styles.tituloBotao3}>
+                {"Qual o volume do produto?(ml)"}
+              </Text>
+              <TextInput
+                style={styles.input}
+                value={qtdAliS}
+                keyboardType="number-pad"
+                onChangeText={SetQtdAliS}
+                placeholder="Exemplo: 50"
+              />
+            </View>
+            <View style={styles.containerinfosmodal}>
+              <Text style={styles.tituloBotao3}>
+                {"Qual a quantidade aplicada?(ml)"}
+              </Text>
+              <TextInput
+                style={styles.input}
+                value={consumoAliS}
+                keyboardType="number-pad"
+                onChangeText={SetConsumoAliS}
+                placeholder="Exemplo: 5"
+              />
+            </View>
+          </ScrollView>
         </View>
         <TouchableOpacity style={styles.botaopress6} onPress={handleAddGastos}>
           <Text style={styles.tituloBotao}>{"Cadastrar"}</Text>
@@ -229,8 +231,7 @@ function Manejo({ navigation }) {
             <TextInput
               style={styles.input}
               value={valorAliS}
-              numeric
-              keyboardType={"numeric"}
+              keyboardType="number-pad"
               onChangeText={setValorAliS}
               placeholder="Exemplo: 2500.50"
             />
@@ -273,8 +274,7 @@ function Manejo({ navigation }) {
             <TextInput
               style={styles.input}
               value={valorAliS}
-              numeric
-              keyboardType={"numeric"}
+              keyboardType="number-pad"
               onChangeText={setValorAliS}
               placeholder="Exemplo: 10000.20"
             />
@@ -333,6 +333,13 @@ const styles = StyleSheet.create({
     height: verticalScale(280),
     borderRadius: 20,
     justifyContent: "center",
+  },
+  modalContainer4: {
+    backgroundColor: "#004513",
+    alignSelf: "center",
+    width: scale(330),
+    height: verticalScale(510),
+    borderRadius: 20,
   },
   input: {
     backgroundColor: "white",
@@ -416,7 +423,7 @@ const styles = StyleSheet.create({
     position: "absolute",
   },
   tituloBotao2: {
-    fontSize: scale(23),
+    fontSize: scale(25),
     fontWeight: "bold",
     color: "#fff",
     alignSelf: "center",

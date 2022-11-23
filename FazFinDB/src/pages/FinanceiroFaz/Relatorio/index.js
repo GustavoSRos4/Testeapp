@@ -171,7 +171,7 @@ const styles = StyleSheet.create({
   },
   containerChart: {
     position: "absolute",
-    top: verticalScale(250),
+    top: verticalScale(280),
   },
   botaopress: {
     borderRadius: 20,

@@ -131,42 +131,40 @@ function Leite({ navigation }) {
     <SafeAreaView style={styles.container}>
       <Header />
       {/*Descrição*/}
-
-      <View style={styles.containerinfos}>
-        <Text style={styles.tituloinfo}>Descrição:</Text>
-        <TextInput
-          style={styles.detalhe}
-          value={description}
-          onChangeText={setDescription}
-          placeholder="Exemplo: Leite 22/11 Vaca Araçá"
-        />
-      </View>
-      {/*Preco do leite*/}
-      <View style={styles.containerinfos}>
-        <Text style={styles.tituloinfo}>Preço atual do leite(R$):</Text>
-        <TextInput
-          style={styles.detalhe}
-          value={precoLV}
-          numeric
-          keyboardType={"numeric"}
-          onChangeText={setPrecoLV}
-          placeholder="Exemplo: 3.1"
-        />
-      </View>
-      {/*Produção diaria*/}
-      <View style={styles.containerinfos}>
-        <Text style={styles.tituloinfo}>Produção da vaca hoje(litros):</Text>
-        <TextInput
-          style={styles.detalhe}
-          value={prodLV}
-          numeric
-          keyboardType={"numeric"}
-          onChangeText={setProdLV}
-          placeholder="Exemplo: 10.2"
-        />
-      </View>
-      {/*Descrição*/}
-
+      <ScrollView>
+        <View style={styles.containerinfos}>
+          <Text style={styles.tituloinfo}>Descrição:</Text>
+          <TextInput
+            style={styles.detalhe}
+            value={description}
+            onChangeText={setDescription}
+            placeholder="Exemplo: Leite 22/11 Vaca Araçá"
+          />
+        </View>
+        {/*Preco do leite*/}
+        <View style={styles.containerinfos}>
+          <Text style={styles.tituloinfo}>Preço atual do leite(R$):</Text>
+          <TextInput
+            style={styles.detalhe}
+            value={precoLV}
+            keyboardType="number-pad"
+            onChangeText={setPrecoLV}
+            placeholder="Exemplo: 3.1"
+          />
+        </View>
+        {/*Produção diaria*/}
+        <View style={styles.containerinfos}>
+          <Text style={styles.tituloinfo}>Produção da vaca hoje(litros):</Text>
+          <TextInput
+            style={styles.detalhe}
+            value={prodLV}
+            keyboardType="number-pad"
+            onChangeText={setProdLV}
+            placeholder="Exemplo: 10.2"
+          />
+        </View>
+        {/*Descrição*/}
+      </ScrollView>
       <TouchableOpacity
         onPress={() => {
           toggleModal();
